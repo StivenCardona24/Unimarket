@@ -46,7 +46,7 @@ public class Producto implements Serializable{
     private EstadoProducto estado;
     @ManyToOne
     private Usuario usuario;
-    @OneToMany(mappedBy="producto")
+    @OneToMany(mappedBy="comentario")
     private List<Comentario> comentarios;
     @ElementCollection
     @NotNull
@@ -54,7 +54,7 @@ public class Producto implements Serializable{
     private List<Categoria> categorias;
 
     @ManyToOne
-    private VentaProducto ventaproducto;
+    private VentaProducto ventaProducto;
 
 
 

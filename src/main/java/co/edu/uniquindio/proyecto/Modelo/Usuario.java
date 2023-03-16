@@ -56,9 +56,9 @@ public class Usuario implements Serializable{
     @ManyToMany(mappedBy="usuarios")
     private List<Tarjeta> tarjetas;
 
-    @OneToMany(mappedBy="Favoritos")
+    @OneToMany(mappedBy="usuario")
     private List<Producto> productos;
-    @OneToMany(mappedBy="usuarios")
+    @OneToMany(mappedBy="comentario")
     private List<Comentario> comentarios;
 
 }

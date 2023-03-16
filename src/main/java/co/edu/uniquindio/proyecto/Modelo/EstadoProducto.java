@@ -5,7 +5,6 @@ import java.io.Serializable;
 //@Enumerated(EnumType.ORDINAL)
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 public enum EstadoProducto implements Serializable{
     ACTIVE,
