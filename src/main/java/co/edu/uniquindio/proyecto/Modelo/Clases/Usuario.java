@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.Modelo;
+package co.edu.uniquindio.proyecto.Modelo.Clases;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,10 +13,14 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
+@Embeddable
 public class Usuario implements Serializable{
     @Id
     @EqualsAndHashCode.Include
-    private String codigo;
+    private String userName;
+
+    @Column(nullable = false)
+    private String password;
 
     @Column(nullable = false,length = 20)
     private String cedula;
@@ -26,12 +30,6 @@ public class Usuario implements Serializable{
 
     @Column(length = 60)
     private String direccion;
-
-    @Column(unique = true,nullable = false)
-    private String userName;
-
-    @Column(nullable = false)
-    private String password;
 
     @Column(unique = true,nullable = false)
     private String email;
@@ -54,11 +52,14 @@ public class Usuario implements Serializable{
     private Licencia licencia;
 
     @ManyToMany(mappedBy="usuarios")
+    @ToString.Exclude
     private List<Tarjeta> tarjetas;
 
     @OneToMany(mappedBy="usuario")
+    @ToString.Exclude
     private List<Producto> productos;
     @OneToMany(mappedBy="comentario")
+    @ToString.Exclude
     private List<Comentario> comentarios;
 
 }

@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.Modelo;
+package co.edu.uniquindio.proyecto.Modelo.Clases;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -16,12 +16,10 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class Licencia implements Serializable{
+
     @Id
-    @GeneratedValue
+    @Column( length = 30)
     @EqualsAndHashCode.Include
-    private int codigo;
-    @Column(nullable = false, length = 30)
-    @NotNull
     private String nombre;
     @Column(nullable = false)
     @Min(20)
@@ -32,5 +30,6 @@ public class Licencia implements Serializable{
     @Max(10)
     private int prioridad;
     @OneToMany(mappedBy="licencia")
+    @ToString.Exclude
     private List<Usuario> usuarios;
 }

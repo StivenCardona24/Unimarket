@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.Modelo;
+package co.edu.uniquindio.proyecto.Modelo.Enumeraciones;
 
 import lombok.*;
 

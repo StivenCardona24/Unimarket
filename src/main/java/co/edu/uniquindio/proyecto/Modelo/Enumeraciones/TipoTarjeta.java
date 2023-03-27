@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.Modelo;
+package co.edu.uniquindio.proyecto.Modelo.Enumeraciones;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +8,6 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor
 @ToString
-public enum Categoria{
-      ROPA,CALZADO,ELECTRODOMESTICO;
+public enum TipoTarjeta {
+    DEBITO,CREDITO;
 }

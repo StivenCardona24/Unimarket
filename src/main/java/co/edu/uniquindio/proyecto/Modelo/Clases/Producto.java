@@ -1,4 +1,6 @@
-package co.edu.uniquindio.proyecto.Modelo;
+package co.edu.uniquindio.proyecto.Modelo.Clases;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.Categoria;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoProducto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -16,6 +18,7 @@ import java.util.Map;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
+@Embeddable
 public class Producto implements Serializable{
     @Id
     @GeneratedValue
@@ -44,17 +47,17 @@ public class Producto implements Serializable{
     @NotNull
     @Enumerated(EnumType.STRING)
     private EstadoProducto estado;
-    @ManyToOne
-    private Usuario usuario;
-    @OneToMany(mappedBy="comentario")
-    private List<Comentario> comentarios;
     @ElementCollection
     @NotNull
     @Enumerated(EnumType.STRING)
     private List<Categoria> categorias;
-
+    @OneToMany(mappedBy="comentario")
+    @ToString.Exclude
+    private List<Comentario> comentarios;
     @ManyToOne
-    private VentaProducto ventaProducto;
+    private Usuario usuario;
+    @ManyToOne
+    private DetalleVenta ventaProducto;
 
 
 

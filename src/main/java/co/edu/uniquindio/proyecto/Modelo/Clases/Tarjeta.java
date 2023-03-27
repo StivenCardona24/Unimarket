@@ -1,4 +1,6 @@
-package co.edu.uniquindio.proyecto.Modelo;
+package co.edu.uniquindio.proyecto.Modelo.Clases;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoTarjeta;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.TipoTarjeta;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -19,25 +21,30 @@ public class Tarjeta implements Serializable{
     @Id
     @GeneratedValue
     @EqualsAndHashCode.Include
-    //@EmbeddedId
-    private int codigo;
+    private Integer codigo;
+
+    private String numero;
+
+    @Column(length = 4)
+    private String CVV;
     @Column(nullable = false, length = 30)
     private String nombre;
-    @Column(nullable = false)
-    private String numero;
+
     @NotNull
     private LocalDate fecha;
     @Column(nullable = false)
     private double dinero;
-    @Column(nullable = false,length = 4)
-    private String CVV;
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private EstadoTarjeta estado;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoTarjeta tipo;
+
+
     @ManyToMany
+    @ToString.Exclude
     private List<Usuario> usuarios;
 
 }

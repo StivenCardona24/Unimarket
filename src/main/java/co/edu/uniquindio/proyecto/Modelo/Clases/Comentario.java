@@ -1,4 +1,6 @@
-package co.edu.uniquindio.proyecto.Modelo;
+package co.edu.uniquindio.proyecto.Modelo.Clases;
+import co.edu.uniquindio.proyecto.Modelo.Clases.Producto;
+import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -18,15 +20,16 @@ public class Comentario implements Serializable{
     @GeneratedValue
     @EqualsAndHashCode.Include
     private int codigo;
-
     @Column(nullable = false)
     private LocalDate fecha;
     @NotNull
     @Lob
     private Long comentario;
     @ManyToOne
+    @EmbeddedId
     private Producto producto;
     @ManyToOne
+    @EmbeddedId
     private Usuario usuario;
 
 

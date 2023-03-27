@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.Modelo;
+package co.edu.uniquindio.proyecto.Modelo.Clases;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,13 +12,15 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Pais implements Serializable{
+//@EmbeddedId
+//@ElementCollection
+public class Role implements Serializable{
+
     @Id
-    @GeneratedValue
     @EqualsAndHashCode.Include
-    private int codigo;
-    @Column(nullable = false,length = 30)
+    @Column(length = 30)
     private String nombre;
-    @OneToMany(mappedBy="pais")
-    private List<Departamento> departamentos;
+    @OneToMany(mappedBy="role")
+    @ToString.Exclude
+    private List<Usuario> usuarios;
 }

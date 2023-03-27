@@ -1,9 +1,12 @@
-package co.edu.uniquindio.proyecto.Modelo;
+package co.edu.uniquindio.proyecto.Modelo.Clases;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoVenta;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.MetodoPago;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -30,5 +33,6 @@ public class Venta implements Serializable{
     private MetodoPago metodoPago;
 
     @OneToMany(mappedBy="venta")
-    private List<VentaProducto> ventaProducto;
+    @ToString.Exclude
+    private List<DetalleVenta> ventaProducto;
 }
