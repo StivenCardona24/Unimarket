@@ -21,7 +21,7 @@ import java.util.Map;
 @Embeddable
 public class Producto implements Serializable{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int codigo;
     @Column(nullable = false)
@@ -55,9 +55,13 @@ public class Producto implements Serializable{
     @ToString.Exclude
     private List<Comentario> comentarios;
     @ManyToOne
-    private Usuario usuario;
+    private Usuario usuarioPropietario;
     @ManyToOne
     private DetalleVenta ventaProducto;
+
+    @ManyToMany(mappedBy="productoFavoritos")
+    @ToString.Exclude
+    private List<Usuario> favoritoUsuarios;
 
 
 

@@ -17,7 +17,7 @@ import java.util.List;
 @Setter
 public class Venta implements Serializable{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int codigo;
 
@@ -35,4 +35,8 @@ public class Venta implements Serializable{
     @OneToMany(mappedBy="venta")
     @ToString.Exclude
     private List<DetalleVenta> ventaProducto;
+
+    @ManyToOne
+    private Tarjeta tajetaCompra;
+
 }

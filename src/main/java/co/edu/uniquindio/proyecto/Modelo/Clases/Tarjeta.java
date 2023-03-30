@@ -19,7 +19,7 @@ import java.util.List;
 public class Tarjeta implements Serializable{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer codigo;
 
@@ -45,6 +45,9 @@ public class Tarjeta implements Serializable{
 
     @ManyToMany
     @ToString.Exclude
-    private List<Usuario> usuarios;
+    private List<Usuario> usuario;
 
+    @ToString.Exclude
+    @OneToMany(mappedBy="tajetaCompra")
+    private List<Venta> compras;
 }

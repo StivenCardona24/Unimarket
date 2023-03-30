@@ -18,8 +18,11 @@ import java.util.List;
 public class Licencia implements Serializable{
 
     @Id
-    @Column( length = 30)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    private int codigo;
+
+    @Column( length = 30)
     private String nombre;
     @Column(nullable = false)
     @Min(20)

@@ -17,7 +17,7 @@ import java.util.List;
 @ToString
 public class DetalleVenta implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int codigo;
 

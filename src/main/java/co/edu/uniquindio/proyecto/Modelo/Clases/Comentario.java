@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @ToString
 public class Comentario implements Serializable{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int codigo;
     @Column(nullable = false)
@@ -26,10 +26,8 @@ public class Comentario implements Serializable{
     @Lob
     private Long comentario;
     @ManyToOne
-    @EmbeddedId
     private Producto producto;
     @ManyToOne
-    @EmbeddedId
     private Usuario usuario;
 
 

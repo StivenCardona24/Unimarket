@@ -15,9 +15,11 @@ import java.util.List;
 //@EmbeddedId
 //@ElementCollection
 public class Role implements Serializable{
-
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    private int codigo;
+
     @Column(length = 30)
     private String nombre;
     @OneToMany(mappedBy="role")

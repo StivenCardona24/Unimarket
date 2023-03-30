@@ -15,8 +15,13 @@ import java.util.List;
 @ToString
 @Embeddable
 public class Usuario implements Serializable{
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    private Integer codigo;
+
+    @Column(nullable = false)
     private String userName;
 
     @Column(nullable = false)
@@ -51,13 +56,15 @@ public class Usuario implements Serializable{
     @ManyToOne
     private Licencia licencia;
 
-    @ManyToMany(mappedBy="usuarios")
+    @ManyToMany(mappedBy="usuario")
     @ToString.Exclude
     private List<Tarjeta> tarjetas;
-
-    @OneToMany(mappedBy="usuario")
+    @ManyToMany
     @ToString.Exclude
-    private List<Producto> productos;
+    private List<Producto> productoFavoritos;
+    @OneToMany(mappedBy="usuarioPropietario")
+    @ToString.Exclude
+    private List<Producto> productosVender;
     @OneToMany(mappedBy="comentario")
     @ToString.Exclude
     private List<Comentario> comentarios;
