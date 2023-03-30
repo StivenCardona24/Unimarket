@@ -20,12 +20,15 @@ public interface ComentarioRepository extends JpaRepository<Comentario,Integer> 
     @Query("SELECT c FROM Comentario c WHERE c.fecha = :fecha")
     List<Comentario> findByFecha(LocalDate fecha);
 
-    @Query("SELECT c FROM Comentario c WHERE LOWER(c.comentario) LIKE %:texto%")
-    List<Comentario> findByContenidoContaining(String texto);
+
+
 
     @Query("SELECT COUNT(c) FROM Comentario c WHERE c.producto.codigo = :codigoProducto")
     Long countByProducto( Integer codigoProducto);
     /**
+         @Query("SELECT c FROM Comentario c WHERE LOWER(c.comentario) LIKE concat ( '%', :comentario, '%' )")
+          List<Comentario> findBycomentarioContaining(String comentario);
+
     @Query("SELECT c.usuario FROM Comentario c GROUP BY c.usuario ORDER BY COUNT(c) DESC")
     Usuario findUsuarioWithMostComments();
     **/
