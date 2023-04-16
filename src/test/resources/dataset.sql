@@ -10,18 +10,6 @@ values
     (5, 'Cartagena');
 
 
-INSERT INTO role
-    values
-
-        --codigo,nombre
-
-    (1, 'Administrador'),
-    (2, 'Vendedor'),
-    (3, 'Comprador'),
-    (4, 'Comprador'),
-    (5, 'Comprador');
-
-
 
 
 
@@ -42,11 +30,11 @@ values
 --codigo,activo,cedula,direccion,email,fechanacimeinto,nombre,password,telefono,usen_name,ciudadCodigo,liencia_codigo,role_codigo
 
 
-    (1, true, '1234567890', 'Calle 1 #123', 'usuario1@example.com', '1990-01-01', 'Usuario 1', 'password1', '1234567890', 'usuario1', 1, 1, 1),
-    (2, true, '2345678901', 'Calle 2 #456', 'usuario2@example.com', '1995-02-15', 'Usuario 2', 'password2', '2345678901', 'usuario2', 2, 2, 2),
-    (3, true, '3456789012', 'Calle 3 #789', 'usuario3@example.com', '1988-05-20', 'Usuario 3', 'password3', '3456789012', 'usuario3', 3, 3, 3),
-    (4, true, '4567890123', 'Calle 4 #012', 'usuario4@example.com', '1992-11-11', 'Usuario 4', 'password4', '4567890123', 'usuario4', 4, 4, 4),
-    (5, false, '5678901234', 'Calle 5 #345', 'usuario5@example.com', '2000-06-30', 'Usuario 5', 'password5', '5678901234', 'usuario5', 5, 5, 5);
+    (1, true, '1234567890', 'Calle 1 #123', 'usuario1@example.com',"CLIENTE", '1990-01-01', 'Usuario 1', 'password1', '1234567890', 'usuario1', 1,  1),
+    (2, true, '2345678901', 'Calle 2 #456','usuario2@example.com', "CLIENTE", '1995-02-15', 'Usuario 2', 'password2', '2345678901', 'usuario2', 2,  2),
+    (3, true, '3456789012', 'Calle 3 #789', 'usuario3@example.com',"CLIENTE",  '1988-05-20', 'Usuario 3', 'password3', '3456789012', 'usuario3', 3,  3),
+    (4, true, '4567890123', 'Calle 4 #012','usuario4@example.com', "MODERADOR", '1992-11-11', 'Usuario 4', 'password4', '4567890123', 'usuario4', 4,  4),
+    (5, false, '5678901234', 'Calle 5 #345', 'usuario5@example.com',"MODERADOR", '2000-06-30', 'Usuario 5', 'password5', '5678901234', 'usuario5', 5, 5);
 
 
 
@@ -86,11 +74,11 @@ INSERT INTO venta
 VALUES
 
     -- (codigo,estado, fecha_compra, metodo_pago, total_compra, tajeta_compra_codigo)
-    (1,'ACTIVE',   '2023-03-01', 'EFECTIVO',  50000, 1),
-    (2,'INACTIVE', '2023-03-02', 'DAVIPLATA', 75000, 2),
-    (6,'INACTIVE',   '2023-03-04', 'TARJETA', 125000,4),
-    (4,'INACTIVE',   '2023-03-04', 'TARJETA', 125000,3),
-    (5,'ACTIVE',     '2023-03-05', 'EFECTIVO',150000,5);
+    (1,'ACTIVE',   '2023-03-01', 'EFECTIVO',  50000, 1,1),
+    (2,'INACTIVE', '2023-03-02', 'DAVIPLATA', 75000, 2,2),
+    (6,'INACTIVE',   '2023-03-04', 'TARJETA', 125000,4,3),
+    (4,'INACTIVE',   '2023-03-04', 'TARJETA', 125000,3,4),
+    (5,'ACTIVE',     '2023-03-05', 'EFECTIVO',150000,5,1);
 
 
 
@@ -108,31 +96,27 @@ insert into producto
 values
 ---------------------------------toca organizar la descripcion---------------------------------------------------
     -- codigo, descripcion,  disponibilidad,estado, fecha_limite,  nombre,   precio_unitario,  unidades,  usuario_propietario_codigo, venta_producto_codigo,
-    (1, 11,         true, "ACTIVE", '2024-04-01', "Televisor LG", 799.99, 10, 1, 1),
-    (2, 22, true, 'ACTIVE', '2024-04-01', 'Auriculares Sony', 149.99, 20, 2, 2),
-    (3, 33,          false, 'ACTIVE', '2023-12-31', 'Mesa de madera', 299.99, 1, 3, 3),
-    (4, 22,           true, 'ACTIVE', '2024-04-01', 'La cocina italiana', 29.99, 5, 4, 4),
-    (5, 11,   true, 'ACTIVE', '2025-01-01', 'Monitor Samsung', 299.99, 7, 1, 5);
+    (1, "Televisor LED 55",         true, "ACTIVE", '2024-04-01', "Televisor LG", 799.99, 10, 1, 1),
+    (2, 'Auriculares inalámbricos', true, 'ACTIVE', '2024-04-01', 'Auriculares Sony', 149.99, 20, 2, 2),
+    (3, 'Mesa de comedor',          false, 'ACTIVE', '2023-12-31', 'Mesa de madera', 299.99, 1, 3, 3),
+    (4,  'Libro de cocina',           true, 'ACTIVE', '2024-04-01', 'La cocina italiana', 29.99, 5, 4, 4),
+    (5, 'Monitor de computadora',   true, 'ACTIVE', '2025-01-01', 'Monitor Samsung', 299.99, 7, 1, 5);
+
+
+
 
 insert into comentario
 values
 
 --codigo,comnetario,fecha,producto_codigo,usuario_codigo
 
---(1, "Me encantó este producto, definitivamente lo recomiendo.", "2022-03-01", 1, 1),
---(2, 'No me gustó la calidad de este producto, esperaba algo mejor.', '2022-03-05', 2, 2),
---(3, 'Excelente servicio al cliente, me ayudaron con todas mis dudas.', '2022-03-10', 3, 3),
---(4, 'El envío tardó más de lo esperado, pero el producto en sí es bueno.', '2022-03-15', 4, 4),
---(5, 'Este producto superó mis expectativas, definitivamente lo volvería a comprar.', '2022-03-20', 5, 5);
+(1, "Me encantó este producto, definitivamente lo recomiendo.", "2022-03-01", 1, 1),
+(2, 'No me gustó la calidad de este producto, esperaba algo mejor.', '2022-03-05', 2, 2),
+(3, 'Excelente servicio al cliente, me ayudaron con todas mis dudas.', '2022-03-10', 3, 3),
+(4, 'El envío tardó más de lo esperado, pero el producto en sí es bueno.', '2022-03-15', 4, 4),
+(5, 'Este producto superó mis expectativas, definitivamente lo volvería a comprar.', '2022-03-20', 5, 5);
 
 
---codigo,comnetario,fecha,producto_codigo,usuario_codigo
-
-    ( 1,11111, "2023-04-13", 1, 1),
-(2, 222, '2022-03-05', 2, 2),
-(3, 333, '2022-03-10', 3, 3),
-(4, 444,'2022-03-10', 4, 4),
-(5, 55, '2022-03-20', 5, 5);
 
 
 

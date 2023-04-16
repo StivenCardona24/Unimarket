@@ -73,4 +73,7 @@ public class Usuario implements Serializable{
     @ToString.Exclude
     private List<Comentario> comentarios;
 
+    @OneToMany(mappedBy="usuario")
+    @ToString.Exclude
+    private List<Venta> ventas;
 }

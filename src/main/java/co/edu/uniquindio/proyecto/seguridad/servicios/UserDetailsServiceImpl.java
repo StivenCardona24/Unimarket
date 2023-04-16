@@ -1,5 +1,4 @@
 package co.edu.uniquindio.proyecto.seguridad.servicios;
-import co.edu.uniquindio.proyecto.Modelo.*;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
 import co.edu.uniquindio.proyecto.Repositorios.UsuarioRepository;
 import co.edu.uniquindio.proyecto.seguridad.modelo.UserDetailsImpl;
@@ -18,9 +17,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<Usuario> cliente = clienteRepo.findByEmailAndRole(email,"CLIENTE");
+        Optional<Usuario> cliente = clienteRepo.findByEmailAndEnumRole(email,"CLIENTE");
         if(cliente.isEmpty()){
-            Optional<Usuario> admin = clienteRepo.findByEmailAndRole(email,"MODERADOR");
+            Optional<Usuario> admin = clienteRepo.findByEmailAndEnumRole(email,"MODERADOR");
             if(admin.isEmpty())
                 throw new UsernameNotFoundException("El usuario no existe");
             return UserDetailsImpl.build(admin.get());

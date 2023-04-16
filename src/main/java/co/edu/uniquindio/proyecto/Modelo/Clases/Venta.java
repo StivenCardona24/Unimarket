@@ -39,4 +39,6 @@ public class Venta implements Serializable{
     @ManyToOne
     private Tarjeta tajetaCompra;
 
+    @ManyToOne
+    private Usuario usuario;
 }

@@ -13,9 +13,9 @@ import java.util.Optional;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario,Integer> {
 
-    @Query("SELECT u FROM Usuario u WHERE u.role.codigo = :codigo")
+    @Query("SELECT u FROM Usuario u WHERE u.enumRole = :codigo")
     List<Usuario> findUsuariosByRoleCodigo(int codigo);
-    @Query("SELECT COUNT(u) FROM Usuario u WHERE u.role.codigo = :codigo")
+    @Query("SELECT COUNT(u) FROM Usuario u WHERE u.enumRole = :codigo")
     long countUsuariosByRoleCodigo(int codigo);
 
 
@@ -26,7 +26,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Integer> {
     Usuario buscarUsuarioPorEmail(String email);
 
     Optional<Usuario> findByEmail(String email);
-    Optional<Usuario> findByEmailAndRole(String email, String role);
+    Optional<Usuario> findByEmailAndEnumRole(String email, String role);
 /*
     @Query("Saelect aliasTabla From tabla aliasTabla where tabla.field=;param")
     Usuario buscarUSuarioCorreo(String param);

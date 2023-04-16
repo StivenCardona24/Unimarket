@@ -31,7 +31,7 @@ public class Producto implements Serializable{
     @Column(length = 50)
     private String nombre;
     @Lob
-    private Long descripcion;
+    private String descripcion;
 
     @Column(nullable = false)
     @Min(1)

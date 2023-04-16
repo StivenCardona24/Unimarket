@@ -1,5 +1,5 @@
 package co.edu.uniquindio.proyecto.seguridad.modelo;
-import co.edu.uniquindio.proyecto.Modelo.*;
+
 import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
