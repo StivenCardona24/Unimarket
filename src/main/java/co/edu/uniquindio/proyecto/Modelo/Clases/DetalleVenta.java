@@ -29,9 +29,9 @@ public class DetalleVenta implements Serializable {
     @ToString.Exclude
     private double precio;
 
-    @OneToMany(mappedBy="ventaProducto")
+    @ManyToOne
     @ToString.Exclude
-    private List<Producto> productos;
+    private Producto producto;
     @ManyToOne
     @ToString.Exclude
     private Venta venta;

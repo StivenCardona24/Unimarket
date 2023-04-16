@@ -1,9 +1,11 @@
 package co.edu.uniquindio.proyecto.Servicios.Implementacion;
 
+import co.edu.uniquindio.proyecto.Modelo.Clases.Producto;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.Categoria;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoProducto;
+import co.edu.uniquindio.proyecto.Repositorios.ProductoRepository;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.ProductoServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class ProductoServicioImpl implements ProductoServicio {
+
+    private final ProductoRepository productoRepository;
 
     @Override
     public int crearProducto(ProductoDTO productoDTO) {
@@ -46,11 +50,6 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public ProductoGetDTO obtenerProducto(int codigoProducto) {
-        return null;
-    }
-
-    @Override
     public List<ProductoGetDTO> listarProductosUsuario(int codigoUsuario) {
         return null;
     }
@@ -80,6 +79,11 @@ public class ProductoServicioImpl implements ProductoServicio {
         return null;
     }
 
+    private void validarExistencia(int codigo) throws Exception {
+        boolean existe = productoRepository.existsById(codigo);
+        if (!existe) {
+            throw new Exception("El código: " + codigo + " no está asociado a ningúna Licencia");
+        }
+    }
 
-    //crear metodo de conversion de entity a DTO
 }

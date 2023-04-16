@@ -15,8 +15,9 @@ UsuarioGetDTO actualizarUsuario(int codigoUsuario,UsuarioDTO usuarioDTO) throws 
 UsuarioGetDTO obtenerUsuario (int cedulaUsuario) throws Exception;
 
 Usuario obtener (int cedulaUsuario)throws Exception;
+Usuario obtenerPorCodigo (int codigo)throws Exception;
 
-    Usuario obtenerporCorreo (String gmail)throws Exception;
+Usuario obtenerporCorreo (String gmail)throws Exception;
 
 
 

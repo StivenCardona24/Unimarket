@@ -80,27 +80,27 @@ VALUES
     (4,'INACTIVE',   '2023-03-04', 'TARJETA', 125000,3,4),
     (5,'ACTIVE',     '2023-03-05', 'EFECTIVO',150000,5,1);
 
-
-
-INSERT INTO detalle_venta
-    --(precio, unidades, venta_codigo)
-VALUES
-
-    (1,10.99, 2, 1),
-    (2,15.99, 1, 1),
-    (3,7.99, 3, 2),
-    (4,12.50, 1, 6),
-    (5,9.99, 2, 6);
-
 insert into producto
 values
 ---------------------------------toca organizar la descripcion---------------------------------------------------
-    -- codigo, descripcion,  disponibilidad,estado, fecha_limite,  nombre,   precio_unitario,  unidades,  usuario_propietario_codigo, venta_producto_codigo,
-    (1, "Televisor LED 55",         true, "ACTIVE", '2024-04-01', "Televisor LG", 799.99, 10, 1, 1),
-    (2, 'Auriculares inalámbricos', true, 'ACTIVE', '2024-04-01', 'Auriculares Sony', 149.99, 20, 2, 2),
-    (3, 'Mesa de comedor',          false, 'ACTIVE', '2023-12-31', 'Mesa de madera', 299.99, 1, 3, 3),
-    (4,  'Libro de cocina',           true, 'ACTIVE', '2024-04-01', 'La cocina italiana', 29.99, 5, 4, 4),
-    (5, 'Monitor de computadora',   true, 'ACTIVE', '2025-01-01', 'Monitor Samsung', 299.99, 7, 1, 5);
+-- codigo, descripcion,  disponibilidad,estado, fecha_limite,  nombre,   precio_unitario,  unidades,  usuario_propietario_codigo,
+(1, "Televisor LED 55",         true, "ACTIVE", '2024-04-01', "Televisor LG", 799.99, 10, 1),
+(2, 'Auriculares inalámbricos', true, 'ACTIVE', '2024-04-01', 'Auriculares Sony', 149.99, 20, 2),
+(3, 'Mesa de comedor',          false, 'ACTIVE', '2023-12-31', 'Mesa de madera', 299.99, 1, 3),
+(4,  'Libro de cocina',           true, 'ACTIVE', '2024-04-01', 'La cocina italiana', 29.99, 5, 4),
+(5, 'Monitor de computadora',   true, 'ACTIVE', '2025-01-01', 'Monitor Samsung', 299.99, 7, 1);
+
+
+
+INSERT INTO detalle_venta
+    --(codigo, precio, unidades,Producto, venta )
+VALUES
+
+    (1,10.99, 2,1, 1),
+    (2,15.99, 1,2, 1),
+    (3,7.99, 3,3, 2),
+    (4,12.50, 1,4, 6),
+    (5,9.99, 2,5, 6);
 
 
 
