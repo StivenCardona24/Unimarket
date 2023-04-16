@@ -1,4 +1,6 @@
 package co.edu.uniquindio.proyecto.Modelo.Clases;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoProducto;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -50,8 +52,10 @@ public class Usuario implements Serializable{
     @ManyToOne
     private Ciudad ciudad;
 
-    @ManyToOne
-    private Role role;
+
+
+    @Enumerated(EnumType.STRING)
+    private Role enumRole;
 
     @ManyToOne
     private Licencia licencia;

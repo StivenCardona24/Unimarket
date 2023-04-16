@@ -1,8 +1,6 @@
-package co.edu.uniquindio.proyecto.segurity.modelo;
-
-import co.edu.uniquindio.unimarket.entidades.Moderador;
-import co.edu.uniquindio.unimarket.entidades.Persona;
-import co.edu.uniquindio.unimarket.entidades.Usuario;
+package co.edu.uniquindio.proyecto.seguridad.modelo;
+import co.edu.uniquindio.proyecto.Modelo.*;
+import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,14 +12,14 @@ import java.util.List;
 public class UserDetailsImpl implements UserDetails {
     private String username, password;
     private Collection<? extends GrantedAuthority> authorities;
-    public static UserDetailsImpl build(Persona user){
+    public static UserDetailsImpl build(Usuario user){
         List<GrantedAuthority> authorities = new ArrayList<>();
-        if(user instanceof Usuario){
+        if(user.getEnumRole().equals("CLIENTE")){
             authorities.add( new SimpleGrantedAuthority("CLIENTE") );
-        }else if(user instanceof Moderador){
+        }else if(user.getEnumRole().equals("MODERADOR")){
             authorities.add( new SimpleGrantedAuthority("MODERADOR") );
         }
-        return new UserDetailsImpl(user.getEmail(), user.getContrasenia(), authorities);
+        return new UserDetailsImpl(user.getEmail(), user.getPassword(), authorities);
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -39,7 +37,6 @@ public class UserDetailsImpl implements UserDetails {
     public boolean isAccountNonExpired() {
         return true;
     }
-
     @Override
     public boolean isAccountNonLocked() {
         return true;

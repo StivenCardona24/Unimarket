@@ -1,4 +1,5 @@
 package co.edu.uniquindio.proyecto.Modelo.DTO;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,9 +7,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class TokenDTO {
+@NoArgsConstructor
+public class SesionDTO {
     @NotNull
-    private String token;
+    @Email
+    private String email;
+    @NotNull
+    private String password;
 }
