@@ -17,7 +17,8 @@ public interface CiudadRepository extends JpaRepository<Ciudad,Integer> {
     Ciudad findCiudadByCodigo(int codigo);
 
     @Query("SELECT c FROM Ciudad c WHERE c.nombre LIKE %?1% order by c.nombre asc")
-    List<Ciudad> findCiudadesByNombre(String nombre);
-
+    List<Ciudad> findCiudadesByNombreAsc(String nombre);
+    @Query("SELECT c FROM Ciudad c WHERE c.nombre LIKE %?1% order by c.nombre desc")
+    List<Ciudad> findCiudadesByNombreDesc(String nombre);
 
 }
