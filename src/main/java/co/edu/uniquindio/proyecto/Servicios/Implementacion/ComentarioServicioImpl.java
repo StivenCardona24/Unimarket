@@ -32,7 +32,9 @@ public class ComentarioServicioImpl implements ComentarioServicio {
         if (!usuarioRepository.existsById(comentarioDTO.getIdUsuario())) {
             throw new Exception("El Usuario no existe");
         }
-        return comentarioRepository.save(convertirDTOToAnEntity(comentarioDTO)).getCodigo();
+        Comentario comentarioGuardar=convertirDTOToAnEntity(comentarioDTO);
+        comentarioGuardar.setFecha(LocalDate.now());
+        return comentarioRepository.save(comentarioGuardar).getCodigo();
     }
 
     @Override
@@ -109,6 +111,7 @@ public class ComentarioServicioImpl implements ComentarioServicio {
         }
         Comentario actualizarComentario=convertirDTOToAnEntity(comentarioDTO);
         actualizarComentario.setCodigo(codigoComentario);
+        actualizarComentario.setFecha(LocalDate.now());
         return convertirEntityToAnDTO(comentarioRepository.save(actualizarComentario));
     }
     @Override

@@ -23,7 +23,7 @@ public interface DetalleVentaRepository extends JpaRepository<DetalleVenta,Integ
 
     List<DetalleVenta> findByPrecioGreaterThan(double precioMinimo);
     List<DetalleVenta> findByUnidadesGreaterThan(int unidadesMinimas);
-    @Query("SELECT d FROM DetalleVenta d WHERE d.venta = ?1")
+    @Query("SELECT d FROM DetalleVenta d WHERE d.venta.codigo = ?1")
     List<DetalleVenta> findAllByVenta(int codigoVenta);
 
 

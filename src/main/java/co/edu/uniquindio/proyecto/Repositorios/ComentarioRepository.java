@@ -33,7 +33,7 @@ public interface ComentarioRepository extends JpaRepository<Comentario,Integer> 
     @Query("SELECT COUNT(c) FROM Comentario c WHERE c.producto.codigo = :codigoProducto")
     Integer countByProducto( Integer codigoProducto);
 
-    @Query("SELECT c FROM Comentario c WHERE LOWER(c.comentario) LIKE concat ( '%', :comentario, '%' )")
+    @Query("SELECT c FROM Comentario c WHERE c.comentario LIKE %?1%")
     List<Comentario> findBycomentarioContaining(String comentario);
 
 

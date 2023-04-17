@@ -42,7 +42,7 @@ public class CiudadServicioImpl implements CiudadServicio {
     public CiudadGetDTO obtenerCiudad(int codigoCiudad) throws Exception {
         Optional<Ciudad> ciudadActual=ciudadRepository.findById(codigoCiudad);
         if (ciudadActual.isEmpty()) {
-            throw new Exception("El código " + codigoCiudad + " no está asociado a ningún producto");
+            throw new Exception("El código " + codigoCiudad + " no está asociado a ningúna ciudad");
         }
         return convertirEntityToDTO(ciudadActual.get());
     }
@@ -60,6 +60,9 @@ public class CiudadServicioImpl implements CiudadServicio {
     @Override
     public CiudadGetDTO obtenerCiudadNombreExacto(String nombre) throws Exception {
         Ciudad ciudadActual= ciudadRepository.findCiudadByNombre(nombre);
+        if (ciudadActual ==null) {
+            throw new Exception("El nombre: " + nombre + " no está asociado a ningúna Ciudad");
+        }
         return convertirEntityToDTO(ciudadActual);
     }
 

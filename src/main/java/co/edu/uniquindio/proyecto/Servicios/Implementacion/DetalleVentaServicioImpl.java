@@ -33,11 +33,11 @@ public class DetalleVentaServicioImpl implements DetalleVentaServicio {
             throw new Exception("El valor de la compra debe ser positivo.");
         }
         Optional<Venta> ventaExistente = ventaRepository.findById(detalleVentaDTO.getIdVenta());
-        if (ventaExistente.isPresent()) {
+        if (!ventaExistente.isPresent()) {
             throw new Exception("El codigo"+detalleVentaDTO.getIdVenta()+" de la venta no existe");
         }
         Optional<Producto> productoExitente = productoRepository.findById(detalleVentaDTO.getIdProducto());
-        if (productoExitente.isPresent()) {
+        if (!productoExitente.isPresent()) {
             throw new Exception("El codigo"+detalleVentaDTO.getIdProducto()+" del producto no existe");
         }
         return detalleVentaRepository.save(convertirDTOToAnEntity(detalleVentaDTO)).getCodigo();
@@ -52,11 +52,11 @@ public class DetalleVentaServicioImpl implements DetalleVentaServicio {
             throw new Exception("El valor de la compra debe ser positivo.");
         }
         Optional<Venta> ventaExistente = ventaRepository.findById(detalleVentaDTO.getIdVenta());
-        if (ventaExistente.isPresent()) {
+        if (!ventaExistente.isPresent()) {
             throw new Exception("El codigo"+detalleVentaDTO.getIdVenta()+" de la venta no existe");
         }
         Optional<Producto> productoExitente = productoRepository.findById(detalleVentaDTO.getIdProducto());
-        if (productoExitente.isPresent()) {
+        if (!productoExitente.isPresent()) {
             throw new Exception("El codigo"+detalleVentaDTO.getIdProducto()+" del producto no existe");
         }
         DetalleVenta actualizarDetalleVenta=convertirDTOToAnEntity(detalleVentaDTO);
@@ -87,7 +87,7 @@ public class DetalleVentaServicioImpl implements DetalleVentaServicio {
             DetalleVentaGetDTO nuevoDetalleVenta=convertirEntityToAnDTO(detalleVentasRecorrer);
             listDetalleVenta.add(nuevoDetalleVenta);
         }
-        return null;
+        return listDetalleVenta;
     }
 
     private void validarExistencia(int codigo) throws Exception {
