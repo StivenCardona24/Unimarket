@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.seguridad.servicios;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.Role;
 import co.edu.uniquindio.proyecto.Repositorios.UsuarioRepository;
 import co.edu.uniquindio.proyecto.seguridad.modelo.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<Usuario> cliente = clienteRepo.findByEmailAndEnumRole(email,"CLIENTE");
+
+        //Role role = Role.valueOf(CLIENTE);
+        Optional<Usuario> cliente = clienteRepo.findByEmail(email);
         if(cliente.isEmpty()){
-            Optional<Usuario> admin = clienteRepo.findByEmailAndEnumRole(email,"MODERADOR");
+            Optional<Usuario> admin = clienteRepo.findByEmail(email);
             if(admin.isEmpty())
                 throw new UsernameNotFoundException("El usuario no existe");
             return UserDetailsImpl.build(admin.get());
