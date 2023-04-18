@@ -1,8 +1,5 @@
 package co.edu.uniquindio.proyecto.Modelo.DTO;
 
-import co.edu.uniquindio.proyecto.Modelo.Clases.Ciudad;
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -58,5 +55,8 @@ public class UsuarioDTO {
    @NotBlank(message = "la fechaNacimiento no deberia epuedestar vacia")
    @Length(message = "no debe ser la fechaNacimiento mas grande de 20 caracteres",max = 20)
    private LocalDate fechaNacimiento;
+
+
+    private boolean activo;
 
 }

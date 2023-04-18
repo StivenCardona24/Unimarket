@@ -10,13 +10,13 @@ int crearUsuario(UsuarioDTO usuarioDTO) throws Exception;
 
 int eliminarUsuario(int cedulaUsuario)throws Exception;
 
-UsuarioGetDTO actualizarUsuario(int codigoUsuario,UsuarioDTO usuarioDTO) throws Exception, ExceptionEnUso;
+    UsuarioGetDTO actualizarUsuario(int codigoUsuario, UsuarioDTO usuarioDTO) throws Exception;
 
-UsuarioGetDTO obtenerUsuario (int cedulaUsuario) throws Exception;
+UsuarioGetDTO obtenerUsuario (int codigoUsurio) throws Exception;
 
-Usuario obtener (int cedulaUsuario)throws Exception;
+Usuario obtener (int codigoUsuario)throws Exception;
 
-    Usuario obtenerporCorreo (String gmail)throws Exception;
+Usuario obtenerporCorreo (String gmail)throws Exception;
 
 
 

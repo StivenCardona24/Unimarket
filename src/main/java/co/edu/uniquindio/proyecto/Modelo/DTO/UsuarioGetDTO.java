@@ -60,4 +60,6 @@ public class UsuarioGetDTO {
    @Length(message = "no debe ser la fechaNacimiento mas grande de 20 caracteres",max = 20)
    private LocalDate fechaNacimiento;
 
+   private boolean activo;
+
 }
