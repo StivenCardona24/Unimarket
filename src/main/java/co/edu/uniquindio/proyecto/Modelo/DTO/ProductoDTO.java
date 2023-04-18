@@ -16,10 +16,10 @@ public class ProductoDTO {
     //extends trow
     @Length(max =100,message = "error nombre|")
     private String nombre;
-    private String descripocion;
+    private String descripcion;
     private int vendedor;
     private int unidades;
     private double  precio;
     private List<String> imagenes;
-    private List<String> categoria;
+    private List<String> categorias;
 }

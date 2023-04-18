@@ -76,7 +76,7 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public List<ProductoGetDTO> listarProductosPrecio(float precioMinimo, float precioMaximo) {
+    public List<ProductoGetDTO> listarProductosPrecio(double precioMin, double precioMax) {
         return null;
     }
 

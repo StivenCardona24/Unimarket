@@ -25,7 +25,7 @@ public class Producto implements Serializable{
     @EqualsAndHashCode.Include
     private int codigo;
     @Column(nullable = false)
-    @Min(1)
+    @Min(0)
     private int unidades;
 
     @Column(length = 50)

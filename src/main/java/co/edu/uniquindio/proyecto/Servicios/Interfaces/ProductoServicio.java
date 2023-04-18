@@ -14,7 +14,7 @@ public interface ProductoServicio {
 
     int actualizarUnidades(int codigoProducto, int unidades);
 
-    int actualizarEstado(int codigoProducto, EstadoProducto estado);
+    int actualizarEstado(int codigoProducto, EstadoProducto estado); //Falta
 
     int eliminarProducto(int codigoProducto);
 
@@ -30,5 +30,5 @@ public interface ProductoServicio {
 
     List<ProductoGetDTO> listarProductosNombre(String nombre);
 
-    List<ProductoGetDTO> listarProductosPrecio(float precioMinimo, float precioMaximo);
+    List<ProductoGetDTO> listarProductosPrecio(double precioMin, double precioMax);
 }

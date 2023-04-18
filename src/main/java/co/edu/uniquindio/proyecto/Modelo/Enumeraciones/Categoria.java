@@ -9,5 +9,5 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public enum Categoria{
-      ROPA,CALZADO,ELECTRODOMESTICO;
+      ROPA,CALZADO,ELECTRODOMESTICO,TECNOLOGIA,HOGAR
 }
