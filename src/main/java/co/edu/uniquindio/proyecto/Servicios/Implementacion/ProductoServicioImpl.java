@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioDTO;
+import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.Categoria;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoProducto;
 import co.edu.uniquindio.proyecto.Repositorios.ProductoRepository;
@@ -38,24 +39,56 @@ public class ProductoServicioImpl implements ProductoServicio {
             throw new Exception("Este producto ya lo contiene el vendedor");
         }
 
+
         Producto nuevo = convertir(productoDTO, vendedor);
+
+        //Datos quemados
+        nuevo.setFechaLimite( LocalDate.now().plusDays(vendedor.getLicencia().getDiasActivoProducto()));
+        EstadoProducto estado = EstadoProducto.INACTIVE;
+        nuevo.setEstado(estado);
+
         Producto registro = productoRepository.save(nuevo);
         return registro.getCodigo();
     }
 
     @Override
-    public int actualizarProducto(int codigoProducto, ProductoDTO productoDTO) {
-        return 0;
+    public ProductoGetDTO actualizarProducto(int codigoProducto, ProductoDTO productoDTO) throws Exception {
+
+        Usuario vendedor = usuarioRepository.findUsuariosByCodigo(productoDTO.getVendedor());
+
+        if(vendedor == null ){
+            throw new Exception("El vendedor no existe");
+        }
+
+        validarExiste(codigoProducto);
+        Optional<Producto> actual = productoRepository.findById(codigoProducto);
+
+        Producto producto = convertir(productoDTO, vendedor);
+        //DATOS
+        producto.setFechaLimite( actual.get().getFechaLimite());
+        EstadoProducto estado = actual.get().getEstado();
+        producto.setEstado(estado);
+        producto.setCodigo(codigoProducto);
+
+
+
+
+        return convertirDTO(productoRepository.save(producto));
     }
 
     @Override
-    public int actualizarUnidades(int codigoProducto, int unidades) {
-        return 0;
+    public ProductoGetDTO actualizarUnidades(int codigoProducto, int unidades) throws Exception {
+
+        validarExiste(codigoProducto);
+        productoRepository.actualizarUnidades(codigoProducto, unidades);
+       return  convertirDTO(obtenerProducto(codigoProducto));
     }
 
     @Override
-    public int actualizarEstado(int codigoProducto, EstadoProducto estado) {
-        return 0;
+    public ProductoGetDTO actualizarEstado(int codigoProducto, EstadoProducto estado) throws Exception {
+        validarExiste(codigoProducto);
+        productoRepository.actualizarEstado(codigoProducto, estado);
+        return convertirDTO(obtenerProducto(codigoProducto));
     }
 
     @Override
@@ -64,8 +97,10 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public ProductoGetDTO obtenerProducto(int codigoProducto) {
-        return null;
+    public Producto obtenerProducto(int codigo) throws Exception {
+        Optional<Producto> producto = productoRepository.findById(codigo);
+
+        return producto.get();
     }
 
     @Override
@@ -108,16 +143,42 @@ public class ProductoServicioImpl implements ProductoServicio {
         producto.setUnidades(productoDTO.getUnidades());
         producto.setDescripcion(productoDTO.getDescripcion());
         producto.setPrecioUnitario(productoDTO.getPrecio());
-
-        //Fecha quemada
-        producto.setFechaLimite( LocalDate.now().plusMonths(1));
-
-        EstadoProducto estado = EstadoProducto.INACTIVE;
-        producto.setEstado(estado);
         producto.setUsuarioPropietario(vendedor);
         producto.setCategorias(productoDTO.getCategorias());
         producto.setImagenes(productoDTO.getImagenes());
 
         return producto;
     }
+
+    private ProductoGetDTO convertirDTO(Producto producto) {
+
+        ProductoGetDTO productoGetDTO = new ProductoGetDTO(
+                producto.getCodigo(),
+                producto.getEstado(),
+                producto.getFechaLimite(),
+                producto.getNombre(),
+                producto.getDescripcion(),
+                producto.getUnidades(),
+                producto.getPrecioUnitario(),
+                producto.getUsuarioPropietario().getCodigo(),
+                producto.getImagenes(),
+                producto.getCategorias()
+
+        );
+
+
+        return productoGetDTO;
+    }
+
+    private void validarExiste(int codigo) throws Exception {
+        boolean existe = productoRepository.existsById(Integer.valueOf(codigo));
+
+        if (!existe) {
+            throw new Exception("El código " + codigo + " no está asociado a ningún producto");
+        }
+
+    }
+
 }
+
+

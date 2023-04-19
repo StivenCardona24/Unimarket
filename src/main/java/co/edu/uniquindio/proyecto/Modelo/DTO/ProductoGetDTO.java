@@ -1,12 +1,15 @@
 package co.edu.uniquindio.proyecto.Modelo.DTO;
 
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.Categoria;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoProducto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @Getter
@@ -14,9 +17,9 @@ import java.util.List;
 public class ProductoGetDTO {
     private int codigo;
 
-    private boolean estado;
+    private EstadoProducto estado;
 
-    private LocalDateTime fechaLimite;
+    private LocalDate fechaLimite;
 
     private String nombre;
 
@@ -24,11 +27,11 @@ public class ProductoGetDTO {
 
     private int unidades;
 
-    private float precio;
+    private double precioUnitario;
 
     private int codigoVendedor;
 
-    private List<String> imagenes;
+    private Map<String,String> imagenes;
 
     private List<Categoria> categorias;
 }

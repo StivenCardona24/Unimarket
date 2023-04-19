@@ -1,4 +1,5 @@
 package co.edu.uniquindio.proyecto.Servicios.Interfaces;
+import co.edu.uniquindio.proyecto.Modelo.Clases.Producto;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.Categoria;
@@ -10,15 +11,15 @@ public interface ProductoServicio {
 
     int crearProducto(ProductoDTO productoDTO)  throws Exception;
 
-    int actualizarProducto(int codigoProducto, ProductoDTO productoDTO);
+    ProductoGetDTO actualizarProducto(int codigoProducto, ProductoDTO productoDTO) throws Exception;
 
-    int actualizarUnidades(int codigoProducto, int unidades);
+    ProductoGetDTO actualizarUnidades(int codigoProducto, int unidades)  throws Exception;
 
-    int actualizarEstado(int codigoProducto, EstadoProducto estado); //Falta
+    ProductoGetDTO actualizarEstado(int codigoProducto, EstadoProducto estado) throws Exception ; //Falta
 
     int eliminarProducto(int codigoProducto);
 
-    ProductoGetDTO obtenerProducto(int codigoProducto);
+    Producto obtenerProducto(int codigo) throws Exception;
 
     List<ProductoGetDTO> listarProductosUsuario(int codigoUsuario);
 
@@ -31,4 +32,6 @@ public interface ProductoServicio {
     List<ProductoGetDTO> listarProductosNombre(String nombre);
 
     List<ProductoGetDTO> listarProductosPrecio(double precioMin, double precioMax);
+
+
 }
