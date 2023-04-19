@@ -25,10 +25,7 @@ public class UsuarioGetDTO {
  @Length(message = "no debe ser el UserName mas grande de 100 caracteres",max = 100)
     private String userName;
 
-    @NotNull(message = "el password no puede ser nulo")
-    @NotBlank(message = "el password no puede estar vacio")
-    @Length(message = "no debe ser el password mas grande de 100 caracteres",max = 100)
-    private String password;
+
 
     @NotNull(message = "la cedula no deberia puede nula")
     @NotBlank(message = "la cedula no deberia epuedestar vacia")

@@ -124,7 +124,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         UsuarioGetDTO usuarioDTO = new UsuarioGetDTO(
                 usuario.getCodigo(),
                 usuario.getUserName(),
-                usuario.getPassword(),
                 usuario.getNombre(),
                 usuario.getEmail(),
                 usuario.getDireccion(),
