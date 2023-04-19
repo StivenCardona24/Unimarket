@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto,Integer> {
@@ -23,6 +24,9 @@ public interface ProductoRepository extends JpaRepository<Producto,Integer> {
 
     @Query("SELECT p FROM Producto p JOIN Usuario u WHERE u.codigo = :codigo")
     List<Producto> findProductoByUsuarioPropietario(int codigo);
+
+    @Query("SELECT p FROM Producto p JOIN Usuario u WHERE  p.nombre = :nombre AND u.codigo = :vendedor")
+    Optional<Producto> buscarProductoPorNombreYVendedor(String nombre, int vendedor);
 
     List<Producto> findProductoByFavoritoUsuarios(int codigo);
 }

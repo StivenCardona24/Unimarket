@@ -24,29 +24,32 @@ public class Producto implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int codigo;
-    @Column(nullable = false)
-    @Min(0)
-    private int unidades;
 
     @Column(length = 50)
     private String nombre;
+
     @Lob
     private String descripcion;
+
+    @Column(nullable = false)
+    @Min(0)
+    private int unidades;
 
     @Column(nullable = false)
     @Min(1)
     private double precioUnitario;
 
-    private boolean disponibilidad;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private EstadoProducto estado;
+
     @Column(nullable = false)
     private LocalDate fechaLimite;
     @ElementCollection
     @NotNull
     private Map<String,String> imagenes;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    private EstadoProducto estado;
+    //verificar si es necesario que un producto tenga varias categorias
     @ElementCollection
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -54,10 +57,11 @@ public class Producto implements Serializable{
     @OneToMany(mappedBy="comentario")
     @ToString.Exclude
     private List<Comentario> comentarios;
+    @OneToMany(mappedBy="producto")
+    @ToString.Exclude
+    private List<DetalleVenta> detalleVentas;
     @ManyToOne
     private Usuario usuarioPropietario;
-    @ManyToOne
-    private DetalleVenta ventaProducto;
 
     @ManyToMany(mappedBy="productoFavoritos")
     @ToString.Exclude
