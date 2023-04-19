@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.Modelo.DTO;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.Categoria;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
 public class ProductoGetDTO {
     private int codigo;
 

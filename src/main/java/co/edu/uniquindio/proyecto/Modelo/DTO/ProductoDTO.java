@@ -1,9 +1,6 @@
 package co.edu.uniquindio.proyecto.Modelo.DTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.List;
@@ -11,6 +8,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 public class ProductoDTO {
     //anotaciones validcacion
     //extends trow

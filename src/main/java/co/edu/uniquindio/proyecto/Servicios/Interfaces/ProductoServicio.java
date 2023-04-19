@@ -18,8 +18,6 @@ public interface ProductoServicio {
 
     int eliminarProducto(int codigoProducto);
 
-    ProductoGetDTO obtenerProducto(int codigoProducto);
-
     List<ProductoGetDTO> listarProductosUsuario(int codigoUsuario);
 
     List<ProductoGetDTO> listarProductosCategoria(Categoria categoria);

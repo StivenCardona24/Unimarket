@@ -10,11 +10,10 @@ public interface DetalleVentaServicio {
 
 
     int crearDetalleVenta(DetalleVentaDTO detalleVentaDTO) throws Exception;
+    DetalleVentaGetDTO actualizarDetalleVenta(int codigoDetalleVenta, DetalleVentaDTO detalleVentaDTO) throws Exception;
+    int eliminarDetalleVenta(int codigoDetalleVenta) throws Exception;
 
-    int actualizarDetalleVenta(int codigoDetalleVenta, DetalleVentaDTO detalleVentaDTO) throws Exception;
-    int eliminarComentario(int codigoDetalleVenta) throws Exception;
     DetalleVentaGetDTO obtenerDetalleVenta(int codigoDetalleVenta) throws Exception;
-    List<ComentarioGetDTO>  obtenerDetalleVentaPorVenta(int idVenta) throws Exception;
-    List<ComentarioGetDTO>  obtenerDetalleVentaConProducto(String texto) throws Exception;
+    List<DetalleVentaGetDTO>  obtenerDetalleVentaPorVenta(int idVenta) throws Exception;
 
 }
