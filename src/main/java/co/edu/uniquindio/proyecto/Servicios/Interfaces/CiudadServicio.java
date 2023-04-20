@@ -14,5 +14,6 @@ public interface CiudadServicio {
     CiudadGetDTO obtenerCiudad(int codigoCiudad) throws Exception;
     List<CiudadGetDTO> obtenerCiudadNombre(String nombre) throws Exception;
     CiudadGetDTO obtenerCiudadNombreExacto(String nombre) throws Exception;
+    List<CiudadGetDTO> obtenerCiudades() throws Exception;
 
 }
