@@ -1,5 +1,7 @@
 package co.edu.uniquindio.proyecto.Modelo.DTO;
 
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoVenta;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.MetodoPago;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -9,6 +11,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter

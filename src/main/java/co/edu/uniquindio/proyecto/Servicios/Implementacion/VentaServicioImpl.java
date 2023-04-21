@@ -1,13 +1,11 @@
 package co.edu.uniquindio.proyecto.Servicios.Implementacion;
 
 import co.edu.uniquindio.proyecto.Modelo.Clases.DetalleVenta;
-import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Venta;
 import co.edu.uniquindio.proyecto.Modelo.DTO.*;
 import co.edu.uniquindio.proyecto.Repositorios.TarjetaRepository;
 import co.edu.uniquindio.proyecto.Repositorios.UsuarioRepository;
 import co.edu.uniquindio.proyecto.Repositorios.VentaRepository;
-import co.edu.uniquindio.proyecto.Servicios.Interfaces.DetalleVentaServicio;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.UsuarioServicio;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.VentaServicio;
 import lombok.AllArgsConstructor;

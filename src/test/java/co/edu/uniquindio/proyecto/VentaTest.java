@@ -1,13 +1,12 @@
 package co.edu.uniquindio.proyecto;
 
-import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Venta;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioDTO;
+import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.VentaDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.VentaGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoVenta;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.MetodoPago;
-import co.edu.uniquindio.proyecto.Servicios.Interfaces.UsuarioServicio;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.VentaServicio;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;

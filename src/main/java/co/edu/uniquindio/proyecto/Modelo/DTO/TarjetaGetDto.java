@@ -1,11 +1,7 @@
 package co.edu.uniquindio.proyecto.Modelo.DTO;
 
-import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
-import co.edu.uniquindio.proyecto.Modelo.Clases.Venta;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoTarjeta;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.TipoTarjeta;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;

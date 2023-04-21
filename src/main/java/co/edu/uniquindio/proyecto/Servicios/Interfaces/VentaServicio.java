@@ -1,7 +1,8 @@
 package co.edu.uniquindio.proyecto.Servicios.Interfaces;
 
-import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Venta;
+import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioDTO;
+import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.VentaDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.VentaGetDTO;
 
