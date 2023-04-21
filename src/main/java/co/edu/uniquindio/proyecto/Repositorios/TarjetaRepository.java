@@ -11,11 +11,11 @@ import java.util.List;
 
 @Repository
 public interface TarjetaRepository extends JpaRepository<Tarjeta,Integer> {
-    @Query("SELECT c FROM Tarjeta c WHERE c.usuario.codigo = :codigoUsuario")
-    List<Tarjeta> findByUsuario(Integer codigoUsuario);
+  //  @Query("SELECT c FROM Tarjeta c WHERE c.usuario.codigo = :codigoUsuario")
+   // List<Tarjeta> findByUsuario(Integer codigoUsuario);
 
 
-    List<Tarjeta> findTarjetaByUsuario(Integer codigo);
+  //  List<Tarjeta> findTarjetaByUsuario(Integer codigo);
 
 
 

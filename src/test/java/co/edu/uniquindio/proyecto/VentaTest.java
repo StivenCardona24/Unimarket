@@ -1,13 +1,10 @@
 package co.edu.uniquindio.proyecto;
 
-import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Venta;
-import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioDTO;
-import co.edu.uniquindio.proyecto.Modelo.DTO.VentaDTO;
-import co.edu.uniquindio.proyecto.Modelo.DTO.VentaGetDTO;
+import co.edu.uniquindio.proyecto.Modelo.DTO.TokenDTO;
+import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoVenta;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.MetodoPago;
-import co.edu.uniquindio.proyecto.Servicios.Interfaces.UsuarioServicio;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.VentaServicio;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
@@ -31,7 +28,7 @@ public class VentaTest {
     public void crearVentaTest() {
         try {
             // se crea el usuario con el servicio de crear usuario
-            VentaDTO ventaDTO = new VentaDTO(
+            TokenDTO.VentaDTO ventaDTO = new TokenDTO.VentaDTO(
                     1000000,
                     EstadoVenta.INACTIVE,
                     MetodoPago.EFECTIVO,
@@ -56,7 +53,7 @@ public class VentaTest {
 
             int idUsuario = 1;
 
-            List<VentaGetDTO> compras = ventaServicio.listarVentaUsuarios(idUsuario);
+            List<UsuarioGetDTO.VentaGetDTO> compras = ventaServicio.listarVentaUsuarios(idUsuario);
 
             Assertions.assertEquals(2, compras.size());
             Assertions.assertEquals(idUsuario, compras.get(0).getUsuario());
@@ -69,7 +66,7 @@ public class VentaTest {
 
         int idCompra = 2;
 
-        VentaGetDTO venta = ventaServicio.obtenerVenta(idCompra);
+        UsuarioGetDTO.VentaGetDTO venta = ventaServicio.obtenerVenta(idCompra);
 
         Assertions.assertEquals(idCompra, venta.getIdVenta());
         Assertions.assertEquals(MetodoPago.DAVIPLATA, venta.getMetodoPago());
