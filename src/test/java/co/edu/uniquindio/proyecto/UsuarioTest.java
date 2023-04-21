@@ -104,14 +104,14 @@ public class UsuarioTest {
 
             // Verifica que el usuario fue eliminado
 
-        //    Assertions.assertEquals("juan", usuarioActualizadoResult.getNombre());
+            //    Assertions.assertEquals("juan", usuarioActualizadoResult.getNombre());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
 
-     /**
+    /**
      @Test public void methodimplement(){
 
      claseDTO test= new contrcuto();

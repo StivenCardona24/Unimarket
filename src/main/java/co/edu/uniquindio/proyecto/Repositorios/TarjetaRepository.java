@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.Repositorios;
 
+import co.edu.uniquindio.proyecto.Modelo.Clases.Comentario;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Tarjeta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,8 +11,17 @@ import java.util.List;
 
 @Repository
 public interface TarjetaRepository extends JpaRepository<Tarjeta,Integer> {
-    @Query("SELECT t FROM Tarjeta t JOIN t.usuario u WHERE u.codigo = :codigoUsuario")
-    List<Tarjeta> findByUsuario(String codigoUsuario);
+    @Query("SELECT c FROM Tarjeta c WHERE c.usuario.codigo = :codigoUsuario")
+    List<Tarjeta> findByUsuario(Integer codigoUsuario);
+
+
+    List<Tarjeta> findTarjetaByUsuario(Integer codigo);
+
+
+
+
+
+
 
     @Query("SELECT t FROM Tarjeta t WHERE t.dinero >= :saldo")
     List<Tarjeta> findBySaldo(double saldo);

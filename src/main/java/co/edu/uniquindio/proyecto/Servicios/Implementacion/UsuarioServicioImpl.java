@@ -91,11 +91,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public Usuario obtenerPorCodigo(int codigo) throws Exception {
-        return null;
-    }
-
-    @Override
     public Usuario obtenerporCorreo(String gmail) throws Exception {
 
 
@@ -140,4 +135,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuarioDTO;
     }
 
+
+    //UsuarioRepository.save();
+    //UsuarioRepository.findAll()
+    //UsuarioRepository.exitsById();
+    //UsuarioRepository.delete();
+    //UsuarioRepository.FindbyID();
+    //UsuarioRepository.count();
+    //UsuarioRepository.DeletedAll();
 }

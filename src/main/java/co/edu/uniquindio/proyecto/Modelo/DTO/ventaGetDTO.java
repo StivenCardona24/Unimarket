@@ -1,41 +1,26 @@
 package co.edu.uniquindio.proyecto.Modelo.DTO;
 
-import co.edu.uniquindio.proyecto.Modelo.Clases.DetalleVenta;
-import co.edu.uniquindio.proyecto.Modelo.Clases.Tarjeta;
-import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoVenta;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.MetodoPago;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
-
+@AllArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class ventaGetDTO {
 
-
-    private int codigo;
-
-
+public class VentaGetDTO {
+    private int idVenta;
     private LocalDate fechaCompra;
-
     private double totalCompra;
 
     private EstadoVenta estado;
 
     private MetodoPago metodoPago;
-
-
-    private List<DetalleVenta> ventaProducto;
-
-
-    private Tarjeta tajetaCompra;
-
-
-    private Usuario usuario;
+    private int tajetaCompra;
+    private int usuario;
+    private List<DetalleVentaDTO> ventaProducto;
 }
