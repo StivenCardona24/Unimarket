@@ -33,10 +33,9 @@ public class VentaServicioImpl implements VentaServicio {
     public int crearVenta( VentaDTO ventaDTO) throws Exception{
 
 
-        Venta venta = new Venta();
+        Venta nuevo = convertir(ventaDTO);
 
-        venta.setMetodoPago(ventaDTO.getMetodoPago());
-        venta.setUsuario(usuario.obtener((ventaDTO.getUsuario())));
+        Venta registro = ventaRepository.save(nuevo);
 
         double total = 0;
 
@@ -45,7 +44,7 @@ public class VentaServicioImpl implements VentaServicio {
         }
 */
 
-        return ventaRepository.save(venta).getCodigo();
+        return registro.getCodigo();
 
     }
 
@@ -88,7 +87,7 @@ public class VentaServicioImpl implements VentaServicio {
         venta.setEstado(ventaDTO.getEstado());
         venta.setTotalCompra(ventaDTO.getTotalCompra());
         venta.setUsuario(usuarioRepository.findById(ventaDTO.getUsuario()).get());
-        venta.setTajetaCompra(tarjetaRepository.findById(ventaDTO.getTajetaCompra()).get());
+      //  venta.setTajetaCompra(tarjetaRepository.findById(ventaDTO.getTajetaCompra()).get());
         venta.setFechaCompra(ventaDTO.getFechaCompra());
         return venta;
     }

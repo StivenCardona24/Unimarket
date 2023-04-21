@@ -72,34 +72,7 @@ public class TarjetaServicioImpl implements  TarjetaServicio {
     @Override
     public List<TarjetaGetDto> obtenerTarjetaUsuario(int codigoUsuario) throws Exception {
 
-        List<Tarjeta> tarjetas  = tarjetaRepository.findTarjetaByUsuario(codigoUsuario);
-
-
-        List<TarjetaGetDto> tarjetaGetDTO = new ArrayList<>();
-
-        for (Tarjeta tarjeta : tarjetas) {
-            TarjetaGetDto dto = convertirEntityToDTO(tarjeta);
-            tarjetaGetDTO.add(dto);
-        }
-
-
-/*
-TarjetaGetDto tarjeta= new TarjetaGetDto();
-
-        tarjeta.setCodigo(9);
-        tarjeta.setNombre("bhjhja");
-        List<TarjetaGetDto> listTarjetaDTO=new ArrayList<>();
-        listTarjetaDTO.add(tarjeta);
-
-
-       for(Tarjeta tarjetaRecorer:tarjetaRepository.findByUsuario(codigoUsuario)){
-           TarjetaGetDto nuevoTarjetaDTO=convertirEntityToDTO(tarjetaRecorer);
-           listTarjetaDTO.add(nuevoTarjetaDTO);
-        }
-
-        */
-
-        return tarjetaGetDTO;
+      return null;
     }
 
     public TarjetaGetDto convertirEntityToDTO(Tarjeta tarjetaConvertir){

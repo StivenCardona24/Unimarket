@@ -39,13 +39,16 @@ public class VentaTest {
                     1,
                     LocalDate.of(2023, 4, 17));
 
+
+
+
             int codigo = ventaServicio.crearVenta(ventaDTO);
 
             Venta venta = ventaServicio.obtener(codigo);
 
 
             System.out.println(venta.getCodigo());
-            Assertions.assertNotEquals(0, codigo);
+            Assertions.assertNotEquals(7, venta.getCodigo());
         } catch (Exception e) {
             e.printStackTrace();
         }
