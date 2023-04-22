@@ -96,8 +96,8 @@ public class VentaServicioImpl implements VentaServicio {
 
 
         List<DetalleVentaDTO> detalleVntaDTOs = new ArrayList<>();
-        if (venta.getVentaProducto() != null) { // Verificar si la lista es nula
-            for (DetalleVenta ventaDTO1 : venta.getVentaProducto()) {
+        if (venta.getDetalleVentas() != null) { // Verificar si la lista es nula
+            for (DetalleVenta ventaDTO1 : venta.getDetalleVentas()) {
 
                 DetalleVentaDTO detalle = new DetalleVentaDTO();
                 detalle.setIdVenta(ventaDTO1.getVenta().getCodigo());

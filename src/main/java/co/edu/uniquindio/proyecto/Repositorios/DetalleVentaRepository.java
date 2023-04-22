@@ -27,4 +27,13 @@ public interface DetalleVentaRepository extends JpaRepository<DetalleVenta,Integ
     List<DetalleVenta> findAllByVenta(int codigoVenta);
 
 
+    // Obtener todos los detalles de venta ordenados por precio de forma ascendente
+    List<DetalleVenta> findAllByOrderByPrecioAsc();
+
+    //Obtener todos los detalles de venta que contengan un producto con el nombre especificado
+    @Query("SELECT dv FROM DetalleVenta dv JOIN dv.producto p WHERE p.nombre  LIKE concat ( '%', :nombre, '%' )")
+    List<DetalleVenta> findAllByProductoNombre(@Param("nombre") String nombre);
+
+    //Obtener el número total de detalles de venta que existen:
+    long count();
 }
