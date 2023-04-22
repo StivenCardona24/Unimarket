@@ -1,42 +1,128 @@
 package co.edu.uniquindio.proyecto.Servicios.Implementacion;
 
+import co.edu.uniquindio.proyecto.Modelo.Clases.DetalleVenta;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Venta;
-import co.edu.uniquindio.proyecto.Modelo.DTO.VentaDTO;
-import co.edu.uniquindio.proyecto.Modelo.DTO.VentaGetDTO;
+import co.edu.uniquindio.proyecto.Modelo.DTO.*;
+import co.edu.uniquindio.proyecto.Repositorios.TarjetaRepository;
+import co.edu.uniquindio.proyecto.Repositorios.UsuarioRepository;
 import co.edu.uniquindio.proyecto.Repositorios.VentaRepository;
+import co.edu.uniquindio.proyecto.Servicios.Interfaces.EmailServicio;
+import co.edu.uniquindio.proyecto.Servicios.Interfaces.UsuarioServicio;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.VentaServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class VentaServicioImpl implements VentaServicio {
 
+    private final DetalleVentaServicioImpl detalleVentaServicioImpl;
+    private final TarjetaRepository tarjetaRepository;
+    private final UsuarioRepository usuarioRepository;
+
     private final VentaRepository ventaRepository;
+    private  final UsuarioServicio usuario;
+
+    private  final EmailServicio emailServicio;
     @Override
-    public int crearVenta(VentaDTO ciudadDTO) throws Exception {
-        return 0;
+    public int crearVenta( TokenDTO.VentaDTO ventaDTO) throws Exception{
+
+
+        Venta nuevo = convertir(ventaDTO);
+
+        Venta registro = ventaRepository.save(nuevo);
+
+        emailServicio.enviarEmail(new EmailDTO("Compra", "Se realizo una compra del usuario " +ventaDTO.getUsuario() , "usuario1@example.com"));
+
+
+
+
+
+
+        return registro.getCodigo();
+
     }
 
     @Override
-    public int actualizarCiudad(int codigoCiudad, VentaDTO ciudadDTO) throws Exception {
-        return 0;
-    }
+    public List<UsuarioGetDTO.VentaGetDTO> listarVentaUsuarios(int codigoVenta) throws Exception {
+        List<Venta> ventas  = ventaRepository.findByUsuarioIdUsuario(codigoVenta);
+        List<UsuarioGetDTO.VentaGetDTO> VentaGetDTO = new ArrayList<>();
 
-    @Override
-    public int eliminarCiudad(int codigoCiudad) throws Exception {
-        return 0;
-    }
-
-    @Override
-    public VentaGetDTO obtenerCiudad(int codigoCiudad) throws Exception {
-        return null;
-    }
-
-    private void validarExistencia(int codigo) throws Exception {
-        boolean existe = ventaRepository.existsById(codigo);
-        if (!existe) {
-            throw new Exception("El código: " + codigo + " no está asociado a ningúna Licencia");
+        for (Venta venta : ventas) {
+            UsuarioGetDTO.VentaGetDTO dto = convertirDTO(venta);
+            VentaGetDTO.add(dto);
         }
+
+        return VentaGetDTO;
+    }
+
+    @Override
+    public UsuarioGetDTO.VentaGetDTO obtenerVenta(int codigoVenta) throws Exception {
+
+        return convertirDTO(obtener(codigoVenta));
+
+    }
+
+    @Override
+    public Venta obtener(int codigoVenta) throws Exception {
+        Optional<Venta> venta = ventaRepository.findById(codigoVenta);
+
+        if (venta.isEmpty()) {
+            throw new Exception("El código " + codigoVenta + " no está asociado a ningún venta");
+        }
+
+        return venta.get();
+    }
+
+    private Venta convertir(TokenDTO.VentaDTO ventaDTO) {
+
+        Venta venta = new Venta();
+
+        venta.setMetodoPago(ventaDTO.getMetodoPago());
+        venta.setEstado(ventaDTO.getEstado());
+        venta.setTotalCompra(ventaDTO.getTotalCompra());
+        venta.setUsuario(usuarioRepository.findById(ventaDTO.getUsuario()).get());
+      //  venta.setTajetaCompra(tarjetaRepository.findById(ventaDTO.getTajetaCompra()).get());
+        venta.setFechaCompra(ventaDTO.getFechaCompra());
+        return venta;
+    }
+
+    private UsuarioGetDTO.VentaGetDTO convertirDTO(Venta venta)  throws Exception {
+
+
+
+
+        List<DetalleVentaDTO> detalleVntaDTOs = new ArrayList<>();
+        if (venta.getDetalleVentas() != null) { // Verificar si la lista es nula
+            for (DetalleVenta ventaDTO1 : venta.getDetalleVentas()) {
+
+                DetalleVentaDTO detalle = new DetalleVentaDTO();
+                detalle.setIdVenta(ventaDTO1.getVenta().getCodigo());
+                detalle.setUnidades(ventaDTO1.getUnidades());
+                detalle.setIdProducto(ventaDTO1.getProducto().getCodigo());
+
+                detalleVntaDTOs.add(detalle);
+
+
+
+            }
+        }
+        UsuarioGetDTO.VentaGetDTO ventaDTO = new UsuarioGetDTO.VentaGetDTO(
+                venta.getCodigo(),
+                venta.getFechaCompra(),
+                venta.getTotalCompra(),
+                venta.getEstado(),
+                venta.getMetodoPago(),
+                venta.getTajetaCompra().getCodigo(),
+                venta.getUsuario().getCodigo(),detalleVntaDTOs
+                 );
+
+
+
+        return ventaDTO;
     }
 }

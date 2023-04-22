@@ -74,11 +74,11 @@ INSERT INTO venta
 VALUES
 
     -- (codigo,estado, fecha_compra, metodo_pago, total_compra, tajeta_compra_codigo)
-    (1,'ACTIVE',   '2023-03-01', 'EFECTIVO',  50000, 1,1),
-    (2,'INACTIVE', '2023-03-02', 'DAVIPLATA', 75000, 2,2),
-    (6,'INACTIVE',   '2023-03-04', 'TARJETA', 125000,4,3),
-    (4,'INACTIVE',   '2023-03-04', 'TARJETA', 125000,3,4),
-    (5,'ACTIVE',     '2023-03-05', 'EFECTIVO',150000,5,1);
+    (1,'CARRITO',   '2023-03-01', 'EFECTIVO',  50000, 1,1),
+    (2,'ENTREGADO', '2023-03-02', 'DAVIPLATA', 75000, 2,2),
+    (6,'CARRITO',   '2023-03-04', 'TARJETA', 125000,4,3),
+    (4,'ENTREGADO',   '2023-03-04', 'TARJETA', 125000,3,4),
+    (5,'CARRITO',     '2023-03-05', 'EFECTIVO',150000,5,1);
 
 
 
@@ -87,12 +87,12 @@ VALUES
 insert into producto
 values
 ---------------------------------toca organizar la descripcion---------------------------------------------------
--- codigo, descripcion,  disponibilidad,estado, fecha_limite,  nombre,   precio_unitario,  unidades,  usuario_propietario_codigo, venta_producto_codigo,
-(1, "Televisor LED 55", true,          "ACTIVE", '2024-04-01', "Televisor LG", 799.99, 10, 1 ),
-(2, 'Auriculares inalámbricos', true, 'ACTIVE', '2024-04-01', 'Auriculares Sony', 149.99, 20, 2),
-(3, 'Mesa de comedor',      true,     'ACTIVE', '2023-12-31', 'Mesa de madera', 299.99, 1, 3),
-(4,  'Libro de cocina',          true,  'ACTIVE', '2024-04-01', 'La cocina italiana', 29.99, 5, 4),
-(5, 'Monitor de computadora',  true,  'ACTIVE', '2025-01-01', 'Monitor Samsung', 299.99, 7, 1 );
+    -- codigo, descripcion,  disponibilidad,estado, fecha_limite,  nombre,   precio_unitario,  unidades,  usuario_propietario_codigo, venta_producto_codigo,
+    (1, "Televisor LED 55", true,          "ACTIVE", '2024-04-01', "Televisor LG", 799.99, 10, 1 ),
+    (2, 'Auriculares inalámbricos', true, 'ACTIVE', '2024-04-01', 'Auriculares Sony', 149.99, 20, 2),
+    (3, 'Mesa de comedor',      true,     'ACTIVE', '2023-12-31', 'Mesa de madera', 299.99, 1, 3),
+    (4,  'Libro de cocina',          true,  'ACTIVE', '2024-04-01', 'La cocina italiana', 29.99, 5, 4),
+    (5, 'Monitor de computadora',  true,  'ACTIVE', '2025-01-01', 'Monitor Samsung', 299.99, 7, 1 );
 
 
 INSERT INTO detalle_venta

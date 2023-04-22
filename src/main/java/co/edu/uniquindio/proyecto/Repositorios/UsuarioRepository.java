@@ -21,15 +21,25 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Integer> {
     long countUsuariosByRoleCodigo(int codigo);
 
 
+
+    @Query("select u from Usuario u where u.cedula = :cedula")
+    Usuario buscarUsuarioPorCedula1(String cedula);
+
     @Query("select u from Usuario u where u.cedula = :cedula")
     Optional<Usuario> buscarUsuarioPorCedula(String cedula);
 
     @Query("select u from Usuario u where u.email = :email")
     Usuario buscarUsuarioPorEmail(String email);
 
+
     Optional<Usuario> findByEmail(String email);
+
     Optional<Usuario> findByEmailAndEnumRole(String email, String role);
+
+    Optional<Usuario> findByCodigo(int codigo);
+
 /*
+
     @Query("Saelect aliasTabla From tabla aliasTabla where tabla.field=;param")
     Usuario buscarUSuarioCorreo(String param);
 

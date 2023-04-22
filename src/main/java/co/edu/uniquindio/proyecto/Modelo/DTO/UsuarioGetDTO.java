@@ -1,5 +1,7 @@
 package co.edu.uniquindio.proyecto.Modelo.DTO;
 
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoVenta;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.MetodoPago;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -9,6 +11,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,10 +28,7 @@ public class UsuarioGetDTO {
  @Length(message = "no debe ser el UserName mas grande de 100 caracteres",max = 100)
     private String userName;
 
-    @NotNull(message = "el password no puede ser nulo")
-    @NotBlank(message = "el password no puede estar vacio")
-    @Length(message = "no debe ser el password mas grande de 100 caracteres",max = 100)
-    private String password;
+
 
     @NotNull(message = "la cedula no deberia puede nula")
     @NotBlank(message = "la cedula no deberia epuedestar vacia")
@@ -60,4 +60,22 @@ public class UsuarioGetDTO {
    @Length(message = "no debe ser la fechaNacimiento mas grande de 20 caracteres",max = 20)
    private LocalDate fechaNacimiento;
 
+   private boolean activo;
+
+    @AllArgsConstructor
+    @Getter
+    @Setter
+
+    public static class VentaGetDTO {
+        private int idVenta;
+        private LocalDate fechaCompra;
+        private double totalCompra;
+
+        private EstadoVenta estado;
+
+        private MetodoPago metodoPago;
+        private int tajetaCompra;
+        private int usuario;
+        private List<DetalleVentaDTO> ventaProducto;
+    }
 }

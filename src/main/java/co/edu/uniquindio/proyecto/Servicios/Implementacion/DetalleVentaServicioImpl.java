@@ -105,7 +105,6 @@ public class DetalleVentaServicioImpl implements DetalleVentaServicio {
         nuevoDetalleVenta.setPrecioCompra(detalleVentaConvertir.getPrecio());
         return nuevoDetalleVenta;
     }
-
     public DetalleVenta convertirDTOToAnEntity (DetalleVentaDTO detalleVentaConvertir) throws Exception {
         DetalleVenta nuevodetalleVenta= new DetalleVenta();
         nuevodetalleVenta.setVenta(ventaRepository.findById(detalleVentaConvertir.getIdVenta()).get());

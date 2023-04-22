@@ -17,7 +17,7 @@ public interface ProductoServicio {
 
     ProductoGetDTO actualizarEstado(int codigoProducto, EstadoProducto estado) throws Exception ; //Falta
 
-    int eliminarProducto(int codigoProducto);
+    int eliminarProducto(int codigoProducto) throws Exception;
 
     Producto obtenerProducto(int codigo) throws Exception;
 
@@ -33,5 +33,5 @@ public interface ProductoServicio {
 
     List<ProductoGetDTO> listarProductosPrecio(double precioMin, double precioMax);
 
-
+    List<ProductoGetDTO> listarProductos();
 }
