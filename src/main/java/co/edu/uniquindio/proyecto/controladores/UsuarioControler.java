@@ -43,6 +43,11 @@ public class UsuarioControler {
         return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, usuarioServicio.obtenerUsuario(codigoUsuario)));
     }
 
+    @GetMapping("/obtener/{gmail}")
+    public ResponseEntity<MensajeDTO> obtenerUsuarioporCorreo(@PathVariable String  gmail) throws Exception{
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, usuarioServicio.obtenerporCorreo(gmail)));
+    }
+
 
 
  /*   Usuario obtener (int codigoUsuario) {
@@ -50,13 +55,7 @@ public class UsuarioControler {
         return null;
     }
 
-    Usuario obtenerporCorreo (String gmail) {
 
-
-            return null;
-
-
-}
 */
 
 }
