@@ -46,6 +46,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         nuevo.setFechaLimite( LocalDate.now().plusDays(vendedor.getLicencia().getDiasActivoProducto()));
         EstadoProducto estado = EstadoProducto.INACTIVE;
         nuevo.setEstado(estado);
+        nuevo.setDisponible(true);
 
         Producto registro = productoRepository.save(nuevo);
         return registro.getCodigo();

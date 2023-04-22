@@ -95,6 +95,7 @@ public class ProductoTest {
 
         ProductoGetDTO productoGetDTO = productoServicio.actualizarEstado(1, EstadoProducto.EN_APROBACION);
 
+
         System.out.println(productoGetDTO.getCodigo() + ' '+  productoGetDTO.getNombre() + " ESTADO:" + productoGetDTO.getEstado());
 
     }

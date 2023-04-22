@@ -13,22 +13,27 @@ import java.util.Optional;
 
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto,Integer> {
-    @Query("SELECT p FROM Producto p WHERE p.categorias = :categoria")
+
+    @Query("SELECT p FROM Producto  p where  p.disponible = true")
+    List<Producto> findAll();
+
+
+    @Query("SELECT p FROM Producto p WHERE p.categorias = :categoria AND p.disponible = true")
     List<Producto> findProductoByCategorias(String categoria);
 
-    @Query("SELECT p FROM Producto p WHERE p.estado = :estado")
+    @Query("SELECT p FROM Producto p WHERE p.estado = :estado AND p.disponible = true")
     List<Producto> findProductoByEstado(String estado);
 
-    @Query("SELECT p FROM Producto p WHERE LOWER(p.nombre) LIKE concat('%', :nombre, '%')")
+    @Query("SELECT p FROM Producto p WHERE LOWER(p.nombre) LIKE concat('%', :nombre, '%') AND p.disponible = true")
     List<Producto> findProductoByNombre(String nombre);
 
-    @Query("SELECT p FROM Producto p WHERE p.precioUnitario BETWEEN :precioMin AND :precioMax")
+    @Query("SELECT p FROM Producto p WHERE p.precioUnitario BETWEEN :precioMin AND :precioMax AND p.disponible = true")
     List<Producto> findProductoByPrecioUnitario(double precioMin, double precioMax);
 
-    @Query("SELECT p FROM Producto p JOIN Usuario u WHERE u.codigo = :codigo")
+    @Query("SELECT p FROM Producto p JOIN Usuario u WHERE u.codigo = :codigo AND p.disponible = true")
     List<Producto> findProductoByUsuarioPropietario(int codigo);
 
-    @Query("SELECT p FROM Producto p JOIN Usuario u WHERE  p.nombre = :nombre AND u.codigo = :vendedor")
+    @Query("SELECT p FROM Producto p JOIN Usuario u WHERE  p.nombre = :nombre AND u.codigo = :vendedor AND p.disponible = true")
     Optional<Producto> buscarProductoPorNombreYVendedor(String nombre, int vendedor);
 
     @Modifying
