@@ -39,4 +39,8 @@ public interface ProductoRepository extends JpaRepository<Producto,Integer> {
     @Query("UPDATE Producto p SET p.estado = :estado WHERE p.codigo = :codigo")
     void actualizarEstado(int codigo, EstadoProducto estado);
     List<Producto> findProductoByFavoritoUsuarios(int codigo);
+
+
+
+
 }

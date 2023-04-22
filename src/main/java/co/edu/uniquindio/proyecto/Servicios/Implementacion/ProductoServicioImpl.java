@@ -92,8 +92,15 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public int eliminarProducto(int codigoProducto) {
-        return 0;
+    public int eliminarProducto(int codigoProducto) throws Exception {
+        validarExiste(codigoProducto);
+        productoRepository.deleteById(codigoProducto);
+        boolean existe = productoRepository.existsById(codigoProducto);
+        if (existe){
+            return 0;
+        }
+        return 1;
+
     }
 
     @Override

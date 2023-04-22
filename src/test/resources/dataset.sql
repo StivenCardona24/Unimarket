@@ -110,7 +110,7 @@ values
 
 --codigo,comnetario,fecha,producto_codigo,usuario_codigo
 
-(1, "Me encantó este producto, definitivamente lo recomiendo.", "2022-03-01", 1, 1),
+(1, "Me encantó este producto, definitivamente lo recomiendo.", "2022-03-01", 2, 1),
 (2, 'No me gustó la calidad de este producto, esperaba algo mejor.', '2022-03-05', 2, 2),
 (3, 'Excelente servicio al cliente, me ayudaron con todas mis dudas.', '2022-03-10', 3, 3),
 (4, 'El envío tardó más de lo esperado, pero el producto en sí es bueno.', '2022-03-15', 4, 4),

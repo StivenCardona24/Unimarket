@@ -98,4 +98,14 @@ public class ProductoTest {
         System.out.println(productoGetDTO.getCodigo() + ' '+  productoGetDTO.getNombre() + " ESTADO:" + productoGetDTO.getEstado());
 
     }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void eliminarProducto() throws  Exception {
+
+        int ward = productoServicio.eliminarProducto(1);
+
+        System.out.println(ward);
+
+    }
 }
