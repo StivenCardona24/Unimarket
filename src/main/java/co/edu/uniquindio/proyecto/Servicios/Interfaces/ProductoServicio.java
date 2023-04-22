@@ -21,7 +21,7 @@ public interface ProductoServicio {
 
     Producto obtenerProducto(int codigo) throws Exception;
 
-    List<ProductoGetDTO> listarProductosUsuario(int codigoUsuario);
+    List<ProductoGetDTO> listarProductosUsuario(int codigoUsuario) throws Exception;
 
     List<ProductoGetDTO> listarProductosCategoria(Categoria categoria);
 

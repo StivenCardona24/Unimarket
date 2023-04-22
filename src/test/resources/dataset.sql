@@ -88,11 +88,12 @@ insert into producto
 values
 ---------------------------------toca organizar la descripcion---------------------------------------------------
     -- codigo, descripcion,  disponibilidad,estado, fecha_limite,  nombre,   precio_unitario,  unidades,  usuario_propietario_codigo, venta_producto_codigo,
-    (1, "Televisor LED 55", true,          "ACTIVE", '2024-04-01', "Televisor LG", 799.99, 10, 1 ),
+    (1, 'Televisor LED 55', true,          'ACTIVE', '2024-04-01', 'Televisor LG', 799.99, 10, 1 ),
     (2, 'Auriculares inalámbricos', true, 'ACTIVE', '2024-04-01', 'Auriculares Sony', 149.99, 20, 2),
-    (3, 'Mesa de comedor',      true,     'ACTIVE', '2023-12-31', 'Mesa de madera', 299.99, 1, 3),
+    (3, 'Mesa de comedor',      true,     'INACTIVE', '2023-12-31', 'Mesa de madera', 299.99, 1, 3),
     (4,  'Libro de cocina',          true,  'ACTIVE', '2024-04-01', 'La cocina italiana', 29.99, 5, 4),
-    (5, 'Monitor de computadora',  true,  'ACTIVE', '2025-01-01', 'Monitor Samsung', 299.99, 7, 1 );
+    (5, 'Monitor de computadora',  true,  'ACTIVE', '2025-01-01', 'Monitor Samsung', 299.99, 7, 1 ),
+    (6, 'Smartphone samsung pro',  true,  'ACTIVE', '2025-01-01', 'Celular Samsung S22', 599.99, 5, 1 );
 
 
 INSERT INTO detalle_venta
@@ -150,7 +151,7 @@ INSERT INTO  usuario_producto_favoritos
 VALUES
 
     (1, 1),
-    (2, 2),
+    (1, 2),
     (3, 3),
     (4, 4),
     (5, 5);
