@@ -28,3 +28,5 @@ public class ProductoDTO {
    private Map< String, String> imagenes;
      private List<Categoria> categorias;
 }
+
+

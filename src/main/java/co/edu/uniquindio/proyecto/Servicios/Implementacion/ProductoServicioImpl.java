@@ -115,7 +115,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         validarExiste(codigoProducto);
         productoRepository.deleteByCodigo(codigoProducto);
         Optional<Producto> producto = productoRepository.findById(codigoProducto);
-        if (producto.get().isDisponible()){
+        if (producto.orElse(null) != null && producto.get().isDisponible()){
             return 0;
         }
         return 1;
@@ -202,7 +202,7 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public List<ProductoGetDTO> listarProductosNombre(String nombre) {
 
-        List<Producto> productos = productoRepository.findProductoByNombre(nombre);
+        List<Producto> productos = productoRepository.findProductoByNombre(nombre.toLowerCase());
         List<ProductoGetDTO> productosGetDTOS = new ArrayList<>();
         for (Producto p: productos) {
 
