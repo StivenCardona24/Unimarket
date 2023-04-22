@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
+
 public interface TarjetaRepository   extends JpaRepository<Tarjeta,Integer> {
 
   //  @Query("SELECT c FROM Tarjeta c WHERE c.usuario.codigo = :codigoUsuario")
@@ -19,11 +20,6 @@ public interface TarjetaRepository   extends JpaRepository<Tarjeta,Integer> {
 
 
   List<Tarjeta> findTarjetaByUsuario(Usuario user);
-
-
-
-
-
 
     //@Query("SELECT t.dinero FROM Tarjeta t WHERE t.dinero >= :saldo")
    // Tarjeta findBySaldo(int  codigoTarjeta);
