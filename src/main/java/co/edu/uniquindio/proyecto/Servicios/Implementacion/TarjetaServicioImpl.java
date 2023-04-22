@@ -119,10 +119,10 @@ public class TarjetaServicioImpl implements  TarjetaServicio {
         nuevaTarjeta.setEstado(tarjetaConvertir.getEstado());
         nuevaTarjeta.setNumero(tarjetaConvertir.getNumero());
         nuevaTarjeta.setFecha(tarjetaConvertir.getFecha());
-        List<VentaDTO> ventasDTOs = new ArrayList<>();
+        List<TokenDTO.VentaDTO> ventasDTOs = new ArrayList<>();
         if (tarjetaConvertir.getCompras() != null) { // Verificar si la lista es nula
             for (Venta ventasRecorer : tarjetaConvertir.getCompras()) {
-                VentaDTO venta = new VentaDTO();
+                TokenDTO.VentaDTO venta = new TokenDTO.VentaDTO();
                 venta.setEstado(ventasRecorer.getEstado());
                 venta.setFechaCompra(ventasRecorer.getFechaCompra());
                 venta.setMetodoPago(ventasRecorer.getMetodoPago());

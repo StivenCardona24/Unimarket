@@ -28,7 +28,7 @@ public class VentaServicioImpl implements VentaServicio {
 
 
     @Override
-    public int crearVenta( VentaDTO ventaDTO) throws Exception{
+    public int crearVenta( TokenDTO.VentaDTO ventaDTO) throws Exception{
 
 
         Venta nuevo = convertir(ventaDTO);
@@ -47,12 +47,12 @@ public class VentaServicioImpl implements VentaServicio {
     }
 
     @Override
-    public List<VentaGetDTO> listarVentaUsuarios(int codigoVenta) throws Exception {
+    public List<UsuarioGetDTO.VentaGetDTO> listarVentaUsuarios(int codigoVenta) throws Exception {
         List<Venta> ventas  = ventaRepository.findByUsuarioIdUsuario(codigoVenta);
-        List<VentaGetDTO> VentaGetDTO = new ArrayList<>();
+        List<UsuarioGetDTO.VentaGetDTO> VentaGetDTO = new ArrayList<>();
 
         for (Venta venta : ventas) {
-            VentaGetDTO dto = convertirDTO(venta);
+            UsuarioGetDTO.VentaGetDTO dto = convertirDTO(venta);
             VentaGetDTO.add(dto);
         }
 
@@ -60,7 +60,7 @@ public class VentaServicioImpl implements VentaServicio {
     }
 
     @Override
-    public VentaGetDTO obtenerVenta(int codigoVenta) throws Exception {
+    public UsuarioGetDTO.VentaGetDTO obtenerVenta(int codigoVenta) throws Exception {
 
         return convertirDTO(obtener(codigoVenta));
 
@@ -77,7 +77,7 @@ public class VentaServicioImpl implements VentaServicio {
         return venta.get();
     }
 
-    private Venta convertir(VentaDTO ventaDTO) {
+    private Venta convertir(TokenDTO.VentaDTO ventaDTO) {
 
         Venta venta = new Venta();
 
@@ -90,7 +90,7 @@ public class VentaServicioImpl implements VentaServicio {
         return venta;
     }
 
-    private VentaGetDTO convertirDTO(Venta venta)  throws Exception {
+    private UsuarioGetDTO.VentaGetDTO convertirDTO(Venta venta)  throws Exception {
 
 
 
@@ -110,7 +110,7 @@ public class VentaServicioImpl implements VentaServicio {
 
             }
         }
-        VentaGetDTO ventaDTO = new VentaGetDTO(
+        UsuarioGetDTO.VentaGetDTO ventaDTO = new UsuarioGetDTO.VentaGetDTO(
                 venta.getCodigo(),
                 venta.getFechaCompra(),
                 venta.getTotalCompra(),
