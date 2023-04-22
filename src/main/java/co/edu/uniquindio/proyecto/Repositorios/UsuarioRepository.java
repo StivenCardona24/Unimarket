@@ -13,6 +13,8 @@ import java.util.Optional;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario,Integer> {
 
+    Usuario findUsuariosByCodigo(int codigo);
+
     @Query("SELECT u FROM Usuario u WHERE u.enumRole = :codigo")
     List<Usuario> findUsuariosByRoleCodigo(int codigo);
     @Query("SELECT COUNT(u) FROM Usuario u WHERE u.enumRole = :codigo")

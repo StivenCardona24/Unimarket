@@ -1,9 +1,16 @@
 package co.edu.uniquindio.proyecto.Modelo.DTO;
 
 import lombok.*;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.Categoria;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.List;
+import java.util.Map;
+
 @AllArgsConstructor
 @Getter
 @Setter
@@ -14,10 +21,11 @@ public class ProductoDTO {
     //extends trow
     @Length(max =100,message = "error nombre|")
     private String nombre;
-    private String descripocion;
+    private String descripcion;
+
     private int vendedor;
     private int unidades;
     private double  precio;
-    private List<String> imagenes;
-    private List<String> categoria;
+   private Map< String, String> imagenes;
+     private List<Categoria> categorias;
 }

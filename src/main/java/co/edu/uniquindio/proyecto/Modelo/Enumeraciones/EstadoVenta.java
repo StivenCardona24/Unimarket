@@ -8,5 +8,11 @@ import java.io.Serializable;
 @ToString
 public enum EstadoVenta implements Serializable{
     ACTIVE,
-    INACTIVE
+    INACTIVE,
+    CARRITO,
+    SOLICITADO,
+    PAGADO,
+    ENTREGADO,
+    CANCELADO
+
 }
