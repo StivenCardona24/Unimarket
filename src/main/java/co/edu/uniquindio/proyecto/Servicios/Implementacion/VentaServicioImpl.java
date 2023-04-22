@@ -6,6 +6,7 @@ import co.edu.uniquindio.proyecto.Modelo.DTO.*;
 import co.edu.uniquindio.proyecto.Repositorios.TarjetaRepository;
 import co.edu.uniquindio.proyecto.Repositorios.UsuarioRepository;
 import co.edu.uniquindio.proyecto.Repositorios.VentaRepository;
+import co.edu.uniquindio.proyecto.Servicios.Interfaces.EmailServicio;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.UsuarioServicio;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.VentaServicio;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,7 @@ public class VentaServicioImpl implements VentaServicio {
     private final VentaRepository ventaRepository;
     private  final UsuarioServicio usuario;
 
-
+    private  final EmailServicio emailServicio;
     @Override
     public int crearVenta( TokenDTO.VentaDTO ventaDTO) throws Exception{
 
@@ -35,12 +36,12 @@ public class VentaServicioImpl implements VentaServicio {
 
         Venta registro = ventaRepository.save(nuevo);
 
-        double total = 0;
+        emailServicio.enviarEmail(new EmailDTO("Compra", "Se realizo una compra del usuario " +ventaDTO.getUsuario() , "usuario1@example.com"));
 
-     /* for(DetalleVentaDTO ventaDTO1 : ventaDTO.getVentaProducto()){
-            total += ventaDTO1.getPrecioCompra()*ventaDTO1.getUnidades();
-        }
-*/
+
+
+
+
 
         return registro.getCodigo();
 

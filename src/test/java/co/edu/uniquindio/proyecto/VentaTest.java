@@ -34,7 +34,7 @@ public class VentaTest {
             // se crea el usuario con el servicio de crear usuario
             TokenDTO.VentaDTO ventaDTO = new TokenDTO.VentaDTO(
                     1000000,
-                    EstadoVenta.INACTIVE,
+                    EstadoVenta.CANCELADO,
                     MetodoPago.EFECTIVO,
                     7998273,
                     1,
