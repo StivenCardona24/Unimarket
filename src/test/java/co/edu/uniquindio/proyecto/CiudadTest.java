@@ -1,6 +1,6 @@
 package co.edu.uniquindio.proyecto;
 
-import co.edu.uniquindio.proyecto.Modelo.Clases.Ciudad;
+
 import co.edu.uniquindio.proyecto.Modelo.DTO.CiudadDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.CiudadGetDTO;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.CiudadServicio;
@@ -34,7 +34,7 @@ public class CiudadTest {
         CiudadGetDTO ciudadObtenida=ciudadServicio.obtenerCiudad(1);
         CiudadDTO ciudadDTO =new CiudadDTO();
         ciudadDTO.setNombre("Bogotá3");
-        Assertions.assertEquals( "Bogotá3" , ciudadServicio.actualizarCiudad(1,ciudadDTO).getNombre());
+        Assertions.assertEquals( "Bogotá3" , ciudadServicio.actualizarCiudad(ciudadObtenida.getCodigo(),ciudadDTO).getNombre());
     }
 
     @Test
@@ -44,7 +44,6 @@ public class CiudadTest {
         ciudadDTO.setNombre("Armenia");
         int codigoCiudadCreada=ciudadServicio.crearCiudad(ciudadDTO);
         Assertions.assertEquals( "Armenia" , ciudadServicio.obtenerCiudad(codigoCiudadCreada).getNombre());
-        Assertions.assertNotNull( codigoCiudadCreada);
     }
 
     @Test
@@ -52,7 +51,7 @@ public class CiudadTest {
     public void eliminarCiudad() throws Exception {
         CiudadGetDTO ciudadObtenida=ciudadServicio.obtenerCiudad(1);
        int ciudadEliminada= ciudadServicio.eliminarCiudad(1);
-        Assertions.assertEquals( 1 , ciudadEliminada);
+        Assertions.assertEquals( ciudadObtenida.getCodigo() , ciudadEliminada);
         Assertions.assertThrows(Exception.class, () -> ciudadServicio.eliminarCiudad(ciudadEliminada));
     }
     @Test
@@ -67,6 +66,13 @@ public class CiudadTest {
     @Sql("classpath:dataset.sql")
     public void obtenerCiudadNombre() throws Exception {
         List<CiudadGetDTO> ciudadObtenida=ciudadServicio.obtenerCiudadNombre("Cal");
+        Assertions.assertNotNull( ciudadObtenida);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerCiudades() throws Exception {
+        List<CiudadGetDTO> ciudadObtenida=ciudadServicio.obtenerCiudades();
         Assertions.assertNotNull( ciudadObtenida);
     }
 }
