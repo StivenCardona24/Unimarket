@@ -32,10 +32,12 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Integer> {
 
     Optional<Usuario> findByEmail(String email);
 
-    boolean findByCodigo(int codigo);
     Optional<Usuario> findByEmailAndEnumRole(String email, String role);
 
+    Optional<Usuario> findByCodigo(int codigo);
+
 /*
+
     @Query("Saelect aliasTabla From tabla aliasTabla where tabla.field=;param")
     Usuario buscarUSuarioCorreo(String param);
 

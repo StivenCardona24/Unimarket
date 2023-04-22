@@ -14,6 +14,7 @@ public interface UsuarioServicio {
 
     UsuarioGetDTO obtenerUsuario (int codigoUsurio) throws Exception;
 
+
     Usuario obtener (int codigoUsuario)throws Exception;
 
     Usuario obtenerporCorreo (String gmail)throws Exception;

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.Servicios.Interfaces;
 
+import co.edu.uniquindio.proyecto.Modelo.Clases.Tarjeta;
 import co.edu.uniquindio.proyecto.Modelo.DTO.*;
 import co.edu.uniquindio.proyecto.Repositorios.TarjetaRepository;
 
@@ -16,5 +17,7 @@ public interface TarjetaServicio {
     TarjetaGetDto actualizarTarjeta(int codigoTarjeta, TarjetaDTO terjetaDTO) throws Exception;
 
 
-    List<TarjetaGetDto> obtenerTarjetaUsuario(int codigoUsuario) throws Exception;
+    List<TarjetaGetDto> obtenerTajertasUsuario(int codigo) throws Exception;
+
+
 }

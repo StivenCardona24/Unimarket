@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 @SpringBootTest
@@ -47,6 +48,13 @@ public class TarjetaTest {
         TarjetaGetDto tarjetaObtenida=tarjetaServicio.obtenerTarjeta(1);
         Assertions.assertEquals( 1 , tarjetaObtenida.getCodigo());
         Assertions.assertNotNull( tarjetaObtenida);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerTarjetaPorUsuario() throws Exception {
+        List<TarjetaGetDto> tarjetasObtenidas=tarjetaServicio.obtenerTajertasUsuario(1);
+       System.out.println(tarjetasObtenidas.get(0).getNumero());
     }
 
 
@@ -84,24 +92,7 @@ public class TarjetaTest {
         }
     }
 
-    @Test
-    @Sql("classpath:dataset.sql")
-    public void listarTarjetasUsuarioTest() throws Exception {
-    //    List<TarjetaGetDto> listTarjetasDTO=tarjetaServicio.obtenerTarjetaUsuario(1);
-      //  Assertions.assertNotNull(listTarjetasDTO);
 
-      //  System.out.println(listTarjetasDTO.get(0).getNumero());
-
-
-
-      //  int idUsuario = 1;
-
-        //List<TarjetaGetDto> tarjetas = tarjetaServicio.obtenerTarjetaUsuario(idUsuario);
-
-     //   Assertions.assertEquals(2, tarjetas.size());
-      //  Assertions.assertEquals(idUsuario, tarjetas.get(0).getUsuario());
-      //  Assertions.assertEquals(idUsuario, tarjetas.get(1).getUsuario());
-    }
 
 
 }

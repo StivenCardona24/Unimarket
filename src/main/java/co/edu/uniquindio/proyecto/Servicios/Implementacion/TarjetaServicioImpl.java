@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.Servicios.Implementacion;
 import co.edu.uniquindio.proyecto.Modelo.Clases.*;
 import co.edu.uniquindio.proyecto.Modelo.DTO.*;
 import co.edu.uniquindio.proyecto.Repositorios.TarjetaRepository;
+import co.edu.uniquindio.proyecto.Repositorios.UsuarioRepository;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.TarjetaServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.util.Optional;
 public class TarjetaServicioImpl implements  TarjetaServicio {
     @Autowired
     private TarjetaRepository tarjetaRepository;
+    private final UsuarioRepository usuarioRepository;
 
 
     private void validarExistencia(int codigo) throws Exception {
@@ -70,17 +72,26 @@ public class TarjetaServicioImpl implements  TarjetaServicio {
     }
 
     @Override
-    public List<TarjetaGetDto> obtenerTarjetaUsuario(int codigoUsuario) throws Exception {
-      //  List<Tarjeta> ventas  = tarjetaRepository.findByUsuarioIdUsuario(codigoUsuario);
-      //  List<TarjetaGetDto> VentaGetDTO = new ArrayList<>();
+    public List<TarjetaGetDto> obtenerTajertasUsuario(int codigo) throws Exception {
 
-      //  for (Tarjeta venta : ventas) {
-        //    TarjetaGetDto dto = convertirEntityToDTO(venta);
-       //     VentaGetDTO.add(dto);
-      //  }
+        boolean existe = usuarioRepository.existsById(Integer.valueOf(codigo));
 
-       // return VentaGetDTO;
-        return null;
+        if (!existe) {
+            throw new Exception("El código " + codigo + " no está asociado a ningún usuario");
+        }
+
+        Optional<Usuario> user = usuarioRepository.findByCodigo(codigo);
+
+        List<Tarjeta> tarjetas = tarjetaRepository.findTarjetaByUsuario(user.get());
+
+        List <TarjetaGetDto> tarjetasDTO = new ArrayList<>();
+
+        for (Tarjeta tarjeta: tarjetas) {
+            TarjetaGetDto t = convertirEntityToDTO(tarjeta);
+            tarjetasDTO.add(t);
+        }
+
+        return tarjetasDTO;
     }
 
     public TarjetaGetDto convertirEntityToDTO(Tarjeta tarjetaConvertir){
