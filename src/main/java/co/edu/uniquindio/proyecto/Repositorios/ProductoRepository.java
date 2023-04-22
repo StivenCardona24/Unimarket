@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,14 +38,17 @@ public interface ProductoRepository extends JpaRepository<Producto,Integer> {
     @Query("SELECT p FROM Producto p JOIN Usuario u WHERE  p.nombre = :nombre AND u.codigo = :vendedor AND p.disponible = true")
     Optional<Producto> buscarProductoPorNombreYVendedor(String nombre, int vendedor);
 
+    @Transactional
     @Modifying
     @Query("UPDATE Producto p SET p.unidades = :unidades WHERE p.codigo = :codigoProducto")
     void actualizarUnidades(@Param("codigoProducto") int codigo, @Param("unidades") int unidades);
 
+    @Transactional
     @Modifying
     @Query("UPDATE Producto p SET p.estado = :estado WHERE p.codigo = :codigo")
     void actualizarEstado(int codigo, EstadoProducto estado);
 
+    @Transactional
     @Modifying
     @Query("UPDATE Producto p SET p.disponible = false WHERE p.codigo = :codigo")
     void deleteByCodigo(int codigo);
