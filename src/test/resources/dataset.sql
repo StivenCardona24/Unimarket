@@ -24,17 +24,17 @@ values
 (4, 7, 'Licencia de Prueba', 4),
 (5, 180, 'Licencia Avanzada', 2);
 
-insert into Usuario
+insert into usuario
 values
 
 --codigo,activo,cedula,direccion,email,fechanacimeinto,nombre,password,telefono,usen_name,ciudadCodigo,liencia_codigo,role_codigo
 
 
-    (1, true, '1234567890', 'Calle 1 #123', 'usuario1@example.com',"CLIENTE", '1990-01-01', 'Usuario 1', '$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq', '1234567890', 'usuario1', 1,  1),
-    (2, true, '2345678901', 'Calle 2 #456','usuario2@example.com', "CLIENTE", '1995-02-15', 'Usuario 2', '$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq', '2345678901', 'usuario2', 2,  2),
-    (3, true, '3456789012', 'Calle 3 #789', 'usuario3@example.com',"CLIENTE",  '1988-05-20', 'Usuario 3', '$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq', '3456789012', 'usuario3', 3,  3),
-    (4, true, '4567890123', 'Calle 4 #012','usuario4@example.com', "MODERADOR", '1992-11-11', 'Usuario 4', '$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq', '4567890123', 'usuario4', 4,  4),
-    (5, false, '5678901234', 'Calle 5 #345', 'usuario5@example.com',"MODERADOR", '2000-06-30', 'Usuario 5', '$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq', '5678901234', 'usuario5', 5, 5);
+    (1, 1, '1234567890', 'Calle 1 #123', 'usuario1@example.com',"CLIENTE", '1990-01-01', 'Usuario 1', '$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq', '1234567890', 'usuario1', 1,  1),
+    (2, 1, '2345678901', 'Calle 2 #456','usuario2@example.com', "CLIENTE", '1995-02-15', 'Usuario 2', '$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq', '2345678901', 'usuario2', 2,  2),
+    (3, 1, '3456789012', 'Calle 3 #789', 'usuario3@example.com',"CLIENTE",  '1988-05-20', 'Usuario 3', '$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq', '3456789012', 'usuario3', 3,  3),
+    (4, 1, '4567890123', 'Calle 4 #012','usuario4@example.com', "MODERADOR", '1992-11-11', 'Usuario 4', '$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq', '4567890123', 'usuario4', 4,  4),
+    (5, 0, '5678901234', 'Calle 5 #345', 'usuario5@example.com',"MODERADOR", '2000-06-30', 'Usuario 5', '$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq', '5678901234', 'usuario5', 5, 5);
 
 
 
@@ -88,11 +88,11 @@ insert into producto
 values
 ---------------------------------toca organizar la descripcion---------------------------------------------------
     -- codigo, descripcion,  disponibilidad,estado, fecha_limite,  nombre,   precio_unitario,  unidades,  usuario_propietario_codigo, venta_producto_codigo,
-    (1, "Televisor LED 55",          "ACTIVE", '2024-04-01', "Televisor LG", 799.99, 10, 1 ),
-    (2, 'Auriculares inalámbricos', 'ACTIVE', '2024-04-01', 'Auriculares Sony', 149.99, 20, 2),
-    (3, 'Mesa de comedor',           'ACTIVE', '2023-12-31', 'Mesa de madera', 299.99, 1, 3),
-    (4,  'Libro de cocina',            'ACTIVE', '2024-04-01', 'La cocina italiana', 29.99, 5, 4),
-    (5, 'Monitor de computadora',    'ACTIVE', '2025-01-01', 'Monitor Samsung', 299.99, 7, 1 );
+    (1, "Televisor LED 55", true,          "ACTIVE", '2024-04-01', "Televisor LG", 799.99, 10, 1 ),
+    (2, 'Auriculares inalámbricos', true, 'ACTIVE', '2024-04-01', 'Auriculares Sony', 149.99, 20, 2),
+    (3, 'Mesa de comedor',      true,     'ACTIVE', '2023-12-31', 'Mesa de madera', 299.99, 1, 3),
+    (4,  'Libro de cocina',          true,  'ACTIVE', '2024-04-01', 'La cocina italiana', 29.99, 5, 4),
+    (5, 'Monitor de computadora',  true,  'ACTIVE', '2025-01-01', 'Monitor Samsung', 299.99, 7, 1 );
 
 
 INSERT INTO detalle_venta

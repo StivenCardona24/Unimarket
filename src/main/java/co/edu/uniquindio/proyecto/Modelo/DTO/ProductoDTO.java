@@ -21,6 +21,7 @@ public class ProductoDTO {
     @Length(max =100,message = "error nombre|")
     private String nombre;
     private String descripcion;
+
     private int vendedor;
     private int unidades;
     private double  precio;
