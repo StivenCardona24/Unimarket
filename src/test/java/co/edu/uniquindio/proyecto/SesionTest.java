@@ -21,7 +21,7 @@ public class SesionTest {
     @Sql("classpath:dataset.sql")
     public void login() throws Exception {
         TokenDTO tokenDTO = sesionServicio.login(new SesionDTO(
-                "usuario1@example.com",
+                "usuario4@example.com",
                 "1234"
         ));
 

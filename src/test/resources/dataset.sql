@@ -74,11 +74,11 @@ INSERT INTO venta
 VALUES
 
     -- (codigo,estado, fecha_compra, metodo_pago, total_compra, tajeta_compra_codigo)
-    (1,'ACTIVE',   '2023-03-01', 'EFECTIVO',  50000, 1,1),
-    (2,'INACTIVE', '2023-03-02', 'DAVIPLATA', 75000, 2,2),
-    (6,'INACTIVE',   '2023-03-04', 'TARJETA', 125000,4,3),
-    (4,'INACTIVE',   '2023-03-04', 'TARJETA', 125000,3,4),
-    (5,'ACTIVE',     '2023-03-05', 'EFECTIVO',150000,5,1);
+    (1,'SOLICITADO',   '2023-03-01', 'EFECTIVO',  50000, 1,1),
+    (2,'SOLICITADO', '2023-03-02', 'DAVIPLATA', 75000, 2,2),
+    (6,'PAGADO',   '2023-03-04', 'TARJETA', 125000,4,3),
+    (4,'PAGADO',   '2023-03-04', 'TARJETA', 125000,3,4),
+    (5,'ENTREGADO',     '2023-03-05', 'EFECTIVO',150000,5,1);
 
 
 

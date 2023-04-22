@@ -27,6 +27,22 @@ public class ProductoServicioImpl implements ProductoServicio {
     private final UsuarioRepository usuarioRepository;
 
     @Override
+    public List<ProductoGetDTO> listarProductos(){
+
+        List<Producto> productos = productoRepository.findAll();
+        List<ProductoGetDTO> productosGetDTOS = new ArrayList<>();
+        for (Producto p: productos) {
+
+            //System.out.println(p.getNombre());
+            ProductoGetDTO pro = convertirDTO(p);
+            productosGetDTOS.add(pro);
+
+
+        }
+        return productosGetDTOS;
+    }
+
+    @Override
     public int crearProducto(ProductoDTO productoDTO) throws Exception {
 
         Usuario vendedor = usuarioRepository.findUsuariosByCodigo(productoDTO.getVendedor());
@@ -83,14 +99,14 @@ public class ProductoServicioImpl implements ProductoServicio {
 
         validarExiste(codigoProducto);
         productoRepository.actualizarUnidades(codigoProducto, unidades);
-       return  convertirDTO(obtenerProducto(codigoProducto));
+       return  obtenerProducto(codigoProducto);
     }
 
     @Override
     public ProductoGetDTO actualizarEstado(int codigoProducto, EstadoProducto estado) throws Exception {
         validarExiste(codigoProducto);
         productoRepository.actualizarEstado(codigoProducto, estado);
-        return convertirDTO(obtenerProducto(codigoProducto));
+        return obtenerProducto(codigoProducto);
     }
 
     @Override
@@ -106,10 +122,10 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public Producto obtenerProducto(int codigo) throws Exception {
+    public ProductoGetDTO obtenerProducto(int codigo) throws Exception {
         Optional<Producto> producto = productoRepository.findById(codigo);
-
-        return producto.get();
+        ProductoGetDTO productoGetDTO = convertirDTO(producto.get());
+        return productoGetDTO;
     }
 
     @Override

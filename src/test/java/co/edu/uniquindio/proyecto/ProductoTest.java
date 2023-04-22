@@ -26,6 +26,23 @@ public class ProductoTest {
     @Autowired
     private ProductoServicio productoServicio;
 
+
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerProductos() throws  Exception {
+
+        List<ProductoGetDTO> productos = productoServicio.listarProductos();
+
+        System.out.println(productos.size());
+        for (ProductoGetDTO p: productos) {
+            System.out.println( p.getNombre());
+
+        }
+        Assertions.assertEquals(6, productos.size());
+
+    }
+
     @Test
     @Sql("classpath:dataset.sql")
     public void crearProducto() throws  Exception {
@@ -121,7 +138,7 @@ public class ProductoTest {
     @Sql("classpath:dataset.sql")
     public void obtenerProducto() throws  Exception {
 
-        Producto producto = productoServicio.obtenerProducto(1);
+        ProductoGetDTO producto = productoServicio.obtenerProducto(1);
 
         System.out.println(producto.getNombre());
 
