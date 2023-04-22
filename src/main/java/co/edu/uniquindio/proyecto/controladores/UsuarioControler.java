@@ -7,43 +7,45 @@ import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/usuario")
 @AllArgsConstructor
 public class UsuarioControler {
     @Autowired
-    private final UsuarioServicio usuarioServicioServicio;
+    private final UsuarioServicio usuarioServicio;
 
     @PostMapping("/crear")
-    public ResponseEntity<MensajeDTO> crearUsuario(@RequestBody UsuarioDTO usuarioDTO){
+    public ResponseEntity<MensajeDTO> crearUsuario(@RequestBody UsuarioDTO usuarioDTO) throws Exception {
+        return ResponseEntity.status(HttpStatus.CREATED).body( new MensajeDTO(HttpStatus.CREATED, false, usuarioServicio.crearUsuario(usuarioDTO)) );
 
 
-        return  0;
+    }
+
+    @DeleteMapping("/eliminar/{codigoUsuario}")
+    public ResponseEntity<MensajeDTO> eliminarUsuario(@PathVariable int codigoUsuario) throws Exception{
+        usuarioServicio.eliminarUsuario(codigoUsuario);
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, "Usuario eliminado correctamente") );
+    }
+
+    @PutMapping("/actualizar/{codigoUsuario}")
+    public ResponseEntity<MensajeDTO> actualizarUsuario(@PathVariable int codigoUsuario, @RequestBody UsuarioDTO usuarioDTO) throws Exception{
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, usuarioServicio.actualizarUsuario(codigoUsuario, usuarioDTO)));
     }
 
 
-    int eliminarUsuario(int cedulaUsuario){
 
-                       return 0;
-    }
-
-    UsuarioGetDTO actualizarUsuario(int codigoUsuario, UsuarioDTO usuarioDTO){
-
-                       return null;}
-
-    UsuarioGetDTO obtenerUsuario (int codigoUsurio) {
-
-        return null;
+    @GetMapping("/obtener/{codigoUsuario}")
+    public ResponseEntity<MensajeDTO> obtenerUsuario(@PathVariable int codigoUsuario) throws Exception{
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, usuarioServicio.obtenerUsuario(codigoUsuario)));
     }
 
 
-    Usuario obtener (int codigoUsuario) {
+
+ /*   Usuario obtener (int codigoUsuario) {
 
         return null;
     }
@@ -55,57 +57,6 @@ public class UsuarioControler {
 
 
 }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    private final UsuarioServicio usuarioServicio;
-
-    @PostMapping("/crear")
-     ResponseEntity<MensajeDTO> crearUsuario(@RequestBody  UsuarioDTO usuarioDTO)  throws Exception{
-        return ResponseEntity.status(HttpStatus.CREATED).body( new MensajeDTO(HttpStatus.CREATED, false, usuarioServicio.crearUsuario(usuarioDTO)) );
-    }
-
-    @PutMapping("/actualizar/{codigoUsuario}")
-    public ResponseEntity<MensajeDTO> actualizarUsuario(@PathVariable int codigoUsuario, @RequestBody UsuarioDTO usuarioDTO) throws Exception{
-        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, usuarioServicio.actualizarUsuario(codigoUsuario, usuarioDTO)));
-    }
-
-    @DeleteMapping("/eliminar/{codigoUsuario}")
-    public ResponseEntity<MensajeDTO> eliminiarUsuario(@PathVariable int codigoUsuario) throws Exception{
-        usuarioServicio.eliminiarUsuario(codigoUsuario);
-        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, "Usuario eliminado correctamente") );
-    }
-
-    @GetMapping("/obtener/{codigoUsuario}")
-    public ResponseEntity<MensajeDTO> obtenerUsuario(@PathVariable int codigoUsuario) throws Exception{
-        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, usuarioServicio.obtenerUsuario(codigoUsuario)));
-    }
-
+*/
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
