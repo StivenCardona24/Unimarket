@@ -38,15 +38,15 @@ public class ProductoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO(HttpStatus.CREATED, false, "Cliente creado correctamente"));
     }
 
-    @PutMapping
+    @PutMapping("/{codigo}")
     public ResponseEntity<MensajeDTO> update(@PathVariable int codigo, @Valid @RequestBody ProductoDTO producto) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false,
                 productoServicio.actualizarProducto(codigo, producto) ) );
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{codigo}")
     public ResponseEntity<MensajeDTO> delete(@PathVariable int codigo) throws Exception {
-        productoServicio.eliminarProducto(codigo);
+        int num  = productoServicio.eliminarProducto(codigo);
 
         return (ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false,
                 "Eliminado correctamente" )) );

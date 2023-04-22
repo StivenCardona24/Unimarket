@@ -86,6 +86,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         producto.setFechaLimite( actual.get().getFechaLimite());
         EstadoProducto estado = actual.get().getEstado();
         producto.setEstado(estado);
+        producto.setDisponible(true);
         producto.setCodigo(codigoProducto);
 
 
