@@ -50,9 +50,11 @@ public class CiudadServicioImpl implements CiudadServicio {
     @Override
     public List<CiudadGetDTO> obtenerCiudadNombre(String nombre) throws Exception {
         List<CiudadGetDTO> listaCiudadDTO= new ArrayList<>();
-        for(Ciudad ciudadActual:ciudadRepository.findCiudadesByNombreAsc(nombre)){
-            CiudadGetDTO nuevaCiudad=convertirEntityToDTO(ciudadActual);
-            listaCiudadDTO.add(nuevaCiudad);
+        if(ciudadRepository.findCiudadesByNombreAsc(nombre).size()>0){
+            for(Ciudad ciudadActual:ciudadRepository.findCiudadesByNombreAsc(nombre)){
+                CiudadGetDTO nuevaCiudad=convertirEntityToDTO(ciudadActual);
+                listaCiudadDTO.add(nuevaCiudad);
+            }
         }
         return listaCiudadDTO;
     }
@@ -64,6 +66,17 @@ public class CiudadServicioImpl implements CiudadServicio {
             throw new Exception("El nombre: " + nombre + " no está asociado a ningúna Ciudad");
         }
         return convertirEntityToDTO(ciudadActual);
+    }
+
+    @Override
+    public List<CiudadGetDTO> obtenerCiudades() throws Exception {
+        List<CiudadGetDTO> listaCiudades=new ArrayList<>();
+        if (ciudadRepository.findAll().size()>0){
+            for(Ciudad ciudadActual:ciudadRepository.findAll()){
+                listaCiudades.add(convertirEntityToDTO(ciudadActual));
+            }
+        }
+        return listaCiudades;
     }
 
     @Override

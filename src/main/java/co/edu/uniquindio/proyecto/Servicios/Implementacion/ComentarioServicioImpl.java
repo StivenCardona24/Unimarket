@@ -4,10 +4,12 @@ import co.edu.uniquindio.proyecto.Modelo.Clases.Comentario;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Producto;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ComentarioDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ComentarioGetDTO;
+import co.edu.uniquindio.proyecto.Modelo.DTO.EmailDTO;
 import co.edu.uniquindio.proyecto.Repositorios.ComentarioRepository;
 import co.edu.uniquindio.proyecto.Repositorios.ProductoRepository;
 import co.edu.uniquindio.proyecto.Repositorios.UsuarioRepository;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.ComentarioServicio;
+import co.edu.uniquindio.proyecto.Servicios.Interfaces.EmailServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,7 @@ public class ComentarioServicioImpl implements ComentarioServicio {
     private final ProductoRepository productoRepository;
     private final UsuarioRepository usuarioRepository;
     private final ComentarioRepository comentarioRepository;
+    private final EmailServicio emailServicio;
     @Override
     public int crearComentario(ComentarioDTO comentarioDTO) throws Exception {
         if (comentarioDTO.getComentario() != null && comentarioDTO.getComentario().length() > 500) {
@@ -33,7 +36,10 @@ public class ComentarioServicioImpl implements ComentarioServicio {
             throw new Exception("El Usuario no existe");
         }
         Comentario comentarioGuardar=convertirDTOToAnEntity(comentarioDTO);
+        Producto productoAsociado=productoRepository.findById(comentarioDTO.getIdProducto()).get();
+
         comentarioGuardar.setFecha(LocalDate.now());
+        emailServicio.enviarEmail(new EmailDTO("Comentario producto", comentarioGuardar.getComentario(), productoAsociado.getUsuarioPropietario().getEmail()));
         return comentarioRepository.save(comentarioGuardar).getCodigo();
     }
 
