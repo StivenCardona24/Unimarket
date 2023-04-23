@@ -21,8 +21,8 @@ public class ComentarioControler {
     @Autowired
     private final ComentarioServicio comentarioServicio;
 
-    @DeleteMapping("/eliminarCiudad/{codigo}")
-    public ResponseEntity<MensajeDTO> geteliminarCiudad(@PathVariable int codigo) throws Exception {
+    @DeleteMapping("/eliminarComentario/{codigo}")
+    public ResponseEntity<MensajeDTO> geteliminarComentario(@PathVariable int codigo) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false,
                 comentarioServicio.eliminarComentario(codigo) ));
     }
@@ -35,7 +35,7 @@ public class ComentarioControler {
 
     @PostMapping("/create")
     public ResponseEntity<MensajeDTO> create(@Valid @RequestBody ComentarioDTO comentarioDTO) throws Exception {
-        return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO(HttpStatus.CREATED, false, "Ciudad creado correctamente"+comentarioServicio.crearComentario(comentarioDTO)));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO(HttpStatus.CREATED, false, "Comentario creado correctamente"+comentarioServicio.crearComentario(comentarioDTO)));
     }
 
     @GetMapping("/getObtenerComentario/{codigo}")
