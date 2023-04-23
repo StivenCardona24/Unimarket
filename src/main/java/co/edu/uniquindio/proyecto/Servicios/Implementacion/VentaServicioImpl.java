@@ -29,7 +29,7 @@ public class VentaServicioImpl implements VentaServicio {
 
     private  final EmailServicio emailServicio;
     @Override
-    public int crearVenta( TokenDTO.VentaDTO ventaDTO) throws Exception{
+    public int crearVenta( VentaDTO ventaDTO) throws Exception{
 
 
         Venta nuevo = convertir(ventaDTO);
@@ -78,7 +78,7 @@ public class VentaServicioImpl implements VentaServicio {
         return venta.get();
     }
 
-    private Venta convertir(TokenDTO.VentaDTO ventaDTO) {
+    private Venta convertir(VentaDTO ventaDTO) {
 
         Venta venta = new Venta();
 

@@ -56,6 +56,9 @@ public class CiudadServicioImpl implements CiudadServicio {
                 listaCiudadDTO.add(nuevaCiudad);
             }
         }
+        if(listaCiudadDTO.size()==0){
+            throw new Exception("El conjunto de palabras: " + nombre + " no está asociado a ningúna Ciudad");
+        }
         return listaCiudadDTO;
     }
 
@@ -75,6 +78,9 @@ public class CiudadServicioImpl implements CiudadServicio {
             for(Ciudad ciudadActual:ciudadRepository.findAll()){
                 listaCiudades.add(convertirEntityToDTO(ciudadActual));
             }
+        }
+        if (listaCiudades ==null) {
+            throw new Exception("no Se ecneutran Ciudades");
         }
         return listaCiudades;
     }

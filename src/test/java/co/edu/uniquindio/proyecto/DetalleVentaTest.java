@@ -60,4 +60,11 @@ public class DetalleVentaTest {
         Assertions.assertNotNull( listaDetalleVenta);
     }
 
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void findAllByProductoNombre() throws Exception {
+        List<DetalleVentaGetDTO> listaDetalleVenta=detalleVentaServicio.findAllByProductoNombre("a");
+        Assertions.assertNotNull( listaDetalleVenta);
+    }
+
 }

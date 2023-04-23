@@ -32,7 +32,7 @@ public class VentaTest {
     public void crearVentaTest() {
         try {
             // se crea el usuario con el servicio de crear usuario
-            TokenDTO.VentaDTO ventaDTO = new TokenDTO.VentaDTO(
+            VentaDTO ventaDTO = new VentaDTO(
                     1000000,
                     EstadoVenta.CANCELADO,
                     MetodoPago.EFECTIVO,

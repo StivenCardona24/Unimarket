@@ -15,5 +15,8 @@ public interface DetalleVentaServicio {
 
     DetalleVentaGetDTO obtenerDetalleVenta(int codigoDetalleVenta) throws Exception;
     List<DetalleVentaGetDTO>  obtenerDetalleVentaPorVenta(int idVenta) throws Exception;
+    List<DetalleVentaGetDTO>  obtenerDetalleVentaProducto(int idProducto) throws Exception;
+
+    List<DetalleVentaGetDTO>  findAllByProductoNombre(String nombre) throws Exception;
 
 }

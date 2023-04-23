@@ -40,6 +40,12 @@ public class DetalleVentaServicioImpl implements DetalleVentaServicio {
         if (!productoExitente.isPresent()) {
             throw new Exception("El codigo"+detalleVentaDTO.getIdProducto()+" del producto no existe");
         }
+        if(productoExitente.get().getUnidades()<detalleVentaDTO.getUnidades()){
+            throw new Exception("del producto"+productoExitente.get().getNombre()+" no existen todas las unidades solicitadas " +
+                    "existen"+detalleVentaDTO.getUnidades());
+        }
+        int CantidadProductos=productoExitente.get().getUnidades()-detalleVentaDTO.getUnidades();
+        productoRepository.actualizarUnidades(productoExitente.get().getCodigo(),CantidadProductos);
         return detalleVentaRepository.save(convertirDTOToAnEntity(detalleVentaDTO)).getCodigo();
     }
 
@@ -89,6 +95,27 @@ public class DetalleVentaServicioImpl implements DetalleVentaServicio {
         }
         return listDetalleVenta;
     }
+
+    @Override
+    public List<DetalleVentaGetDTO> obtenerDetalleVentaProducto(int idProducto) throws Exception {
+        List<DetalleVentaGetDTO> listDetalleVenta=new ArrayList<>();
+        for(DetalleVenta detalleVentasRecorrer:detalleVentaRepository.findAllByProductoID(idProducto)){
+            DetalleVentaGetDTO nuevoDetalleVenta=convertirEntityToAnDTO(detalleVentasRecorrer);
+            listDetalleVenta.add(nuevoDetalleVenta);
+        }
+        return listDetalleVenta;
+    }
+
+    @Override
+    public List<DetalleVentaGetDTO> findAllByProductoNombre(String nombre) throws Exception {
+        List<DetalleVentaGetDTO> listDetalleVenta=new ArrayList<>();
+        for(DetalleVenta detalleVentasRecorrer:detalleVentaRepository.findAllByProductoNombre(nombre)){
+            DetalleVentaGetDTO nuevoDetalleVenta=convertirEntityToAnDTO(detalleVentasRecorrer);
+            listDetalleVenta.add(nuevoDetalleVenta);
+        }
+        return listDetalleVenta;
+    }
+
 
     private void validarExistencia(int codigo) throws Exception {
         boolean existe = detalleVentaRepository.existsById(codigo);
