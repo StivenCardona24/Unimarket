@@ -4,8 +4,6 @@ import co.edu.uniquindio.proyecto.Modelo.Clases.Producto;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoGetDTO;
-import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioDTO;
-import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.Categoria;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoProducto;
 import co.edu.uniquindio.proyecto.Repositorios.ProductoRepository;
@@ -15,6 +13,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

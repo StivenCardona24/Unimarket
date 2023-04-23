@@ -1,6 +1,5 @@
 package co.edu.uniquindio.proyecto;
 
-
 import co.edu.uniquindio.proyecto.Modelo.DTO.CiudadDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.CiudadGetDTO;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.CiudadServicio;
@@ -44,6 +43,7 @@ public class CiudadTest {
         ciudadDTO.setNombre("Armenia");
         int codigoCiudadCreada=ciudadServicio.crearCiudad(ciudadDTO);
         Assertions.assertEquals( "Armenia" , ciudadServicio.obtenerCiudad(codigoCiudadCreada).getNombre());
+        Assertions.assertNotNull( codigoCiudadCreada);
     }
 
     @Test
