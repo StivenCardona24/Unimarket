@@ -62,20 +62,5 @@ public class UsuarioGetDTO {
 
    private boolean activo;
 
-    @AllArgsConstructor
-    @Getter
-    @Setter
 
-    public static class VentaGetDTO {
-        private int idVenta;
-        private LocalDate fechaCompra;
-        private double totalCompra;
-
-        private EstadoVenta estado;
-
-        private MetodoPago metodoPago;
-        private int tajetaCompra;
-        private int usuario;
-        private List<DetalleVentaDTO> ventaProducto;
-    }
 }

@@ -1,6 +1,8 @@
 package co.edu.uniquindio.proyecto.Servicios.Implementacion;
 
+import co.edu.uniquindio.proyecto.Modelo.Clases.Producto;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
+import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.Repositorios.UsuarioRepository;
@@ -12,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.print.AttributeException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -41,10 +45,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Override
     public int eliminarUsuario(int cedulaUsuario) throws Exception {
-
-
         usuarioRepository.deleteById(cedulaUsuario);
-
         return cedulaUsuario;
     }
 
@@ -101,6 +102,21 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
 
         return usuario.get();
+    }
+
+    @Override
+    public List<UsuarioGetDTO> listarUsuarios() {
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        List<UsuarioGetDTO> usuarioGetDTOS = new ArrayList<>();
+        for (Usuario p: usuarios) {
+
+            //System.out.println(p.getNombre());
+            UsuarioGetDTO pro = convertirDTO(p);
+            usuarioGetDTOS.add(pro);
+
+
+        }
+        return usuarioGetDTOS;
     }
 
     private Usuario convertir(UsuarioDTO usuarioDTO) {

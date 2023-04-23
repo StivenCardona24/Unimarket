@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootTest
-@Transactional
+
 public class VentaTest {
 
     @Autowired
@@ -32,7 +32,7 @@ public class VentaTest {
     public void crearVentaTest() {
         try {
             // se crea el usuario con el servicio de crear usuario
-            TokenDTO.VentaDTO ventaDTO = new TokenDTO.VentaDTO(
+            VentaDTO ventaDTO = new VentaDTO(
                     1000000,
                     EstadoVenta.CANCELADO,
                     MetodoPago.EFECTIVO,
@@ -60,7 +60,7 @@ public class VentaTest {
 
             int idUsuario = 1;
 
-            List<UsuarioGetDTO.VentaGetDTO> compras = ventaServicio.listarVentaUsuarios(idUsuario);
+            List<VentaGetDTO> compras = ventaServicio.listarVentaUsuarios(idUsuario);
 
             Assertions.assertEquals(2, compras.size());
             Assertions.assertEquals(idUsuario, compras.get(0).getUsuario());
@@ -73,7 +73,7 @@ public class VentaTest {
 
         int idCompra = 2;
 
-        UsuarioGetDTO.VentaGetDTO venta = ventaServicio.obtenerVenta(idCompra);
+       VentaGetDTO venta = ventaServicio.obtenerVenta(idCompra);
 
         Assertions.assertEquals(idCompra, venta.getIdVenta());
         Assertions.assertEquals(MetodoPago.DAVIPLATA, venta.getMetodoPago());

@@ -15,11 +15,11 @@ public interface VentaServicio {
 
 
 
-    int crearVenta(TokenDTO.VentaDTO ventaDTO) throws Exception;
+    int crearVenta(VentaDTO ventaDTO) throws Exception;
 
-    List<UsuarioGetDTO.VentaGetDTO> listarVentaUsuarios(int codigoVenta) throws Exception;
+    List<VentaGetDTO> listarVentaUsuarios(int codigoVenta) throws Exception;
 
-    UsuarioGetDTO.VentaGetDTO obtenerVenta(int codigoVenta) throws Exception;
+    VentaGetDTO obtenerVenta(int codigoVenta) throws Exception;
 
     Venta obtener (int codigoVenta)throws Exception;
 

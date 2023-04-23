@@ -34,5 +34,5 @@ public class TarjetaGetDto {
     private List<UsuarioDTO> usuario;
 
 
-    private List<TokenDTO.VentaDTO> compras;
+    private List<VentaDTO> compras;
 }
