@@ -30,7 +30,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             throw new Exception("La cédula ya se encuentra en uso");
         }
         Optional<Usuario> buscadoEmail = usuarioRepository.findByEmail(usuarioDTO.getEmail());
-        if(!buscadoEmail.isPresent()){
+        if(buscadoEmail.isPresent()){
             throw new Exception("El email ya se encuentra en uso");
         }
         Usuario nuevo = convertir(usuarioDTO);

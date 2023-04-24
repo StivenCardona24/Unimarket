@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.Modelo.Clases;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.Categoria;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoProducto;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -45,6 +46,11 @@ public class Producto implements Serializable{
 
     @Column(nullable = false)
     private LocalDate fechaLimite;
+
+    @Column(nullable = false)
+    @Min(1)
+    @Max(10)
+    private int prioridad;
 
     private  boolean disponible;
     @ElementCollection

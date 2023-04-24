@@ -61,6 +61,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
         //Datos quemados
         nuevo.setFechaLimite( LocalDate.now().plusDays(vendedor.getLicencia().getDiasActivoProducto()));
+        nuevo.setPrioridad(vendedor.getLicencia().getPrioridad());
         EstadoProducto estado = EstadoProducto.INACTIVE;
         nuevo.setEstado(estado);
         nuevo.setDisponible(true);
@@ -84,6 +85,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         Producto producto = convertir(productoDTO, vendedor);
         //DATOS
         producto.setFechaLimite( actual.get().getFechaLimite());
+        producto.setPrioridad(actual.get().getPrioridad());
         EstadoProducto estado = actual.get().getEstado();
         producto.setEstado(estado);
         producto.setDisponible(true);

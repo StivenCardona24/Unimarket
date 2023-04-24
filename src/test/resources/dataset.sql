@@ -18,11 +18,11 @@ values
 
 --codigo,dias_activo_producto,nombre,prioridad
 
-(1, 30, 'Licencia Básica', 3),
-(2, 90, 'Licencia Estándar', 2),
-(3, 365, 'Licencia Premium', 1),
-(4, 7, 'Licencia de Prueba', 4),
-(5, 180, 'Licencia Avanzada', 2);
+(1, 30, 'Licencia Básica', 5000.0, 3),
+(2, 90, 'Licencia Estándar', 3080000.00, 3),
+(3, 365, 'Licencia Premium', 200000.00, 10),
+(4, 7, 'Licencia de Prueba', 0.0, 4),
+(5, 180, 'Licencia Avanzada', 100000.00, 7);
 
 insert into usuario
 values
@@ -88,12 +88,12 @@ insert into producto
 values
 ---------------------------------toca organizar la descripcion---------------------------------------------------
     -- codigo, descripcion,  disponibilidad,estado, fecha_limite,  nombre,   precio_unitario,  unidades,  usuario_propietario_codigo, venta_producto_codigo,
-    (1, 'Televisor LED 55', true,          'ACTIVE', '2024-04-01', 'Televisor LG', 799.99, 10, 1 ),
-    (2, 'Auriculares inalámbricos', true, 'ACTIVE', '2024-04-01', 'Auriculares Sony', 149.99, 20, 2),
-    (3, 'Mesa de comedor',      true,     'INACTIVE', '2023-12-31', 'Mesa de madera', 299.99, 1, 3),
-    (4,  'Libro de cocina',          true,  'ACTIVE', '2024-04-01', 'La cocina italiana', 29.99, 5, 4),
-    (5, 'Monitor de computadora',  true,  'ACTIVE', '2025-01-01', 'Monitor Samsung', 299.99, 7, 1 ),
-    (6, 'Smartphone samsung pro',  true,  'ACTIVE', '2025-01-01', 'Celular Samsung S22', 599.99, 5, 1 );
+    (1, 'Televisor LED 55', true,          'ACTIVE', '2024-04-01', 'Televisor LG', 799.99, 9, 9, 1 ),
+    (2, 'Auriculares inalámbricos', true, 'ACTIVE', '2024-04-01', 'Auriculares Sony', 149.99,3, 20, 2),
+    (3, 'Mesa de comedor',      true,     'INACTIVE', '2023-12-31', 'Mesa de madera', 299.99, 9, 7, 3),
+    (4,  'Libro de cocina',          true,  'ACTIVE', '2024-04-01', 'La cocina italiana', 29.99, 5, 5, 4),
+    (5, 'Monitor de computadora',  true,  'ACTIVE', '2025-01-01', 'Monitor Samsung', 299.99, 7, 2, 1 ),
+    (6, 'Smartphone samsung pro',  true,  'ACTIVE', '2025-01-01', 'Celular Samsung S22', 599.99, 2, 5, 1 );
 
 
 INSERT INTO detalle_venta

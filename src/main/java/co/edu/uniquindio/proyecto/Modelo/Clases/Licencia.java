@@ -24,6 +24,11 @@ public class Licencia implements Serializable{
 
     @Column( length = 30)
     private String nombre;
+
+    @Column(nullable = false)
+    @Min(1)
+    private double precio;
+
     @Column(nullable = false)
     @Min(20)
     @Max(1000)

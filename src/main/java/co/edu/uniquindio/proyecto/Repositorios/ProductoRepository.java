@@ -16,26 +16,26 @@ import java.util.Optional;
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto,Integer> {
 
-    @Query("SELECT p FROM Producto  p where  p.disponible = true")
+    @Query("SELECT p FROM Producto  p where  p.disponible = true order by p.prioridad desc")
     List<Producto> findAll();
 
 
-    @Query("SELECT p FROM Producto p join p.categorias c WHERE c = :categoria AND p.disponible = true")
+    @Query("SELECT p FROM Producto p join p.categorias c WHERE c = :categoria AND p.disponible = true order by p.prioridad desc")
     List<Producto> findProductoByCategoriasAndDisponible(Categoria categoria);
 
-    @Query("SELECT p FROM Producto p WHERE p.estado = :estado AND p.disponible = true")
+    @Query("SELECT p FROM Producto p WHERE p.estado = :estado AND p.disponible = true order by p.prioridad desc")
     List<Producto> findProductoByEstado(EstadoProducto estado);
 
-    @Query("SELECT p FROM Producto p WHERE LOWER(p.nombre) LIKE concat('%', :nombre, '%') AND p.disponible = true")
+    @Query("SELECT p FROM Producto p WHERE LOWER(p.nombre) LIKE concat('%', :nombre, '%') AND p.disponible = true order by p.prioridad desc")
     List<Producto> findProductoByNombre(String nombre);
 
-    @Query("SELECT p FROM Producto p WHERE p.precioUnitario BETWEEN :precioMin AND :precioMax AND p.disponible = true")
+    @Query("SELECT p FROM Producto p WHERE p.precioUnitario BETWEEN :precioMin AND :precioMax AND p.disponible = true order by p.prioridad desc")
     List<Producto> findProductoByPrecioUnitario(double precioMin, double precioMax);
 
-    @Query("SELECT p FROM Producto p WHERE p.usuarioPropietario.codigo = :codigo AND p.disponible = true")
+    @Query("SELECT p FROM Producto p WHERE p.usuarioPropietario.codigo = :codigo AND p.disponible = true order by p.prioridad desc")
     List<Producto> listarProductosPropietario(int codigo);
 
-    @Query("SELECT p FROM Producto p JOIN Usuario u WHERE  p.nombre = :nombre AND u.codigo = :vendedor AND p.disponible = true")
+    @Query("SELECT p FROM Producto p JOIN Usuario u WHERE  p.nombre = :nombre AND u.codigo = :vendedor AND p.disponible = true order by p.prioridad desc")
     Optional<Producto> buscarProductoPorNombreYVendedor(String nombre, int vendedor);
 
     @Transactional
@@ -53,7 +53,7 @@ public interface ProductoRepository extends JpaRepository<Producto,Integer> {
     @Query("UPDATE Producto p SET p.disponible = false WHERE p.codigo = :codigo")
     void deleteByCodigo(int codigo);
 
-    @Query("SELECT p FROM Producto p JOIN p.favoritoUsuarios u WHERE u.codigo = :codigo")
+    @Query("SELECT p FROM Producto p JOIN p.favoritoUsuarios u WHERE u.codigo = :codigo order by p.prioridad desc")
     List<Producto> findProductoByFavoritoUsuarios(int codigo);
 
 
