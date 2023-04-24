@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.seguridad.modelo;
 
 import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.Role;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,9 +15,10 @@ public class UserDetailsImpl implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
     public static UserDetailsImpl build(Usuario user){
         List<GrantedAuthority> authorities = new ArrayList<>();
-        if(user.getEnumRole().equals("CLIENTE")){
+        System.out.println(user.getEnumRole());
+        if(user.getEnumRole() == Role.CLIENTE){
             authorities.add( new SimpleGrantedAuthority("CLIENTE") );
-        }else if(user.getEnumRole().equals("MODERADOR")){
+        }else if(user.getEnumRole() == Role.MODERADOR){
             authorities.add( new SimpleGrantedAuthority("MODERADOR") );
         }
         return new UserDetailsImpl(user.getEmail(), user.getPassword(), authorities);

@@ -1,4 +1,5 @@
 package co.edu.uniquindio.proyecto.Servicios.Interfaces;
+import co.edu.uniquindio.proyecto.Modelo.Clases.Producto;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.Categoria;
@@ -8,19 +9,19 @@ import java.util.List;
 
 public interface ProductoServicio {
 
-    int crearProducto(ProductoDTO productoDTO);
+    int crearProducto(ProductoDTO productoDTO)  throws Exception;
 
-    int actualizarProducto(int codigoProducto, ProductoDTO productoDTO);
+    ProductoGetDTO actualizarProducto(int codigoProducto, ProductoDTO productoDTO) throws Exception;
 
-    int actualizarUnidades(int codigoProducto, int unidades);
+    ProductoGetDTO actualizarUnidades(int codigoProducto, int unidades)  throws Exception;
 
-    int actualizarEstado(int codigoProducto, EstadoProducto estado);
+    ProductoGetDTO actualizarEstado(int codigoProducto, EstadoProducto estado) throws Exception ; //Falta
 
-    int eliminarProducto(int codigoProducto);
+    int eliminarProducto(int codigoProducto) throws Exception;
 
-    ProductoGetDTO obtenerProducto(int codigoProducto);
+    ProductoGetDTO obtenerProducto(int codigo) throws Exception;
 
-    List<ProductoGetDTO> listarProductosUsuario(int codigoUsuario);
+    List<ProductoGetDTO> listarProductosUsuario(int codigoUsuario) throws Exception;
 
     List<ProductoGetDTO> listarProductosCategoria(Categoria categoria);
 
@@ -30,5 +31,7 @@ public interface ProductoServicio {
 
     List<ProductoGetDTO> listarProductosNombre(String nombre);
 
-    List<ProductoGetDTO> listarProductosPrecio(float precioMinimo, float precioMaximo);
+    List<ProductoGetDTO> listarProductosPrecio(double precioMin, double precioMax);
+
+    List<ProductoGetDTO> listarProductos();
 }

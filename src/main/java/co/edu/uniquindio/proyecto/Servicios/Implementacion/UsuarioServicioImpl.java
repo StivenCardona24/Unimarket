@@ -1,6 +1,8 @@
 package co.edu.uniquindio.proyecto.Servicios.Implementacion;
 
+import co.edu.uniquindio.proyecto.Modelo.Clases.Producto;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
+import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.Repositorios.UsuarioRepository;
@@ -12,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.print.AttributeException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,14 +29,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Override
     public int crearUsuario(UsuarioDTO usuarioDTO) throws Exception {
+        System.out.println(usuarioDTO.getUserName());
         Optional<Usuario> buscadoCedula = usuarioRepository.buscarUsuarioPorCedula(usuarioDTO.getCedula());
         if(buscadoCedula.isPresent()){
             throw new Exception("La cédula ya se encuentra en uso");
         }
-        Optional<Usuario> buscadoEmail = usuarioRepository.findByEmail(usuarioDTO.getEmail());
-        if(!buscadoEmail.isPresent()){
-            throw new Exception("El email ya se encuentra en uso");
-        }
+
         Usuario nuevo = convertir(usuarioDTO);
         nuevo.setPassword( passwordEncoder.encode(nuevo.getPassword()) );
         Usuario registro = usuarioRepository.save(nuevo);
@@ -43,34 +45,22 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Override
     public int eliminarUsuario(int cedulaUsuario) throws Exception {
-
-
         usuarioRepository.deleteById(cedulaUsuario);
-
         return cedulaUsuario;
     }
 
     @Override
-    public UsuarioGetDTO actualizarUsuario(int  codigoUsuario, UsuarioDTO usuarioDTO) throws Exception, ExceptionEnUso {
+    public UsuarioGetDTO actualizarUsuario(int codigoUsuario, UsuarioDTO usuarioDTO) throws Exception {
 
-        // Verificar que el correo no esté en uso
-        Usuario emailExistente = usuarioRepository.buscarUsuarioPorEmail(usuarioDTO.getEmail());
-        if (emailExistente != null && emailExistente.getCodigo()!= codigoUsuario) {
-            throw new ExceptionEnUso("El correo " + usuarioDTO.getEmail() + " ya está en uso");
-        }
-        // Verificar que la cédula no esté en uso
-        Optional<Usuario> cedulaExistente = usuarioRepository.buscarUsuarioPorCedula(usuarioDTO.getCedula());
-        if (cedulaExistente.isPresent() && cedulaExistente.get().getCodigo() != codigoUsuario) {
-            throw new ExceptionEnUso("La cédula " + usuarioDTO.getCedula() + " ya está en uso");
-        }
+
 
         validarExiste(codigoUsuario);
+
 
         Usuario usuario = convertir(usuarioDTO);
         usuario.setCodigo(codigoUsuario);
 
         return convertirDTO(usuarioRepository.save(usuario));
-
     }
 
 
@@ -84,33 +74,62 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public UsuarioGetDTO obtenerUsuario(int cedulaUsuario) throws Exception {
+    public UsuarioGetDTO obtenerUsuario(int codigoUsuario) throws Exception {
 
 
-        return convertirDTO(obtener(cedulaUsuario));
+        return convertirDTO(obtener(codigoUsuario));
     }
 
     @Override
-    public Usuario obtener(int idUsuario) throws Exception {
-        Optional<Usuario> usuario = usuarioRepository.findById(idUsuario);
+    public Usuario obtener(int codigoUsuario) throws Exception {
+        Optional<Usuario> usuario = usuarioRepository.findById(codigoUsuario);
+
+        if (usuario.isEmpty()) {
+            throw new Exception("El código " + codigoUsuario + " no está asociado a ningún usuario");
+        }
 
         return usuario.get();
     }
 
     @Override
     public Usuario obtenerporCorreo(String gmail) throws Exception {
-        return null;
+
+
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(gmail);
+
+        if (usuario.isEmpty()) {
+            throw new Exception("El gmail " + gmail + " no está asociado a ningún usuario");
+        }
+
+        return usuario.get();
+    }
+
+    @Override
+    public List<UsuarioGetDTO> listarUsuarios() {
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        List<UsuarioGetDTO> usuarioGetDTOS = new ArrayList<>();
+        for (Usuario p: usuarios) {
+
+            //System.out.println(p.getNombre());
+            UsuarioGetDTO pro = convertirDTO(p);
+            usuarioGetDTOS.add(pro);
+
+
+        }
+        return usuarioGetDTOS;
     }
 
     private Usuario convertir(UsuarioDTO usuarioDTO) {
 
         Usuario usuario = new Usuario();
+        usuario.setActivo(true);
         usuario.setNombre(usuarioDTO.getNombre());
         usuario.setEmail(usuarioDTO.getEmail());
         usuario.setDireccion(usuarioDTO.getDireccion());
         usuario.setCedula(usuarioDTO.getCedula());
         usuario.setTelefono(usuarioDTO.getTelefono());
         usuario.setPassword(usuarioDTO.getPassword());
+        usuario.setUserName(usuarioDTO.getUserName());
         usuario.setFechaNacimiento((usuarioDTO.getFechaNacimiento()));
 
         return usuario;
@@ -121,13 +140,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         UsuarioGetDTO usuarioDTO = new UsuarioGetDTO(
                 usuario.getCodigo(),
                 usuario.getUserName(),
-                usuario.getPassword(),
                 usuario.getNombre(),
                 usuario.getEmail(),
                 usuario.getDireccion(),
                 usuario.getTelefono(),
                 usuario.getCedula(),
-                usuario.getFechaNacimiento());
+                usuario.getFechaNacimiento(),true);
 
 
         return usuarioDTO;

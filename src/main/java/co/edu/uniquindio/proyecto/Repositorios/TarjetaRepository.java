@@ -1,6 +1,9 @@
 package co.edu.uniquindio.proyecto.Repositorios;
 
+import co.edu.uniquindio.proyecto.Modelo.Clases.Comentario;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Tarjeta;
+import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
+import co.edu.uniquindio.proyecto.Modelo.Clases.Venta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -9,12 +12,17 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface TarjetaRepository extends JpaRepository<Tarjeta,Integer> {
-    @Query("SELECT t FROM Tarjeta t JOIN t.usuario u WHERE u.codigo = :codigoUsuario")
-    List<Tarjeta> findByUsuario(String codigoUsuario);
 
-    @Query("SELECT t FROM Tarjeta t WHERE t.dinero >= :saldo")
-    List<Tarjeta> findBySaldo(double saldo);
+public interface TarjetaRepository   extends JpaRepository<Tarjeta,Integer> {
+
+  //  @Query("SELECT c FROM Tarjeta c WHERE c.usuario.codigo = :codigoUsuario")
+    //List<Tarjeta> findByUsuario(Integer codigoUsuario);
+
+
+  List<Tarjeta> findTarjetaByUsuario(Usuario user);
+
+    //@Query("SELECT t.dinero FROM Tarjeta t WHERE t.dinero >= :saldo")
+   // Tarjeta findBySaldo(int  codigoTarjeta);
     @Query("SELECT t FROM Tarjeta t WHERE UPPER(t.estado) = :estado")
     List<Tarjeta> findByEstado(String estado);
     @Query("SELECT t FROM Tarjeta t WHERE UPPER(t.tipo) = :tipo")
