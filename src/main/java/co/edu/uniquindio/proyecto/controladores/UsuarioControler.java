@@ -1,7 +1,8 @@
-package co.edu.uniquindio.proyecto.controladores;
+package co.edu.uniquindio.proyecto.Controladores;
 
 import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
 import co.edu.uniquindio.proyecto.Modelo.DTO.MensajeDTO;
+import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.UsuarioServicio;
@@ -11,8 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("api/usuario")
+@RequestMapping("api/usuarios")
 @AllArgsConstructor
 public class UsuarioControler {
     @Autowired
@@ -27,9 +30,10 @@ public class UsuarioControler {
 
     @DeleteMapping("/eliminar/{codigoUsuario}")
     public ResponseEntity<MensajeDTO> eliminarUsuario(@PathVariable int codigoUsuario) throws Exception{
-        usuarioServicio.eliminarUsuario(codigoUsuario);
-        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, "Usuario eliminado correctamente") );
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, usuarioServicio.eliminarUsuario(codigoUsuario)) );
     }
+
+
 
     @PutMapping("/actualizar/{codigoUsuario}")
     public ResponseEntity<MensajeDTO> actualizarUsuario(@PathVariable int codigoUsuario, @RequestBody UsuarioDTO usuarioDTO) throws Exception{
@@ -38,24 +42,18 @@ public class UsuarioControler {
 
 
 
-    @GetMapping("/obtener/{codigoUsuario}")
-    public ResponseEntity<MensajeDTO> obtenerUsuario(@PathVariable int codigoUsuario) throws Exception{
+    @GetMapping("/obtenerCodigo/{codigoUsuario}")
+    public ResponseEntity<MensajeDTO> getOne(@PathVariable int codigoUsuario) throws Exception{
         return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, usuarioServicio.obtenerUsuario(codigoUsuario)));
     }
 
-    @GetMapping("/obtener/{gmail}")
+    @GetMapping("/obtenerEmail/{gmail}")
     public ResponseEntity<MensajeDTO> obtenerUsuarioporCorreo(@PathVariable String  gmail) throws Exception{
         return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, usuarioServicio.obtenerporCorreo(gmail)));
     }
 
-
-
- /*   Usuario obtener (int codigoUsuario) {
-
-        return null;
+    @GetMapping
+    public List<UsuarioGetDTO> getAll(){
+        return usuarioServicio.listarUsuarios();
     }
-
-
-*/
-
 }

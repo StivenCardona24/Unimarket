@@ -1,6 +1,8 @@
 package co.edu.uniquindio.proyecto;
 
 import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
+import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoGetDTO;
+import co.edu.uniquindio.proyecto.Modelo.DTO.TarjetaGetDto;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.UsuarioServicio;
@@ -14,12 +16,30 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @SpringBootTest
 @Transactional
 public class UsuarioTest {
     @Autowired
     private UsuarioServicio usuarioServicio;
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerProductos() throws  Exception {
+
+        List<UsuarioGetDTO> usuarios = usuarioServicio.listarUsuarios();
+
+        System.out.println(usuarios.size());
+        for (UsuarioGetDTO p: usuarios) {
+            System.out.println( p.getNombre());
+
+        }
+        Assertions.assertEquals(5, usuarios.size());
+
+    }
+
+
     @Test
     @Sql("classpath:dataset.sql")
     public void obtenerUsuarioTest() throws Exception {

@@ -49,7 +49,7 @@ public class VentaTest {
 
 
             System.out.println(venta.getCodigo());
-            Assertions.assertNotEquals(7, venta.getCodigo());
+            Assertions.assertNotEquals(0, venta.getCodigo());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -60,7 +60,7 @@ public class VentaTest {
 
             int idUsuario = 1;
 
-            List<UsuarioGetDTO.VentaGetDTO> compras = ventaServicio.listarVentaUsuarios(idUsuario);
+            List<VentaGetDTO> compras = ventaServicio.listarVentaUsuarios(idUsuario);
 
             Assertions.assertEquals(2, compras.size());
             Assertions.assertEquals(idUsuario, compras.get(0).getUsuario());
@@ -73,7 +73,7 @@ public class VentaTest {
 
         int idCompra = 2;
 
-        UsuarioGetDTO.VentaGetDTO venta = ventaServicio.obtenerVenta(idCompra);
+       VentaGetDTO venta = ventaServicio.obtenerVenta(idCompra);
 
         Assertions.assertEquals(idCompra, venta.getIdVenta());
         Assertions.assertEquals(MetodoPago.DAVIPLATA, venta.getMetodoPago());

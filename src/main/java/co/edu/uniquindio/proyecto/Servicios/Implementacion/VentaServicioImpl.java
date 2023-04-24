@@ -29,8 +29,8 @@ public class VentaServicioImpl implements VentaServicio {
 
     private  final EmailServicio emailServicio;
     @Override
-    public int crearVenta( VentaDTO ventaDTO) throws Exception{
 
+    public int crearVenta(VentaDTO ventaDTO) throws Exception{
 
         Venta nuevo = convertir(ventaDTO);
 
@@ -48,12 +48,12 @@ public class VentaServicioImpl implements VentaServicio {
     }
 
     @Override
-    public List<UsuarioGetDTO.VentaGetDTO> listarVentaUsuarios(int codigoVenta) throws Exception {
+    public List<VentaGetDTO> listarVentaUsuarios(int codigoVenta) throws Exception {
         List<Venta> ventas  = ventaRepository.findByUsuarioIdUsuario(codigoVenta);
-        List<UsuarioGetDTO.VentaGetDTO> VentaGetDTO = new ArrayList<>();
+        List<VentaGetDTO> VentaGetDTO = new ArrayList<>();
 
         for (Venta venta : ventas) {
-            UsuarioGetDTO.VentaGetDTO dto = convertirDTO(venta);
+            VentaGetDTO dto = convertirDTO(venta);
             VentaGetDTO.add(dto);
         }
 
@@ -61,7 +61,7 @@ public class VentaServicioImpl implements VentaServicio {
     }
 
     @Override
-    public UsuarioGetDTO.VentaGetDTO obtenerVenta(int codigoVenta) throws Exception {
+    public VentaGetDTO obtenerVenta(int codigoVenta) throws Exception {
 
         return convertirDTO(obtener(codigoVenta));
 
@@ -91,7 +91,7 @@ public class VentaServicioImpl implements VentaServicio {
         return venta;
     }
 
-    private UsuarioGetDTO.VentaGetDTO convertirDTO(Venta venta)  throws Exception {
+    private VentaGetDTO convertirDTO(Venta venta)  throws Exception {
 
 
 
@@ -111,7 +111,7 @@ public class VentaServicioImpl implements VentaServicio {
 
             }
         }
-        UsuarioGetDTO.VentaGetDTO ventaDTO = new UsuarioGetDTO.VentaGetDTO(
+        VentaGetDTO ventaDTO = new VentaGetDTO(
                 venta.getCodigo(),
                 venta.getFechaCompra(),
                 venta.getTotalCompra(),

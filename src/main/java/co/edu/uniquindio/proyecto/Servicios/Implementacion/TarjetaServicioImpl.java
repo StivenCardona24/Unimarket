@@ -123,6 +123,7 @@ public class TarjetaServicioImpl implements  TarjetaServicio {
         if (tarjetaConvertir.getCompras() != null) { // Verificar si la lista es nula
             for (Venta ventasRecorer : tarjetaConvertir.getCompras()) {
                 VentaDTO venta = new VentaDTO();
+
                 venta.setEstado(ventasRecorer.getEstado());
                 venta.setFechaCompra(ventasRecorer.getFechaCompra());
                 venta.setMetodoPago(ventasRecorer.getMetodoPago());
