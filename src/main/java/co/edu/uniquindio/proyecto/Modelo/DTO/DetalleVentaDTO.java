@@ -20,8 +20,10 @@ public class DetalleVentaDTO {
 
     @NotNull(message = "El precio de compra no puede ser nulo")
     @PositiveOrZero(message = "El precio de compra debe ser mayor o igual a cero")
-    private float precioCompra;
+    private double precioCompra;
 
     @NotNull(message = "El id del producto no puede ser nulo")
     private int idVenta;
+    @NotNull(message = "El id del producto no puede ser nulo")
+    private int idProducto;
 }

@@ -4,8 +4,6 @@ import co.edu.uniquindio.proyecto.Modelo.Clases.Producto;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoGetDTO;
-import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioDTO;
-import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.Categoria;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoProducto;
 import co.edu.uniquindio.proyecto.Repositorios.ProductoRepository;
@@ -188,17 +186,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public List<ProductoGetDTO> listarProductosFavoritos(int codigoUsuario) {
-        List<Producto> productos = productoRepository.findProductoByFavoritoUsuarios(codigoUsuario);
-        List<ProductoGetDTO> productosGetDTOS = new ArrayList<>();
-        for (Producto p: productos) {
-
-            //System.out.println(p.getNombre());
-            ProductoGetDTO pro = convertirDTO(p);
-            productosGetDTOS.add(pro);
-
-
-        }
-        return productosGetDTOS;
+        return null;
     }
 
     @Override

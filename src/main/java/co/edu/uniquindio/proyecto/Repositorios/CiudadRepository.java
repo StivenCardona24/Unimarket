@@ -10,15 +10,12 @@ import java.util.List;
 @Repository
 public interface CiudadRepository extends JpaRepository<Ciudad,Integer> {
 
-    @Query("SELECT c FROM Ciudad c")
-    List<Ciudad> findAllCiudades();
-
-    @Query("SELECT c FROM Ciudad c WHERE c.codigo = ?1")
-    Ciudad findCiudadByCodigo(int codigo);
+    @Query("SELECT c FROM Ciudad c WHERE c.nombre = ?1")
+    Ciudad findCiudadByNombre(String nombre);
 
     @Query("SELECT c FROM Ciudad c WHERE c.nombre LIKE %?1% order by c.nombre asc")
     List<Ciudad> findCiudadesByNombreAsc(String nombre);
-    @Query("SELECT c FROM Ciudad c WHERE c.nombre LIKE %?1% order by c.nombre desc")
-    List<Ciudad> findCiudadesByNombreDesc(String nombre);
+
+
 
 }

@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.Categoria;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoProducto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import java.util.Map;
 @AllArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
 public class ProductoGetDTO {
     private int codigo;
 

@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Getter
@@ -28,7 +27,6 @@ public class DetalleVenta implements Serializable {
     @NotNull
     @ToString.Exclude
     private double precio;
-
 
     @ManyToOne
     @ToString.Exclude

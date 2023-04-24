@@ -13,21 +13,19 @@ import java.util.List;
 
 @Repository
 public interface DetalleVentaRepository extends JpaRepository<DetalleVenta,Integer> {
-
-    // Obtener el detalle de venta con el código especificado:
-    Optional<DetalleVenta> findByCodigo(int codigo);
-    DetalleVenta findAllByOrderByPrecioDesc();
-    DetalleVenta findTopByOrderByPrecioAsc();
-
     List<DetalleVenta> findByPrecioGreaterThan(double precioMinimo);
+    List<DetalleVenta> findByUnidadesGreaterThan(int unidadesMinimas);
+    @Query("SELECT d FROM DetalleVenta d WHERE d.venta.codigo = ?1")
+    List<DetalleVenta> findAllByVenta(int codigoVenta);
 
-    List<DetalleVenta> findByVenta(Venta venta);
+    @Query("SELECT d FROM DetalleVenta d WHERE d.producto.codigo = ?1")
+    List<DetalleVenta> findAllByProductoID(int codigoVenta);
 
     // Obtener todos los detalles de venta ordenados por precio de forma ascendente
     List<DetalleVenta> findAllByOrderByPrecioAsc();
 
     //Obtener todos los detalles de venta que contengan un producto con el nombre especificado
-    @Query("SELECT dv FROM DetalleVenta dv JOIN dv.producto p WHERE p.nombre  LIKE concat ( '%', :nombre, '%' )")
+    @Query("SELECT dv FROM DetalleVenta dv WHERE dv.producto.nombre  LIKE concat ( '%', :nombre, '%' )")
     List<DetalleVenta> findAllByProductoNombre(@Param("nombre") String nombre);
 
     //Obtener el número total de detalles de venta que existen:

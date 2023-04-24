@@ -1,12 +1,8 @@
 package co.edu.uniquindio.proyecto.Servicios.Implementacion;
 
 import co.edu.uniquindio.proyecto.Modelo.Clases.Licencia;
-import co.edu.uniquindio.proyecto.Modelo.Clases.Producto;
-import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
 import co.edu.uniquindio.proyecto.Modelo.DTO.LicenciaDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.LicenciaGetDTO;
-import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoGetDTO;
-import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioDTO;
 import co.edu.uniquindio.proyecto.Repositorios.LicenciaRepository;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.LicenciaServicio;
 import lombok.AllArgsConstructor;
@@ -118,8 +114,5 @@ public class LicenciaServicioImpl implements LicenciaServicio {
 
         return licenciaGetDTO;
     }
-
-
-
 
 }

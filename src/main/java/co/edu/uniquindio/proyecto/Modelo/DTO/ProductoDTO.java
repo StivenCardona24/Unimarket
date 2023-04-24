@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.Modelo.DTO;
 
+import lombok.*;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.Categoria;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoProducto;
 import jakarta.validation.constraints.NotBlank;
@@ -19,6 +20,7 @@ import java.util.Map;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 public class ProductoDTO {
     //anotaciones validcacion
     //extends trow
@@ -53,5 +55,3 @@ public class ProductoDTO {
 
    private List<Categoria> categorias;
 }
-
-
