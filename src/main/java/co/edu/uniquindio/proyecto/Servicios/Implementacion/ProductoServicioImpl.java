@@ -186,7 +186,17 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public List<ProductoGetDTO> listarProductosFavoritos(int codigoUsuario) {
-        return null;
+        List<Producto> productos = productoRepository.findProductoByFavoritoUsuarios(codigoUsuario);
+        List<ProductoGetDTO> productosGetDTOS = new ArrayList<>();
+        for (Producto p: productos) {
+
+            //System.out.println(p.getNombre());
+            ProductoGetDTO pro = convertirDTO(p);
+            productosGetDTOS.add(pro);
+
+
+        }
+        return productosGetDTOS;
     }
 
     @Override
