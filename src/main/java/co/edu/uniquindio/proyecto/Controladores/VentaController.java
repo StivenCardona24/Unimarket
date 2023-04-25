@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.Controladores;
 
 import co.edu.uniquindio.proyecto.Modelo.Clases.Venta;
 import co.edu.uniquindio.proyecto.Modelo.DTO.*;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoVenta;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.TarjetaServicio;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.UsuarioServicio;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.VentaServicio;
@@ -42,6 +43,11 @@ public class VentaController {
     @GetMapping("/obtenerCodigo/{codigoUsuario}")
     public ResponseEntity<MensajeDTO> getOne(@PathVariable int codigoUsuario) throws Exception{
         return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, ventaServicio.obtenerVenta(codigoUsuario)));
+    }
+
+    @PutMapping("{codigo}/estado/{estado}")
+    public  ResponseEntity<MensajeDTO> actualizarEstado(@PathVariable int codigo, @PathVariable EstadoVenta estado) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, ventaServicio.actualizarEstado(codigo, estado)));
     }
 
 

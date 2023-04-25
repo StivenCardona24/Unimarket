@@ -3,15 +3,19 @@ package co.edu.uniquindio.proyecto.Servicios.Implementacion;
 import co.edu.uniquindio.proyecto.Modelo.Clases.DetalleVenta;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Venta;
 import co.edu.uniquindio.proyecto.Modelo.DTO.*;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoVenta;
 import co.edu.uniquindio.proyecto.Repositorios.TarjetaRepository;
 import co.edu.uniquindio.proyecto.Repositorios.UsuarioRepository;
 import co.edu.uniquindio.proyecto.Repositorios.VentaRepository;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.EmailServicio;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.UsuarioServicio;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.VentaServicio;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -67,7 +71,9 @@ public class VentaServicioImpl implements VentaServicio {
 
     }
 
+
     @Override
+    @Transactional
     public Venta obtener(int codigoVenta) throws Exception {
         Optional<Venta> venta = ventaRepository.findById(codigoVenta);
 
@@ -76,6 +82,22 @@ public class VentaServicioImpl implements VentaServicio {
         }
 
         return venta.get();
+    }
+
+    @Override
+    public VentaGetDTO actualizarEstado(int codigo, EstadoVenta estadoVenta) throws Exception{
+
+        validarExiste(codigo);
+
+        if(estadoVenta == EstadoVenta.PAGADO){
+            ventaRepository.actualizarFecha(codigo, LocalDate.now());
+        }
+        System.out.println(codigo);
+
+        ventaRepository.actualizarEstado(codigo, estadoVenta);
+
+
+        return obtenerVenta(codigo);
     }
 
     private Venta convertir(VentaDTO ventaDTO) {
@@ -111,6 +133,8 @@ public class VentaServicioImpl implements VentaServicio {
 
             }
         }
+
+        System.out.println(venta.getCodigo());
         VentaGetDTO ventaDTO = new VentaGetDTO(
                 venta.getCodigo(),
                 venta.getFechaCompra(),
@@ -125,4 +149,17 @@ public class VentaServicioImpl implements VentaServicio {
 
         return ventaDTO;
     }
+
+
+    private void validarExiste(int codigo) throws Exception {
+        boolean existe = ventaRepository.existsById(Integer.valueOf(codigo));
+
+        if (!existe) {
+            throw new Exception("El código " + codigo + " no está asociado a ningúna venta");
+        }
+
+    }
+
+
+
 }

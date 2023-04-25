@@ -6,10 +6,13 @@ import co.edu.uniquindio.proyecto.Modelo.Clases.Producto;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Venta;
 import co.edu.uniquindio.proyecto.Modelo.DTO.DetalleVentaDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.DetalleVentaGetDTO;
+import co.edu.uniquindio.proyecto.Modelo.DTO.VentaGetDTO;
 import co.edu.uniquindio.proyecto.Repositorios.DetalleVentaRepository;
 import co.edu.uniquindio.proyecto.Repositorios.ProductoRepository;
 import co.edu.uniquindio.proyecto.Repositorios.VentaRepository;
+import co.edu.uniquindio.proyecto.Servicios.Interfaces.CiudadServicio;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.DetalleVentaServicio;
+import co.edu.uniquindio.proyecto.Servicios.Interfaces.VentaServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +27,13 @@ public class DetalleVentaServicioImpl implements DetalleVentaServicio {
     private final VentaRepository ventaRepository;
     private final ProductoRepository productoRepository;
     private final DetalleVentaRepository detalleVentaRepository;
+
     @Override
     public int crearDetalleVenta(DetalleVentaDTO detalleVentaDTO) throws Exception {
         if (detalleVentaDTO.getUnidades() < 1 || detalleVentaDTO.getUnidades() > 100) {
             throw new Exception("El Numero de unidades debe ser entre 1 y 100.");
         }
-        if (detalleVentaDTO.getPrecioCompra() < 0) {
+        if (detalleVentaDTO.getPrecioUnitario() < 0) {
             throw new Exception("El valor de la compra debe ser positivo.");
         }
         Optional<Venta> ventaExistente = ventaRepository.findById(detalleVentaDTO.getIdVenta());
@@ -44,9 +48,13 @@ public class DetalleVentaServicioImpl implements DetalleVentaServicio {
             throw new Exception("del producto"+productoExitente.get().getNombre()+" no existen todas las unidades solicitadas " +
                     "existen"+detalleVentaDTO.getUnidades());
         }
+
         int CantidadProductos=productoExitente.get().getUnidades()-detalleVentaDTO.getUnidades();
         productoRepository.actualizarUnidades(productoExitente.get().getCodigo(),CantidadProductos);
-        return detalleVentaRepository.save(convertirDTOToAnEntity(detalleVentaDTO)).getCodigo();
+        int codigo = detalleVentaRepository.save(convertirDTOToAnEntity(detalleVentaDTO)).getCodigo();
+
+       updateVentaTotal(detalleVentaDTO.getIdVenta());
+        return  codigo;
     }
 
     @Override
@@ -54,7 +62,7 @@ public class DetalleVentaServicioImpl implements DetalleVentaServicio {
         if (detalleVentaDTO.getUnidades() < 1 || detalleVentaDTO.getUnidades() > 100) {
             throw new Exception("El Numero de unidades debe ser entre 1 y 100.");
         }
-        if (detalleVentaDTO.getPrecioCompra() < 0) {
+        if (detalleVentaDTO.getPrecioUnitario() < 0) {
             throw new Exception("El valor de la compra debe ser positivo.");
         }
         Optional<Venta> ventaExistente = ventaRepository.findById(detalleVentaDTO.getIdVenta());
@@ -129,16 +137,29 @@ public class DetalleVentaServicioImpl implements DetalleVentaServicio {
         nuevoDetalleVenta.setIdVenta(detalleVentaConvertir.getVenta().getCodigo());
         nuevoDetalleVenta.setUnidades(detalleVentaConvertir.getUnidades());
         nuevoDetalleVenta.setIdProducto(detalleVentaConvertir.getProducto().getCodigo());
-        nuevoDetalleVenta.setPrecioCompra(detalleVentaConvertir.getPrecio());
+        nuevoDetalleVenta.setPrecioUnitario(detalleVentaConvertir.getPrecioUnitario());
         return nuevoDetalleVenta;
     }
     public DetalleVenta convertirDTOToAnEntity (DetalleVentaDTO detalleVentaConvertir) throws Exception {
         DetalleVenta nuevodetalleVenta= new DetalleVenta();
         nuevodetalleVenta.setVenta(ventaRepository.findById(detalleVentaConvertir.getIdVenta()).get());
-        nuevodetalleVenta.setPrecio(detalleVentaConvertir.getPrecioCompra());
+        nuevodetalleVenta.setPrecioUnitario(detalleVentaConvertir.getPrecioUnitario());
         nuevodetalleVenta.setUnidades(detalleVentaConvertir.getUnidades());
         nuevodetalleVenta.setProducto(productoRepository.findById(detalleVentaConvertir.getIdProducto()).get());
         return nuevodetalleVenta;
+    }
+
+    public void updateVentaTotal(int codigo) throws Exception{
+
+        List<DetalleVentaGetDTO> listaProductos = obtenerDetalleVentaPorVenta(codigo);
+        double total = 0;
+
+        for (DetalleVentaGetDTO dv: listaProductos) {
+            total += dv.getPrecioUnitario() * dv.getUnidades();
+        }
+
+        ventaRepository.actualizarTotal(codigo, total);
+
     }
 }
 

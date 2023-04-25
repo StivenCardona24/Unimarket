@@ -12,7 +12,7 @@ import lombok.Setter;
 public class DetalleVentaGetDTO {
     private int idDetalleVenta;
     private int unidades;
-    private double precioCompra;
+    private double precioUnitario;
     private int idVenta;
     private int idProducto;
 }

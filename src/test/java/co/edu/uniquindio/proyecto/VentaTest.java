@@ -1,12 +1,9 @@
 package co.edu.uniquindio.proyecto;
 
 import co.edu.uniquindio.proyecto.Modelo.Clases.Venta;
-import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioDTO;
+import co.edu.uniquindio.proyecto.Modelo.DTO.*;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioGetDTO;
-import co.edu.uniquindio.proyecto.Modelo.DTO.VentaDTO;
-import co.edu.uniquindio.proyecto.Modelo.DTO.VentaGetDTO;
-import co.edu.uniquindio.proyecto.Modelo.DTO.TokenDTO;
-import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioGetDTO;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoProducto;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoVenta;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.MetodoPago;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.VentaServicio;
@@ -21,7 +18,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootTest
-@Transactional
+
 public class VentaTest {
 
     @Autowired
@@ -77,6 +74,17 @@ public class VentaTest {
 
         Assertions.assertEquals(idCompra, venta.getIdVenta());
         Assertions.assertEquals(MetodoPago.DAVIPLATA, venta.getMetodoPago());
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void actualizarEstado() throws  Exception {
+
+        VentaGetDTO venta = ventaServicio.actualizarEstado(1, EstadoVenta.ENTREGADO);
+
+
+        System.out.println(venta.getIdVenta() + ' ' + " ESTADO:" + venta.getEstado());
+        Assertions.assertEquals(EstadoVenta.PAGADO, venta.getEstado());
     }
 
 

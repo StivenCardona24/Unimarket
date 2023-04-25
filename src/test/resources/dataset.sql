@@ -101,11 +101,11 @@ INSERT INTO detalle_venta
     --(precio, unidades, venta_codigo, producto)
 VALUES
 
-    (1,10.99, 2, 1,1),
-    (2,15.99, 1, 1,2),
-    (3,7.99, 3, 2,6),
-    (4,12.50, 1, 5,4),
-    (5,9.99, 2, 4,5);
+    (1,799.99, 2, 1,1),
+    (2,799.99, 1, 1,2),
+    (3,149.99, 3, 2,6),
+    (4,299.99, 1, 5,4),
+    (5, 599.99, 2, 4,5);
 
 insert into comentario
 values

@@ -24,7 +24,7 @@ public class DetalleVentaTest {
         DetalleVentaDTO nuevoDetalleVenta= new DetalleVentaDTO();
         nuevoDetalleVenta.setIdVenta(2);
         nuevoDetalleVenta.setIdProducto(1);
-        nuevoDetalleVenta.setPrecioCompra(400000);
+        nuevoDetalleVenta.setPrecioUnitario(400000);
         nuevoDetalleVenta.setUnidades(5);
         Assertions.assertNotNull(detalleVentaServicio.crearDetalleVenta(nuevoDetalleVenta));
     }
@@ -35,7 +35,7 @@ public class DetalleVentaTest {
         DetalleVentaGetDTO detalleVentaObtenido=detalleVentaServicio.obtenerDetalleVenta(1);
         DetalleVentaDTO detalleVentaDTO =new DetalleVentaDTO(5,1000,2,1);
         Assertions.assertNotNull(detalleVentaServicio.actualizarDetalleVenta(detalleVentaObtenido.getIdDetalleVenta(),detalleVentaDTO));
-        Assertions.assertEquals(1000,detalleVentaServicio.actualizarDetalleVenta(detalleVentaObtenido.getIdDetalleVenta(),detalleVentaDTO).getPrecioCompra());
+        Assertions.assertEquals(1000,detalleVentaServicio.actualizarDetalleVenta(detalleVentaObtenido.getIdDetalleVenta(),detalleVentaDTO).getPrecioUnitario());
     }
     @Test
     @Sql("classpath:dataset.sql")

@@ -26,7 +26,7 @@ public class DetalleVenta implements Serializable {
     private int unidades;
     @NotNull
     @ToString.Exclude
-    private double precio;
+    private double precioUnitario;
 
     @ManyToOne
     @ToString.Exclude
