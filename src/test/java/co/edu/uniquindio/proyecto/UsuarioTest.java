@@ -19,7 +19,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootTest
-
+@Transactional
 public class UsuarioTest {
     @Autowired
     private UsuarioServicio usuarioServicio;

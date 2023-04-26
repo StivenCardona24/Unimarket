@@ -30,11 +30,11 @@ values
 --codigo,activo,cedula,direccion,email,fechanacimeinto,nombre,password,telefono,usen_name,ciudadCodigo,liencia_codigo,role_codigo
 
 
-(1, 1, '1234567890', 'Calle 1 #123', 'usuario1@example.com',"CLIENTE", '1990-01-01', 'Usuario 1', '$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq', '1234567890', 'usuario1', 1,  1),
-(2, 1, '2345678901', 'Calle 2 #456','usuario2@example.com', "CLIENTE", '1995-02-15', 'Usuario 2', '$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq', '2345678901', 'usuario2', 2,  2),
-(3, 1, '3456789012', 'Calle 3 #789', 'usuario3@example.com',"CLIENTE",  '1988-05-20', 'Usuario 3', '$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq', '3456789012', 'usuario3', 3,  3),
-(4, 1, '4567890123', 'Calle 4 #012','usuario4@example.com', "MODERADOR", '1992-11-11', 'Usuario 4', '$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq', '4567890123', 'usuario4', 4,  4),
-(5, 0, '5678901234', 'Calle 5 #345', 'usuario5@example.com',"MODERADOR", '2000-06-30', 'Usuario 5', '$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq', '5678901234', 'usuario5', 5, 5);
+(1, 1, '1234567890', NULL,'Calle 1 #123', 'usuario1@example.com',"CLIENTE", '1990-01-01', 'Usuario 1', '$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq', '1234567890', 'usuario1', 1,  1),
+(2, 1, '2345678901',NULL ,'Calle 2 #456','usuario2@example.com', "CLIENTE", '1995-02-15', 'Usuario 2', '$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq', '2345678901', 'usuario2', 2,  2),
+(3, 1, '3456789012', NULL,'Calle 3 #789', 'usuario3@example.com',"CLIENTE",  '1988-05-20', 'Usuario 3', '$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq', '3456789012', 'usuario3', 3,  3),
+(4, 1, '4567890123', NULL,'Calle 4 #012','usuario4@example.com', "MODERADOR", '1992-11-11', 'Usuario 4', '$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq', '4567890123', 'usuario4', 4,  4),
+(5, 0, '5678901234',NULL ,'Calle 5 #345', 'proyectos.universidad.2023@gmail.com',"MODERADOR", '2000-06-30', 'Usuario 5', '$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq', '5678901234', 'usuario5', 5, 5);
 
 
 

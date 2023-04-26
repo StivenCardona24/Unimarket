@@ -146,6 +146,31 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
      return usuario.get().getCodigo();
     }
+
+    @Override
+    public int recuperarContrasenia(String email, String codigo, String password) throws Exception{
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+
+        if (usuario.isEmpty()) {
+            throw new Exception("El email " + email + " no está asociado a ningún usuario");
+        }
+
+
+        if(usuario.get().getCodigoContrasenia().equals(codigo)){
+
+            System.out.println("HOLAA");
+
+            String passNew = passwordEncoder.encode(password);
+
+            usuarioRepository.actualizarContrasenia(usuario.get().getCodigo(), passNew);
+            usuarioRepository.actualizarCodigoContrasenia(usuario.get().getCodigo(),null);
+        }
+
+
+        return usuario.get().getCodigo();
+    }
+
+
     private Usuario convertir(UsuarioDTO usuarioDTO) {
 
         Usuario usuario = new Usuario();

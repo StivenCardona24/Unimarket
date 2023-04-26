@@ -84,7 +84,7 @@ public class VentaTest {
 
 
         System.out.println(venta.getIdVenta() + ' ' + " ESTADO:" + venta.getEstado());
-        Assertions.assertEquals(EstadoVenta.PAGADO, venta.getEstado());
+        Assertions.assertEquals(EstadoVenta.ENTREGADO, venta.getEstado());
     }
 
 

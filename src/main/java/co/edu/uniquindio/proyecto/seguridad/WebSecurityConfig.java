@@ -26,11 +26,11 @@ public class WebSecurityConfig {
         http.authorizeHttpRequests()
         .requestMatchers("/api/auth/**").permitAll();
         http.authorizeHttpRequests()
-                .requestMatchers("/productos/estado/**").hasRole("MODERADOR");
+                .requestMatchers(HttpMethod.DELETE,"/usuario/**").hasRole("MODERADOR");
+        //http.authorizeHttpRequests()
+          //      .requestMatchers("/productos/favorito/**").hasRole("CLIENTE");
         http.authorizeHttpRequests()
-                .requestMatchers("/productos/favorito/**").hasRole("CLIENTE");
-        http.authorizeHttpRequests()
-        .requestMatchers(HttpMethod.GET, "/api/productos/**").permitAll().anyRequest().authenticated();;
+        .requestMatchers(HttpMethod.GET, "/api/productos/**").permitAll().anyRequest().authenticated();
 
         http.exceptionHandling().authenticationEntryPoint(jwtEntryPoint);
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

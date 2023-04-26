@@ -39,6 +39,11 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Integer> {
     @Query("UPDATE Usuario u SET u.codigoContrasenia  = :codigoContrasenia WHERE u.codigo = :codigo")
     void actualizarCodigoContrasenia(@Param("codigo") int codigo, @Param("codigoContrasenia") String codigoContrasenia);
 
+    @Transactional
+    @Modifying
+    @Query("UPDATE Usuario u SET u.password  = :password WHERE u.codigo = :codigo")
+    void actualizarContrasenia(@Param("codigo") int codigo, @Param("password") String password);
+
 
     Optional<Usuario> findByEmail(String email);
 

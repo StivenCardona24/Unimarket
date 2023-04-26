@@ -26,5 +26,7 @@ public interface UsuarioServicio {
 
     int generarCodigoContrasenia(String email) throws Exception;
 
+    int recuperarContrasenia(String email, String codigo, String password) throws Exception;
+
 
 }
