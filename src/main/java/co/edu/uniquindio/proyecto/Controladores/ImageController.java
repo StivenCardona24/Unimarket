@@ -22,8 +22,9 @@ public class ImageController {
     private CloudinaryServicioImpl cloudinaryServicio;
 
     @PostMapping
-    public ResponseEntity<MensajeDTO> create(@RequestPart("file") File file) throws Exception {
-        return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO(HttpStatus.CREATED, false,   cloudinaryServicio.subirImagen( file, "nueva")));
+    public ResponseEntity<MensajeDTO> create(@RequestParam("file") MultipartFile file) throws Exception {
+        File imagen = cloudinaryServicio.convertir(file);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO(HttpStatus.CREATED, false,   cloudinaryServicio.subirImagen( imagen, "productos/")));
 
     }
 

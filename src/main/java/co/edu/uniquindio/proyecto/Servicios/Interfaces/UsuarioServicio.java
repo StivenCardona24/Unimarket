@@ -24,5 +24,7 @@ public interface UsuarioServicio {
 
     List<UsuarioGetDTO> listarUsuarios();
 
+    int generarCodigoContrasenia(String email) throws Exception;
+
 
 }

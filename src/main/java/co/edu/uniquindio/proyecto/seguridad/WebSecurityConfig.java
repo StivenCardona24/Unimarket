@@ -25,6 +25,13 @@ public class WebSecurityConfig {
         http.cors();
         http.authorizeHttpRequests()
         .requestMatchers("/api/auth/**").permitAll().anyRequest().authenticated();
+
+        //http.authorizeHttpRequests()
+        //.requestMatchers( "/productos").permitAll();
+       // http.authorizeHttpRequests()
+        //.requestMatchers("/productos/estado/**").hasRole("MODERADOR");
+        //http.authorizeHttpRequests()
+        //.requestMatchers("/productos/favorito/**").hasRole("CLIENTE");
         http.exceptionHandling().authenticationEntryPoint(jwtEntryPoint);
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authenticationProvider(authenticationProvider);

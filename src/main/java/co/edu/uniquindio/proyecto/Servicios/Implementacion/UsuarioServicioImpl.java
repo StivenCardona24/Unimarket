@@ -17,6 +17,7 @@ import javax.print.AttributeException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 @AllArgsConstructor
@@ -123,6 +124,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuarioGetDTOS;
     }
 
+
+    @Override
+    public int generarCodigoContrasenia(String email){
+     return 1;
+    }
     private Usuario convertir(UsuarioDTO usuarioDTO) {
 
         Usuario usuario = new Usuario();
@@ -153,6 +159,21 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
 
         return usuarioDTO;
+    }
+
+
+
+
+    private String generarCodigo(String nombre, String email, String cedula) {
+        int longitud = 8;
+        String caracteres = nombre + email + cedula;
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < longitud; i++) {
+            int index = random.nextInt(caracteres.length());
+            sb.append(caracteres.charAt(index));
+        }
+        return sb.toString();
     }
 
 

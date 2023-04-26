@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootTest
-
+@Transactional
 public class VentaTest {
 
     @Autowired
