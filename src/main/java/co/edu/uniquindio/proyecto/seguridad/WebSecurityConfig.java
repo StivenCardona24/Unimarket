@@ -24,10 +24,9 @@ public class WebSecurityConfig {
         http.csrf().disable();
         http.cors();
         http.authorizeHttpRequests()
-        .requestMatchers("/api/auth/**").permitAll().anyRequest().authenticated();
-
-        //http.authorizeHttpRequests()
-        //.requestMatchers( "/productos").permitAll();
+        .requestMatchers("/api/auth/**").permitAll();
+        http.authorizeHttpRequests()
+        .requestMatchers(HttpMethod.GET, "/api/productos/**").permitAll().anyRequest().authenticated();;
        // http.authorizeHttpRequests()
         //.requestMatchers("/productos/estado/**").hasRole("MODERADOR");
         //http.authorizeHttpRequests()

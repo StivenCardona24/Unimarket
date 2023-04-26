@@ -2,9 +2,12 @@ package co.edu.uniquindio.proyecto.Repositorios;
 
 import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioDTO;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -30,6 +33,11 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Integer> {
 
     @Query("select u from Usuario u where u.email = :email")
     Usuario buscarUsuarioPorEmail(String email);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Usuario u SET u.codigoContrasenia  = :codigoContrasenia WHERE u.codigo = :codigo")
+    void actualizarCodigoContrasenia(@Param("codigo") int codigo, @Param("codigoContrasenia") String codigoContrasenia);
 
 
     Optional<Usuario> findByEmail(String email);

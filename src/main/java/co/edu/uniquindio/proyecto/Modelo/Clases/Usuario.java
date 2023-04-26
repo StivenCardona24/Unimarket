@@ -49,6 +49,7 @@ public class Usuario implements Serializable{
 
     private boolean activo;
 
+    private String codigoContrasenia;
     @ManyToOne
     private Ciudad ciudad;
 

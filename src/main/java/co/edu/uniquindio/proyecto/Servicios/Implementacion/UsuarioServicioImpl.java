@@ -2,10 +2,12 @@ package co.edu.uniquindio.proyecto.Servicios.Implementacion;
 
 import co.edu.uniquindio.proyecto.Modelo.Clases.Producto;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
+import co.edu.uniquindio.proyecto.Modelo.DTO.EmailDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.Repositorios.UsuarioRepository;
+import co.edu.uniquindio.proyecto.Servicios.Interfaces.EmailServicio;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.UsuarioServicio;
 import co.edu.uniquindio.proyecto.exepciones.ExceptionEnUso;
 import lombok.AllArgsConstructor;
@@ -26,6 +28,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     //throws Exception
     private final UsuarioRepository usuarioRepository;
+    private  final EmailServicio emailServicio;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -126,8 +129,22 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
 
     @Override
-    public int generarCodigoContrasenia(String email){
-     return 1;
+    public int generarCodigoContrasenia(String email) throws Exception {
+
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+
+        if (usuario.isEmpty()) {
+            throw new Exception("El email " + email + " no está asociado a ningún usuario");
+        }
+
+
+
+     String codigo = generarCodigo(usuario.get().getNombre(), usuario.get().getEmail(), usuario.get().getCedula());
+
+        usuarioRepository.actualizarCodigoContrasenia(usuario.get().getCodigo(), codigo);
+        emailServicio.enviarEmail(new EmailDTO("Recuperar Contraseña", "El codigo generado para recuperar su contraseña es: " + codigo, email));
+
+     return usuario.get().getCodigo();
     }
     private Usuario convertir(UsuarioDTO usuarioDTO) {
 
@@ -166,7 +183,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     private String generarCodigo(String nombre, String email, String cedula) {
         int longitud = 8;
-        String caracteres = nombre + email + cedula;
+        String caracteres = nombre +cedula +  email;
         Random random = new Random();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < longitud; i++) {
