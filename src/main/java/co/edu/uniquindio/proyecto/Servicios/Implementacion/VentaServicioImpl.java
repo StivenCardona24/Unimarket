@@ -40,7 +40,7 @@ public class VentaServicioImpl implements VentaServicio {
 
         Venta registro = ventaRepository.save(nuevo);
 
-        emailServicio.enviarEmail(new EmailDTO("Compra", "Se realizo una compra del usuario " +ventaDTO.getUsuario() , "usuario1@example.com"));
+        emailServicio.enviarEmail(new EmailDTO("Compra", "Se realizo una compra del usuario " +ventaDTO.getUsuario() , "ruisito124@gmail.com"));
 
 
 

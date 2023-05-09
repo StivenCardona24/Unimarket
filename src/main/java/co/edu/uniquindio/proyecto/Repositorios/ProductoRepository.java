@@ -35,7 +35,7 @@ public interface ProductoRepository extends JpaRepository<Producto,Integer> {
     @Query("SELECT p FROM Producto p WHERE p.usuarioPropietario.codigo = :codigo AND p.disponible = true order by p.prioridad desc")
     List<Producto> listarProductosPropietario(int codigo);
 
-    @Query("SELECT p FROM Producto p JOIN Usuario u WHERE  p.nombre = :nombre AND u.codigo = :vendedor AND p.disponible = true order by p.prioridad desc")
+    @Query("SELECT p FROM Producto p WHERE  p.nombre = :nombre AND p.usuarioPropietario.codigo = :vendedor AND p.disponible = true order by p.prioridad desc")
     Optional<Producto> buscarProductoPorNombreYVendedor(String nombre, int vendedor);
 
     @Transactional

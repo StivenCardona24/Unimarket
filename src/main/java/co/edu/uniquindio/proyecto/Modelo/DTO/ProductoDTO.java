@@ -34,18 +34,15 @@ public class ProductoDTO {
     @Length(max =1000,message = "El descripcion no puede susperar más de 1000 caracteres")
     private String descripcion;
 
-    @NotNull(message = "El vendedor no puede ser nulo")
+
     @NumberFormat
-    @NotEmpty
+
     private int vendedor;
 
-    @NotEmpty
-    @NotNull(message = "Las unidades no pueden ser nulas")
     @NumberFormat
     private int unidades;
 
-    @NotEmpty
-    @NotNull(message = "El precio no puede ser nulo")
+
     @NumberFormat
     private double  precio;
 

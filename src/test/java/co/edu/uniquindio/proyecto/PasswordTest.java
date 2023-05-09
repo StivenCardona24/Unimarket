@@ -28,7 +28,7 @@ public class PasswordTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void recuperarContrasenia() throws Exception{
-        int codigo =  usuarioServicio.recuperarContrasenia("proyectos.universidad.2023@gmail.com", ".yueeoc.", "12345678");
+        int codigo =  usuarioServicio.recuperarContrasenia("proyectos.universidad.2023@gmail.com", "un0irm39", "12345678");
 
         Assertions.assertEquals(5, codigo);
     }

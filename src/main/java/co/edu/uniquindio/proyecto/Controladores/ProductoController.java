@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("api/productos")
 @AllArgsConstructor
@@ -24,8 +25,10 @@ public class ProductoController {
     private final ProductoServicio productoServicio;
 
     @GetMapping
-    public List<ProductoGetDTO> getAll(){
-        return productoServicio.listarProductos();
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<MensajeDTO> getAll(){
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false,
+                productoServicio.listarProductos()));
     }
 
     @GetMapping("/{codigo}")
@@ -37,7 +40,7 @@ public class ProductoController {
     @PostMapping
     public ResponseEntity<MensajeDTO> create(@Valid @RequestBody ProductoDTO producto) throws Exception {
         productoServicio.crearProducto(producto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO(HttpStatus.CREATED, false, "Cliente creado correctamente"));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO(HttpStatus.CREATED, false, "producto creado correctamente"));
     }
 
     @PutMapping("/{codigo}")

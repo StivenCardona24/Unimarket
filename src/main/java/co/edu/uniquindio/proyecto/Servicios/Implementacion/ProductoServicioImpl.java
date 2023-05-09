@@ -46,10 +46,11 @@ public class ProductoServicioImpl implements ProductoServicio {
         Usuario vendedor = usuarioRepository.findUsuariosByCodigo(productoDTO.getVendedor());
 
         if(vendedor == null ){
-            throw new Exception("El usuario no existe");
+            throw new Exception("El vendedor no existe");
         }
 
         Optional<Producto> buscar = productoRepository.buscarProductoPorNombreYVendedor(productoDTO.getNombre(), productoDTO.getVendedor());
+        //System.out.println(buscar.get().getNombre() + productoDTO.getVendedor());
         if(buscar.isPresent()){
             throw new Exception("Este producto ya lo contiene el vendedor");
         }
@@ -74,7 +75,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         Usuario vendedor = usuarioRepository.findUsuariosByCodigo(productoDTO.getVendedor());
 
         if(vendedor == null ){
-            throw new Exception("El usuario no existe");
+            throw new Exception("El producto no existe");
         }
 
         validarExiste(codigoProducto);
