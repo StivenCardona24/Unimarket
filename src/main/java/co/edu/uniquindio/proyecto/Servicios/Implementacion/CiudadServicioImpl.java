@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
 import co.edu.uniquindio.proyecto.Modelo.DTO.CiudadDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.CiudadGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioDTO;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import co.edu.uniquindio.proyecto.Repositorios.CiudadRepository;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.CiudadServicio;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,16 @@ public class CiudadServicioImpl implements CiudadServicio {
         if (ciudadDTO.getNombre() != null && ciudadDTO.getNombre().length() > 50) {
             throw new Exception("El nombre de la ciudad no debe exceder los 50 caracteres.");
         }
-        return ciudadRepository.save(convertirDTOToEntity(ciudadDTO)).getCodigo();
+        Ciudad ciudadGuardar=ciudadRepository.save(convertirDTOToEntity(ciudadDTO));
+        ciudadGuardar.setEstadoObjeto(EstadoObjeto.ACTIVE);
+        return ciudadGuardar.getCodigo();
+    }
+
+    @Override
+    public CiudadGetDTO actualizarEstadoObjeto(int codigo, EstadoObjeto estado) throws Exception {
+        validarExistencia(codigo);
+        ciudadRepository.actualizarEstadoObjeto(codigo, estado);
+        return obtenerCiudad(codigo);
     }
 
     @Override
@@ -102,6 +112,7 @@ public class CiudadServicioImpl implements CiudadServicio {
         CiudadGetDTO nuevaCiudad=new CiudadGetDTO();
         nuevaCiudad.setNombre(ciudadConvertir.getNombre());
         nuevaCiudad.setCodigo(ciudadConvertir.getCodigo());
+        nuevaCiudad.setEstadoObjeto(ciudadConvertir.getEstadoObjeto());
         List<UsuarioDTO> usuariosDTOs = new ArrayList<>();
         if (ciudadConvertir.getUsuarios() != null) { // Verificar si la lista es nula
             for (Usuario usuariosRecorer : ciudadConvertir.getUsuarios()) {

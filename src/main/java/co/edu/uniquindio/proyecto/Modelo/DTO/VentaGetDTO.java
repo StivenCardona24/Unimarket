@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.Modelo.DTO;
 
 
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoVenta;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.MetodoPago;
 import lombok.AllArgsConstructor;
@@ -25,4 +26,5 @@ public  class VentaGetDTO {
     private int tajetaCompra;
     private int usuario;
     private List<DetalleVentaDTO> ventaProducto;
+    private EstadoObjeto estadoObjeto;
 }
