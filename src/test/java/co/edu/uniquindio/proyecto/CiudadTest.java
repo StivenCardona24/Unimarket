@@ -13,7 +13,7 @@ import org.springframework.test.context.jdbc.Sql;
 import java.util.List;
 
 @SpringBootTest
-@Transactional
+
 public class CiudadTest {
 
     @Autowired

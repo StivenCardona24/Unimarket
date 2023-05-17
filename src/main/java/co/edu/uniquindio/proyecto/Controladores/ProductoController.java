@@ -25,7 +25,6 @@ public class ProductoController {
     private final ProductoServicio productoServicio;
 
     @GetMapping
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<MensajeDTO> getAll(){
         return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false,
                 productoServicio.listarProductos()));
