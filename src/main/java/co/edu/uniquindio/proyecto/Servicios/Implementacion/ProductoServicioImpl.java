@@ -137,8 +137,8 @@ public class ProductoServicioImpl implements ProductoServicio {
         if(precioMin > precioMinEnviar){
             precioMinEnviar=precioMin;
         }
-        double precioMaxEnviar=0;
-        if(precioMin > precioMaxEnviar){
+        double precioMaxEnviar=999999999;
+        if(precioMax < precioMaxEnviar){
             precioMaxEnviar=precioMax;
         }
         List<Producto> productos= productoRepository.findProductoProductosCategoriaPrecioNombre(categoria,precioMinEnviar,precioMaxEnviar,nombre);
