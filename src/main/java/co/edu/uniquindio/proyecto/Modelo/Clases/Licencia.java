@@ -1,4 +1,5 @@
 package co.edu.uniquindio.proyecto.Modelo.Clases;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -40,4 +41,8 @@ public class Licencia implements Serializable{
     @OneToMany(mappedBy="licencia")
     @ToString.Exclude
     private List<Usuario> usuarios;
+
+   /* @NotNull
+    @Enumerated(EnumType.STRING)
+    private EstadoObjeto estadoObjeto;*/
 }

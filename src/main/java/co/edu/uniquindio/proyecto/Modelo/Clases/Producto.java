@@ -43,7 +43,6 @@ public class Producto implements Serializable{
     @NotNull
     @Enumerated(EnumType.STRING)
     private EstadoProducto estado;
-
     @Column(nullable = false)
     private LocalDate fechaLimite;
 

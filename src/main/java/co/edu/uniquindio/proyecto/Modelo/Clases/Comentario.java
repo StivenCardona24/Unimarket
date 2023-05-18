@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.Modelo.Clases;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Producto;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -29,6 +30,8 @@ public class Comentario implements Serializable{
     private Producto producto;
     @ManyToOne
     private Usuario usuario;
-
+  /*  @NotNull
+    @Enumerated(EnumType.STRING)
+    private EstadoObjeto estadoObjeto;*/
 
 }
