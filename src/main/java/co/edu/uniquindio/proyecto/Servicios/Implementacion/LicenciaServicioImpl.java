@@ -3,7 +3,6 @@ package co.edu.uniquindio.proyecto.Servicios.Implementacion;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Licencia;
 import co.edu.uniquindio.proyecto.Modelo.DTO.LicenciaDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.LicenciaGetDTO;
-import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import co.edu.uniquindio.proyecto.Repositorios.LicenciaRepository;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.LicenciaServicio;
 import lombok.AllArgsConstructor;
@@ -37,25 +36,25 @@ public class LicenciaServicioImpl implements LicenciaServicio {
 
     @Override
     public int crearLicencia(LicenciaDTO licenciaDTO)  throws Exception{
+
         Optional<Licencia> buscadoNombre = licenciaRepository.findLicenciasByNombre(licenciaDTO.getNombre().toLowerCase());
+
         if(buscadoNombre.isPresent()){
             throw new Exception("Ya existe una licencia con ese nombre o similar");
         }
+
         Optional<Licencia> buscadoDiasPrioridad = licenciaRepository.findByDiasActivoProductoAndPrioridad(licenciaDTO.getDiasActivoProducto(), licenciaDTO.getPrioridad());
+
         if(buscadoDiasPrioridad.isPresent()){
             throw new Exception("Ya existe una licencia similar, (dias, prioridad)");
         }
-        Licencia nueva = convertir(licenciaDTO);
-        /*nueva.setEstadoObjeto(EstadoObjeto.ACTIVE);*/
-        Licencia registro = licenciaRepository.save(nueva);
-        return  registro.getCodigo();
-    }
 
-    @Override
-    public LicenciaGetDTO actualizarEstadoObjeto(int codigo, EstadoObjeto estado) throws Exception {
-        validarExiste(codigo);
-        licenciaRepository.actualizarEstadoObjeto(codigo,estado);
-        return obtenerLicencia(codigo);
+        Licencia nueva = convertir(licenciaDTO);
+
+        Licencia registro = licenciaRepository.save(nueva);
+
+        return  registro.getCodigo();
+
     }
 
 
@@ -110,7 +109,6 @@ public class LicenciaServicioImpl implements LicenciaServicio {
                 licencia.getPrecio(),
                 licencia.getDiasActivoProducto(),
                 licencia.getPrioridad()
-                //licencia.getEstadoObjeto()
         );
 
 

@@ -3,22 +3,26 @@ values
 
 --codigo,nombre
 
-(1,"ACTIVE", 'Bogota'),
-(2,"ACTIVE",  'Medellin'),
-(3,"ACTIVE",  'Cali'),
-(4,"ACTIVE",  'Barranquilla'),
-(5,"ACTIVE",  'Cartagena');
+(1, 'Bogota'),
+(2, 'Medellin'),
+(3, 'Cali'),
+(4, 'Barranquilla'),
+(5, 'Cartagena');
+
+
+
+
 
 insert into licencia
 values
 
 --codigo,dias_activo_producto,nombre,prioridad
 
-(1, 30, "ACTIVE",'Licencia Básica', 5000.0, 3),
-(2, 90, "ACTIVE", 'Licencia Estándar', 3080000.00, 3),
-(3, 365, "ACTIVE", 'Licencia Premium', 200000.00, 10),
-(4, 7, "ACTIVE",'Licencia de Prueba', 0.0, 4),
-(5, 180, "ACTIVE",'Licencia Avanzada', 100000.00, 7);
+(1, 30, 'Licencia Básica', 5000.0, 3),
+(2, 90, 'Licencia Estándar', 3080000.00, 3),
+(3, 365, 'Licencia Premium', 200000.00, 10),
+(4, 7, 'Licencia de Prueba', 0.0, 4),
+(5, 180, 'Licencia Avanzada', 100000.00, 7);
 
 insert into usuario
 values
@@ -70,11 +74,11 @@ INSERT INTO venta
 VALUES
 
     -- (codigo,estado, fecha_compra, metodo_pago, total_compra, tajeta_compra_codigo)
-    (1,'CARRITO', "ACTIVE",  '2023-03-01', 'EFECTIVO',  50000, 1,1),
-    (2,'ENTREGADO',"ACTIVE", '2023-03-02', 'DAVIPLATA', 75000, 2,2),
-    (6,'CARRITO', "ACTIVE",  '2023-03-04', 'TARJETA', 125000,4,3),
-    (4,'ENTREGADO',"ACTIVE",   '2023-03-04', 'TARJETA', 125000,3,4),
-    (5,'CARRITO', "ACTIVE",    '2023-03-05', 'EFECTIVO',150000,5,1);
+    (1,'CARRITO',   '2023-03-01', 'EFECTIVO',  50000, 1,1),
+    (2,'ENTREGADO', '2023-03-02', 'DAVIPLATA', 75000, 2,2),
+    (6,'CARRITO',   '2023-03-04', 'TARJETA', 125000,4,3),
+    (4,'ENTREGADO',   '2023-03-04', 'TARJETA', 125000,3,4),
+    (5,'CARRITO',     '2023-03-05', 'EFECTIVO',150000,5,1);
 
 
 
@@ -108,11 +112,11 @@ values
 
 --codigo,comnetario,fecha,producto_codigo,usuario_codigo
 
-(1, 'Me encantó este producto, definitivamente lo recomiendo.',"ACTIVE", "2022-03-01", 1, 1),
-(2, 'No me gustó la calidad de este producto, esperaba algo mejor.',"ACTIVE", '2022-03-05', 2, 2),
-(3, 'Excelente servicio al cliente, me ayudaron con todas mis dudas.',"ACTIVE", '2022-03-10', 3, 3),
-(4, 'El envío tardó más de lo esperado, pero el producto en sí es bueno.',"ACTIVE", '2022-03-15', 4, 4),
-(5, 'Este producto superó mis expectativas, definitivamente lo volvería a comprar.',"ACTIVE", '2022-03-20', 5, 5);
+(1, "Me encantó este producto, definitivamente lo recomiendo.", "2022-03-01", 1, 1),
+(2, 'No me gustó la calidad de este producto, esperaba algo mejor.', '2022-03-05', 2, 2),
+(3, 'Excelente servicio al cliente, me ayudaron con todas mis dudas.', '2022-03-10', 3, 3),
+(4, 'El envío tardó más de lo esperado, pero el producto en sí es bueno.', '2022-03-15', 4, 4),
+(5, 'Este producto superó mis expectativas, definitivamente lo volvería a comprar.', '2022-03-20', 5, 5);
 
 
 

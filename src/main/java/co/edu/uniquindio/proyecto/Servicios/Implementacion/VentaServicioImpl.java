@@ -3,7 +3,6 @@ package co.edu.uniquindio.proyecto.Servicios.Implementacion;
 import co.edu.uniquindio.proyecto.Modelo.Clases.DetalleVenta;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Venta;
 import co.edu.uniquindio.proyecto.Modelo.DTO.*;
-import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoVenta;
 import co.edu.uniquindio.proyecto.Repositorios.TarjetaRepository;
 import co.edu.uniquindio.proyecto.Repositorios.UsuarioRepository;
@@ -36,22 +35,20 @@ public class VentaServicioImpl implements VentaServicio {
     @Override
 
     public int crearVenta(VentaDTO ventaDTO) throws Exception{
+
         Venta nuevo = convertir(ventaDTO);
-        nuevo.setEstadoObjeto(EstadoObjeto.ACTIVE);
+
         Venta registro = ventaRepository.save(nuevo);
 
         emailServicio.enviarEmail(new EmailDTO("Compra", "Se realizo una compra del usuario " +ventaDTO.getUsuario() , "ruisito124@gmail.com"));
 
 
+
+
+
+
         return registro.getCodigo();
 
-    }
-
-    @Override
-    public VentaGetDTO actualizarEstadoObjeto(int codigo, EstadoObjeto estado) throws Exception {
-        validarExiste(codigo);
-        ventaRepository.actualizarEstadoObjeto(codigo,estado);
-        return obtenerVenta(codigo);
     }
 
     @Override
@@ -113,21 +110,30 @@ public class VentaServicioImpl implements VentaServicio {
         venta.setUsuario(usuarioRepository.findById(ventaDTO.getUsuario()).get());
       //  venta.setTajetaCompra(tarjetaRepository.findById(ventaDTO.getTajetaCompra()).get());
         venta.setFechaCompra(ventaDTO.getFechaCompra());
-        venta.setEstadoObjeto(EstadoObjeto.ACTIVE);
         return venta;
     }
 
     private VentaGetDTO convertirDTO(Venta venta)  throws Exception {
+
+
+
+
         List<DetalleVentaDTO> detalleVntaDTOs = new ArrayList<>();
         if (venta.getDetalleVentas() != null) { // Verificar si la lista es nula
             for (DetalleVenta ventaDTO1 : venta.getDetalleVentas()) {
+
                 DetalleVentaDTO detalle = new DetalleVentaDTO();
                 detalle.setIdVenta(ventaDTO1.getVenta().getCodigo());
                 detalle.setUnidades(ventaDTO1.getUnidades());
                 detalle.setIdProducto(ventaDTO1.getProducto().getCodigo());
+
                 detalleVntaDTOs.add(detalle);
+
+
+
             }
         }
+
         System.out.println(venta.getCodigo());
         VentaGetDTO ventaDTO = new VentaGetDTO(
                 venta.getCodigo(),
@@ -136,9 +142,11 @@ public class VentaServicioImpl implements VentaServicio {
                 venta.getEstado(),
                 venta.getMetodoPago(),
                 venta.getTajetaCompra().getCodigo(),
-                venta.getUsuario().getCodigo(),detalleVntaDTOs,
-                venta.getEstadoObjeto()
+                venta.getUsuario().getCodigo(),detalleVntaDTOs
                  );
+
+
+
         return ventaDTO;
     }
 

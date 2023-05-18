@@ -36,11 +36,6 @@ public class ProductoController {
                 productoServicio.obtenerProducto(codigo)));
     }
 
-    @GetMapping("/{estado}/precioMin/{precioMin}/precioMax/{precioMax}/nombre/{nombre}")
-    public ResponseEntity<MensajeDTO> findProductoProductosCategoriaPrecioNombre(@PathVariable Categoria categoria,@PathVariable double precioMin,@PathVariable double precioMax,@PathVariable String nombre) throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false,
-                productoServicio.findProductoProductosCategoriaPrecioNombre(categoria,precioMin,precioMax,nombre)));
-    }
     @PostMapping
     public ResponseEntity<MensajeDTO> create(@Valid @RequestBody ProductoDTO producto) throws Exception {
         productoServicio.crearProducto(producto);

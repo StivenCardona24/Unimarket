@@ -2,8 +2,6 @@ package co.edu.uniquindio.proyecto.Repositorios;
 
 import co.edu.uniquindio.proyecto.Modelo.Clases.Venta;
 
-import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
-import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoProducto;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoVenta;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.UsuarioServicio;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,10 +18,8 @@ import java.util.List;
 public interface VentaRepository extends JpaRepository<Venta,Integer> {
     @Query("SELECT c FROM Venta c WHERE c.usuario.codigo = :idUsuario")
     List<Venta> findByUsuarioIdUsuario(int idUsuario);
-    @Transactional
-    @Modifying
-    @Query("UPDATE Venta v  SET v.estadoObjeto = :estado WHERE v.codigo = :codigo")
-    void actualizarEstadoObjeto(int codigo, EstadoObjeto estado);
+
+
     @Transactional
     @Modifying
     @Query("UPDATE Venta v SET v.estado = :estado WHERE v.codigo = :codigo")

@@ -21,8 +21,6 @@ public interface ProductoServicio {
 
     ProductoGetDTO obtenerProducto(int codigo) throws Exception;
 
-    List<Producto> findProductoProductosCategoriaPrecioNombre(Categoria categoria,double precioMin,double precioMax, String nombre) throws Exception;
-
     List<ProductoGetDTO> listarProductosUsuario(int codigoUsuario) throws Exception;
 
     List<ProductoGetDTO> listarProductosCategoria(Categoria categoria);
