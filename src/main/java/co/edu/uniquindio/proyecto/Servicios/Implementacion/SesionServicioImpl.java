@@ -26,7 +26,7 @@ public class SesionServicioImpl implements SesionServicio {
                         sesionDTO.getPassword())
 
         );
-        UserDetails user = (UserDetailsImpl) authentication.getPrincipal();
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
         String jwtToken = jwtService.generateToken(user);
         return new TokenDTO(jwtToken);
     }

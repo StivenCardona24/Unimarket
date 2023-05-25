@@ -45,8 +45,8 @@ public class LicenciaServicioImpl implements LicenciaServicio {
         if(buscadoDiasPrioridad.isPresent()){
             throw new Exception("Ya existe una licencia similar, (dias, prioridad)");
         }
+        licenciaDTO.setEstadoObjeto(EstadoObjeto.ACTIVE);
         Licencia nueva = convertir(licenciaDTO);
-        nueva.setEstadoObjeto(EstadoObjeto.ACTIVE);
         Licencia registro = licenciaRepository.save(nueva);
         return  registro.getCodigo();
     }
@@ -98,6 +98,7 @@ public class LicenciaServicioImpl implements LicenciaServicio {
         licencia.setPrecio(licenciaDTO.getPrecio());
         licencia.setDiasActivoProducto(licenciaDTO.getDiasActivoProducto());
         licencia.setPrioridad(licenciaDTO.getPrioridad());
+        licencia.setEstadoObjeto(licenciaDTO.getEstadoObjeto());
 
         return licencia;
     }

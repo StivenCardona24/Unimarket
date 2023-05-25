@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto;
 
 import co.edu.uniquindio.proyecto.Modelo.DTO.CiudadDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.CiudadGetDTO;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.CiudadServicio;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
@@ -41,6 +42,7 @@ public class CiudadTest {
     public void crearCiudad() throws Exception {
         CiudadDTO ciudadDTO =new CiudadDTO();
         ciudadDTO.setNombre("Armenia");
+        ciudadDTO.setEstadoObjeto(EstadoObjeto.ACTIVE);
         int codigoCiudadCreada=ciudadServicio.crearCiudad(ciudadDTO);
         Assertions.assertEquals( "Armenia" , ciudadServicio.obtenerCiudad(codigoCiudadCreada).getNombre());
         Assertions.assertNotNull( codigoCiudadCreada);
