@@ -22,24 +22,21 @@ public interface VentaRepository extends JpaRepository<Venta,Integer> {
     List<Venta> findByUsuarioIdUsuario(int idUsuario);
     @Transactional
     @Modifying
-    @Query("UPDATE Venta v  SET v.estadoObjeto = :estado WHERE v.codigo = :codigo")
+    @Query("UPDATE Venta v  SET v.estadoObjeto = :estado WHERE v.codigo = :codigo and v.estadoObjeto='ACTIVE'")
     void actualizarEstadoObjeto(int codigo, EstadoObjeto estado);
     @Transactional
     @Modifying
-    @Query("UPDATE Venta v SET v.estado = :estado WHERE v.codigo = :codigo")
+    @Query("UPDATE Venta v SET v.estado = :estado WHERE v.codigo = :codigo and v.estadoObjeto='ACTIVE'")
     void actualizarEstado( int codigo, EstadoVenta estado);
 
     @Transactional
     @Modifying
-    @Query("UPDATE Venta v SET v.totalCompra = :total WHERE v.codigo = :codigo")
+    @Query("UPDATE Venta v SET v.totalCompra = :total WHERE v.codigo = :codigo and v.estadoObjeto='ACTIVE'")
     void actualizarTotal(@Param("codigo") int codigo, @Param("total") double total);
 
     @Transactional
     @Modifying
-    @Query("UPDATE Venta v SET v.fechaCompra = :fecha WHERE v.codigo = :codigo")
+    @Query("UPDATE Venta v SET v.fechaCompra = :fecha WHERE v.codigo = :codigo and v.estadoObjeto='ACTIVE'")
     void actualizarFecha(@Param("codigo") int codigo, @Param("fecha") LocalDate fecha);
-
-
-
 
 }

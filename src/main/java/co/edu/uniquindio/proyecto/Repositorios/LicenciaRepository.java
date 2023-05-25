@@ -18,16 +18,16 @@ public interface LicenciaRepository extends JpaRepository<Licencia,Integer> {
     @Modifying
     @Query("UPDATE Licencia l  SET l.estadoObjeto = :estado WHERE l.codigo = :codigo")
     void actualizarEstadoObjeto(int codigo, EstadoObjeto estado);
-    @Query("SELECT l FROM Licencia l WHERE LOWER(l.nombre) LIKE concat ( '%', :nombre, '%' )")
+    @Query("SELECT l FROM Licencia l WHERE LOWER(l.nombre) LIKE concat ( '%', :nombre, '%' ) and l.estadoObjeto='ACTIVE'")
     Optional<Licencia> findLicenciasByNombre(String nombre);
 
     Optional<Licencia> findByDiasActivoProductoAndPrioridad(int diasActivoProductom, int prioridad);
 
 
-    @Query("SELECT l FROM Licencia l WHERE l.usuarios IS NOT EMPTY")
+    @Query("SELECT l FROM Licencia l WHERE l.usuarios IS NOT EMPTY and l.estadoObjeto='ACTIVE'")
     List<Licencia> findLicenciasWithUsuarios();
 
-    @Query("SELECT l FROM Licencia l WHERE l.usuarios IS EMPTY")
+    @Query("SELECT l FROM Licencia l WHERE l.usuarios IS EMPTY and l.estadoObjeto='ACTIVE'")
     List<Licencia> findLicenciasWithoutUsuarios();
 
 }
