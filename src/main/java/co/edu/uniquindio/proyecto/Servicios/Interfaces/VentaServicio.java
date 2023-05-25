@@ -26,4 +26,6 @@ public interface VentaServicio {
 
     VentaGetDTO actualizarEstado(int codigo, EstadoVenta estado) throws Exception;
 
+    Double ventasMesAnio(int mes, int anio) throws Exception;
+
 }

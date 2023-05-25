@@ -105,6 +105,23 @@ public class ProductoController {
                 productoServicio.listarProductosPrecio(precioMin, precioMax) ) );
     }
 
+    @GetMapping("/productoPrecioMenor/{categoria}")
+    public ResponseEntity<MensajeDTO> getProductoPrecioMenor(@PathVariable Categoria categoria) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false,
+                productoServicio.productoPrecioMenor(categoria) ) );
+    }
+
+    @GetMapping("/productoPrecioMayor/{categoria}")
+    public ResponseEntity<MensajeDTO> getProductoPrecioMayor(@PathVariable Categoria categoria) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false,
+                productoServicio.productoPrecioMayor(categoria) ) );
+    }
+
+    @GetMapping("/productosInCategoria")
+    public ResponseEntity<MensajeDTO> getProductosInCategoria() throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false,
+                productoServicio.productosInCategoria()) );
+    }
 
 
 

@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -49,7 +50,10 @@ public class VentaController {
     public  ResponseEntity<MensajeDTO> actualizarEstado(@PathVariable int codigo, @PathVariable EstadoVenta estado) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, ventaServicio.actualizarEstado(codigo, estado)));
     }
-
+    @GetMapping("/findTotalMesAnio/{mes}/{anio}")
+    public ResponseEntity<MensajeDTO> getfindTotalMesAnio(@PathVariable int mes,@PathVariable int anio) throws Exception{
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, ventaServicio.ventasMesAnio(mes,anio)));
+    }
 
 
 }

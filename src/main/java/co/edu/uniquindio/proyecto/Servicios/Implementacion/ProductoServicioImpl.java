@@ -41,6 +41,22 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
+    public Producto productoPrecioMayor(Categoria categoria) {
+        return productoRepository.productoPrecioMayor(categoria);
+    }
+
+    @Override
+    public Producto productoPrecioMenor(Categoria categoria) {
+        return productoRepository.productoPrecioMenor(categoria);
+    }
+
+    @Override
+    public List<Categoria> productosInCategoria() {
+        return productoRepository.productosInCategoria();
+    }
+
+
+    @Override
     public int crearProducto(ProductoDTO productoDTO) throws Exception {
 
         Usuario vendedor = usuarioRepository.findUsuariosByCodigo(productoDTO.getVendedor());

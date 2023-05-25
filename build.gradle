@@ -32,13 +32,13 @@ dependencies {
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
-
+    runtimeOnly 'org.postgresql:postgresql'
     implementation 'com.nimbusds:nimbus-jose-jwt:9.31'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'com.cloudinary:cloudinary-http44:1.33.0'
 }
 
-test {
-    useJUnitPlatform()
-}
+//test {
+ //   useJUnitPlatform()
+//}
 

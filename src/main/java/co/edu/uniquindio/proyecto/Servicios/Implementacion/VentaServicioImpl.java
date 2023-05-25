@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -98,6 +99,14 @@ public class VentaServicioImpl implements VentaServicio {
 
 
         return obtenerVenta(codigo);
+    }
+
+    @Override
+    public Double ventasMesAnio(int mes, int anio) throws Exception {
+        Date inicio = new Date(anio, mes, 1, 1, 0);
+        Date fin = new Date(anio, (mes+1), 1, 1, 0);
+        Double cantidadTotal = ventaRepository.findTotalMesAnio(inicio,fin);
+        return cantidadTotal;
     }
 
     private Venta convertir(VentaDTO ventaDTO) {

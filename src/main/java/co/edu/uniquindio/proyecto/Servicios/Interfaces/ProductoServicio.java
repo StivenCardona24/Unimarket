@@ -34,4 +34,8 @@ public interface ProductoServicio {
     List<ProductoGetDTO> listarProductosPrecio(double precioMin, double precioMax);
 
     List<ProductoGetDTO> listarProductos();
+
+    Producto productoPrecioMayor(Categoria categoria);
+    Producto productoPrecioMenor(Categoria categoria);
+    List<Categoria> productosInCategoria();
 }

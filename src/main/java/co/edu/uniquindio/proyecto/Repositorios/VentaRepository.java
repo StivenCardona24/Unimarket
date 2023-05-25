@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -35,6 +36,8 @@ public interface VentaRepository extends JpaRepository<Venta,Integer> {
     @Query("UPDATE Venta v SET v.fechaCompra = :fecha WHERE v.codigo = :codigo")
     void actualizarFecha(@Param("codigo") int codigo, @Param("fecha") LocalDate fecha);
 
+    @Query("SELECT SUM(v.totalCompra) AS TOTALVENTA FROM Venta v WHERE v.fechaCompra >=:fecha and v.fechaCompra< :fechaFin")
+    double findTotalMesAnio(Date fecha, Date fechaFin);
 
 
 

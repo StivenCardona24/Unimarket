@@ -56,6 +56,14 @@ public interface ProductoRepository extends JpaRepository<Producto,Integer> {
     @Query("SELECT p FROM Producto p JOIN p.favoritoUsuarios u WHERE u.codigo = :codigo order by p.prioridad desc")
     List<Producto> findProductoByFavoritoUsuarios(int codigo);
 
+    @Query("SELECT min(p.precioUnitario)  FROM Producto p Where p.categorias =: categoria")
+    Producto productoPrecioMenor(Categoria categoria);
+
+    @Query("SELECT max (p.precioUnitario) FROM Producto p Where p.categorias =: categoria")
+    Producto productoPrecioMayor(Categoria categoria);
+
+    @Query("select c, count(p.codigo) as cantidadProductos FROM Producto p left join p.categorias c group by c")
+    List<Categoria> productosInCategoria();
 
 
 
