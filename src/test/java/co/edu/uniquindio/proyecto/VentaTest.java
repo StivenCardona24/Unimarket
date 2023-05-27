@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Venta;
 import co.edu.uniquindio.proyecto.Modelo.DTO.*;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioGetDTO;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoProducto;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoVenta;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.MetodoPago;
@@ -35,7 +36,8 @@ public class VentaTest {
                     MetodoPago.EFECTIVO,
                     7998273,
                     1,
-                    LocalDate.of(2023, 4, 17));
+                    LocalDate.of(2023, 4, 17),
+                    EstadoObjeto.ACTIVE);
 
 
 
