@@ -10,6 +10,5 @@ import lombok.ToString;
 public enum EstadoObjeto {
     //Estados que indicaran en el objeto si es visible o no o para eliminar
     ACTIVE,
-    INACTIVE,
-    ACTIVO
+    INACTIVE
 }
