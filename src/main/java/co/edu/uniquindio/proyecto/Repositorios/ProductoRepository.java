@@ -23,6 +23,9 @@ public interface ProductoRepository extends JpaRepository<Producto,Integer> {
     @Query("SELECT p FROM Producto p join p.categorias c WHERE c = :categoria AND p.disponible = true order by p.prioridad desc")
     List<Producto> findProductoByCategoriasAndDisponible(Categoria categoria);
 
+    @Query("SELECT p FROM Producto p join p.categorias c WHERE p.disponible = true " +
+            "and p.precioUnitario BETWEEN :precioMin AND :precioMax  and  c = :categoria and p.nombre like concat('%', :nombre, '%')  order by p.prioridad desc")
+    List<Producto> findProductoProductosCategoriaPrecioNombre(Categoria categoria,double precioMin,double precioMax, String nombre);
     @Query("SELECT p FROM Producto p WHERE p.estado = :estado AND p.disponible = true order by p.prioridad desc")
     List<Producto> findProductoByEstado(EstadoProducto estado);
 
@@ -35,7 +38,7 @@ public interface ProductoRepository extends JpaRepository<Producto,Integer> {
     @Query("SELECT p FROM Producto p WHERE p.usuarioPropietario.codigo = :codigo AND p.disponible = true order by p.prioridad desc")
     List<Producto> listarProductosPropietario(int codigo);
 
-    @Query("SELECT p FROM Producto p WHERE  p.nombre = :nombre AND p.usuarioPropietario.codigo = :vendedor AND p.disponible = true order by p.prioridad desc")
+    @Query("SELECT p FROM Producto p JOIN Usuario u WHERE  p.nombre = :nombre AND u.codigo = :vendedor AND p.disponible = true order by p.prioridad desc")
     Optional<Producto> buscarProductoPorNombreYVendedor(String nombre, int vendedor);
 
     @Transactional

@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
 import co.edu.uniquindio.proyecto.Modelo.DTO.CiudadDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.CiudadGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioDTO;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import co.edu.uniquindio.proyecto.Repositorios.CiudadRepository;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.CiudadServicio;
 import lombok.AllArgsConstructor;
@@ -111,6 +112,7 @@ public class CiudadServicioImpl implements CiudadServicio {
         CiudadGetDTO nuevaCiudad=new CiudadGetDTO();
         nuevaCiudad.setNombre(ciudadConvertir.getNombre());
         nuevaCiudad.setCodigo(ciudadConvertir.getCodigo());
+        nuevaCiudad.setEstadoObjeto(ciudadConvertir.getEstadoObjeto());
         List<UsuarioDTO> usuariosDTOs = new ArrayList<>();
         if (ciudadConvertir.getUsuarios() != null) { // Verificar si la lista es nula
             for (Usuario usuariosRecorer : ciudadConvertir.getUsuarios()) {

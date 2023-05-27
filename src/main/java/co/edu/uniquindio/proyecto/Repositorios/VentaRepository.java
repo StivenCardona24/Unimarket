@@ -2,6 +2,8 @@ package co.edu.uniquindio.proyecto.Repositorios;
 
 import co.edu.uniquindio.proyecto.Modelo.Clases.Venta;
 
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoProducto;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoVenta;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.UsuarioServicio;
 import org.springframework.data.jpa.repository.JpaRepository;

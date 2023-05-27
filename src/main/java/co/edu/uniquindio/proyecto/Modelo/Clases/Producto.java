@@ -53,7 +53,6 @@ public class Producto implements Serializable{
     private int prioridad;
 
     private  boolean disponible;
-
     @ElementCollection
     @NotNull
     private Map<String,String> imagenes;

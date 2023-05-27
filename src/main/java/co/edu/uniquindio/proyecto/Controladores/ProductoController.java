@@ -15,7 +15,6 @@ import lombok.AllArgsConstructor;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("api/productos")
 @AllArgsConstructor
@@ -25,9 +24,8 @@ public class ProductoController {
     private final ProductoServicio productoServicio;
 
     @GetMapping
-    public ResponseEntity<MensajeDTO> getAll(){
-        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false,
-                productoServicio.listarProductos()));
+    public List<ProductoGetDTO> getAll(){
+        return productoServicio.listarProductos();
     }
 
     @GetMapping("/{codigo}")
@@ -36,10 +34,15 @@ public class ProductoController {
                 productoServicio.obtenerProducto(codigo)));
     }
 
+    @GetMapping("/{estado}/precioMin/{precioMin}/precioMax/{precioMax}/nombre/{nombre}")
+    public ResponseEntity<MensajeDTO> findProductoProductosCategoriaPrecioNombre(@PathVariable Categoria categoria,@PathVariable double precioMin,@PathVariable double precioMax,@PathVariable String nombre) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false,
+                productoServicio.findProductoProductosCategoriaPrecioNombre(categoria,precioMin,precioMax,nombre)));
+    }
     @PostMapping
     public ResponseEntity<MensajeDTO> create(@Valid @RequestBody ProductoDTO producto) throws Exception {
         productoServicio.crearProducto(producto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO(HttpStatus.CREATED, false, "producto creado correctamente"));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO(HttpStatus.CREATED, false, "Cliente creado correctamente"));
     }
 
     @PutMapping("/{codigo}")

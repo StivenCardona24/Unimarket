@@ -23,10 +23,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.cors();
-
-        http.authorizeHttpRequests().anyRequest().permitAll();
-
-     /*   http.authorizeHttpRequests()
+        http.authorizeHttpRequests()
         .requestMatchers("/api/auth/**").permitAll();
         http.authorizeHttpRequests()
                 .requestMatchers(HttpMethod.DELETE,"/usuario/**").hasRole("MODERADOR");
@@ -34,11 +31,11 @@ public class WebSecurityConfig {
           //      .requestMatchers("/productos/favorito/**").hasRole("CLIENTE");
         http.authorizeHttpRequests()
         .requestMatchers(HttpMethod.GET, "/api/productos/**").permitAll().anyRequest().authenticated();
-*/
-        /*http.exceptionHandling().authenticationEntryPoint(jwtEntryPoint);
+
+        http.exceptionHandling().authenticationEntryPoint(jwtEntryPoint);
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authenticationProvider(authenticationProvider);
-        http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);*/
+        http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 }

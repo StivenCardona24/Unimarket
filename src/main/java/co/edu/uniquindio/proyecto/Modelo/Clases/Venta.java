@@ -1,4 +1,5 @@
 package co.edu.uniquindio.proyecto.Modelo.Clases;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoVenta;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.MetodoPago;
 import jakarta.persistence.*;
@@ -35,10 +36,11 @@ public class Venta implements Serializable{
     @OneToMany(mappedBy="venta")
     @ToString.Exclude
     private List<DetalleVenta> detalleVentas;
-
     @ManyToOne
     private Tarjeta tajetaCompra;
-
     @ManyToOne
     private Usuario usuario;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private EstadoObjeto estadoObjeto;
 }
