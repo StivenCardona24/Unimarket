@@ -35,6 +35,7 @@ public class ComentarioServicioImpl implements ComentarioServicio {
         if (!usuarioRepository.existsById(comentarioDTO.getIdUsuario())) {
             throw new Exception("El Usuario no existe");
         }
+        comentarioDTO.setEstadoObjeto(EstadoObjeto.ACTIVE);
         Comentario comentarioGuardar=convertirDTOToAnEntity(comentarioDTO);
         Producto productoAsociado=productoRepository.findById(comentarioDTO.getIdProducto()).get();
 
@@ -144,6 +145,7 @@ public class ComentarioServicioImpl implements ComentarioServicio {
     public Comentario convertirDTOToAnEntity (ComentarioDTO comentarioConvertir) throws Exception{
         Comentario nuevoComentario= new Comentario();
         nuevoComentario.setComentario(comentarioConvertir.getComentario());
+        nuevoComentario.setEstadoObjeto(comentarioConvertir.getEstadoObjeto());
         nuevoComentario.setUsuario(usuarioRepository.findById(comentarioConvertir.getIdUsuario()).get());
         nuevoComentario.setProducto(productoRepository.findById(comentarioConvertir.getIdProducto()).get());
         return nuevoComentario;
