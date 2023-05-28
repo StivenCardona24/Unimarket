@@ -23,7 +23,7 @@ public class TipoTarjetaController {
         return ResponseEntity.ok(entidades);
     }
 
-    @GetMapping("/estados")
+    @GetMapping
     public ResponseEntity<List<String>> obtenerEstados() {
         List<String> estados = Arrays.stream(TipoTarjeta.values())
                 .map(Enum::name)

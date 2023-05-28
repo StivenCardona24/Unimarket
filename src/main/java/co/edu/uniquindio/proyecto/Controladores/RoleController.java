@@ -24,7 +24,7 @@ public class RoleController {
         return ResponseEntity.ok(entidades);
     }
 
-    @GetMapping("/estados")
+    @GetMapping
     public ResponseEntity<List<String>> obtenerEstados() {
         List<String> estados = Arrays.stream(Role.values())
                 .map(Enum::name)
