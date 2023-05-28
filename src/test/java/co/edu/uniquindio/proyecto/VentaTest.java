@@ -36,8 +36,8 @@ public class VentaTest {
                     MetodoPago.EFECTIVO,
                     7998273,
                     1,
-                    LocalDate.of(2023, 4, 17),
-                    EstadoObjeto.ACTIVE);
+                    LocalDate.of(2023, 4, 17)
+            );
 
 
 

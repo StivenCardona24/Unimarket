@@ -23,7 +23,7 @@ public class ComentarioTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void crearComentario() throws Exception{
-        ComentarioDTO nuevoComentario =new ComentarioDTO("prueba Comentario",1,1, EstadoObjeto.ACTIVE);
+        ComentarioDTO nuevoComentario =new ComentarioDTO("prueba Comentario",1,1);
         Integer comentarioCreado=comentarioServicio.crearComentario(nuevoComentario);
         Assertions.assertNotNull(comentarioCreado);
     }
@@ -81,7 +81,6 @@ public class ComentarioTest {
         nuevoComentario.setIdUsuario(getcomentario.getIdUsuario());
         nuevoComentario.setIdProducto(getcomentario.getIdProducto());
         nuevoComentario.setComentario("Texto nuevo practica");
-        nuevoComentario.setEstadoObjeto(EstadoObjeto.ACTIVE);
         Assertions.assertEquals("Texto nuevo practica",comentarioServicio.actualizarComentario(1,nuevoComentario).getComentario());
        }
     @Test

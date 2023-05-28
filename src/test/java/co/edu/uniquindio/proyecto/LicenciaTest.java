@@ -48,8 +48,7 @@ public class LicenciaTest {
                 "ORO ",
                 50000,
                 90,
-                5,
-                EstadoObjeto.ACTIVE
+                5
         ));
 
         System.out.println(licencia);
@@ -69,8 +68,8 @@ public class LicenciaTest {
                         "Licencia de Prueba",
                         0.0,
                         20,
-                        1,
-                        EstadoObjeto.ACTIVE
+                        1
+
                 )
         );
 

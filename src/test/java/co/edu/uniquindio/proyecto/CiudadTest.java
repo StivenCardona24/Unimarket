@@ -14,7 +14,7 @@ import org.springframework.test.context.jdbc.Sql;
 import java.util.List;
 
 @SpringBootTest
-@Transactional
+
 public class CiudadTest {
 
     @Autowired
@@ -42,7 +42,6 @@ public class CiudadTest {
     public void crearCiudad() throws Exception {
         CiudadDTO ciudadDTO =new CiudadDTO();
         ciudadDTO.setNombre("Armenia");
-        ciudadDTO.setEstadoObjeto(EstadoObjeto.ACTIVE);
         int codigoCiudadCreada=ciudadServicio.crearCiudad(ciudadDTO);
         Assertions.assertEquals( "Armenia" , ciudadServicio.obtenerCiudad(codigoCiudadCreada).getNombre());
         Assertions.assertNotNull( codigoCiudadCreada);

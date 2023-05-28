@@ -97,7 +97,7 @@ public class ProductoTest {
         );
 
         System.out.println(productoGetDTO.getCodigo() + productoGetDTO.getNombre());
-        Assertions.assertEquals(80000, productoGetDTO.getPrecioUnitario());
+        Assertions.assertEquals(80000, productoGetDTO.getPrecio());
 
     }
 
@@ -224,8 +224,8 @@ public class ProductoTest {
 
         System.out.println(productos.size());
         for (ProductoGetDTO p: productos) {
-            System.out.println( p.getNombre() + p.getPrecioUnitario());
-            Assertions.assertTrue(p.getPrecioUnitario() >= 200 && p.getPrecioUnitario() <= 800);
+            System.out.println( p.getNombre() + p.getPrecio());
+            Assertions.assertTrue(p.getPrecio() >= 200 && p.getPrecio() <= 800);
 
         }
     }
