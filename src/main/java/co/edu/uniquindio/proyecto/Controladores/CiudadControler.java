@@ -25,7 +25,7 @@ public class CiudadControler {
     public List<CiudadGetDTO> getAll() throws Exception {
         return ciudadServicio.obtenerCiudades();
     }
-    @DeleteMapping("/eliminar/{codigoCiudad}")
+    @PutMapping("/eliminar/{codigoCiudad}")
     public ResponseEntity<MensajeDTO> delete(@PathVariable int codigoCiudad) throws Exception {
         int num  = ciudadServicio.eliminarCiudad(codigoCiudad);
         return (ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false,

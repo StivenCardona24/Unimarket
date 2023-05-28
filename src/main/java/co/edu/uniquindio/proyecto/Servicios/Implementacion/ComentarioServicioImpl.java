@@ -45,13 +45,6 @@ public class ComentarioServicioImpl implements ComentarioServicio {
     }
 
     @Override
-    public ComentarioGetDTO actualizarEstadoObjeto(int codigo, EstadoObjeto estado) throws Exception {
-        validarExistencia(codigo);
-        comentarioRepository.actualizarEstadoObjeto(codigo, estado);
-        return obtenerComentario(codigo);
-    }
-
-    @Override
     public List<ComentarioGetDTO> listarComentariosProducto(int idProducto) throws Exception {
         List<ComentarioGetDTO> listComentariosDTO=new ArrayList<>();
         for(Comentario comentarioRecorer:comentarioRepository.findByProducto(idProducto)){
@@ -131,13 +124,17 @@ public class ComentarioServicioImpl implements ComentarioServicio {
     @Override
     public int eliminarComentario(int codigoComentario) throws Exception {
         validarExistencia(codigoComentario);
-        comentarioRepository.deleteById(codigoComentario);
+        comentarioRepository.actualizarEstadoObjeto(codigoComentario, EstadoObjeto.INACTIVE);
         return codigoComentario;
     }
     private void validarExistencia(int codigo) throws Exception {
         boolean existe = comentarioRepository.existsById(codigo);
+        boolean existe2 = comentarioRepository.findComentarioIdActivo(codigo);
         if (!existe) {
             throw new Exception("El código: " + codigo + " no está asociado a ningún comentario");
+        }
+        if (!existe2) {
+            throw new Exception("El código: " + codigo + " Se encuentra inactivo");
         }
     }
     public ComentarioGetDTO convertirEntityToAnDTO (Comentario comentarioConvertir) throws Exception{

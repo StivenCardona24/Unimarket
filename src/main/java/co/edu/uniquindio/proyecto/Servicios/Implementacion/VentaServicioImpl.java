@@ -46,13 +46,6 @@ public class VentaServicioImpl implements VentaServicio {
     }
 
     @Override
-    public VentaGetDTO actualizarEstadoObjeto(int codigo, EstadoObjeto estado) throws Exception {
-        validarExiste(codigo);
-        ventaRepository.actualizarEstadoObjeto(codigo,estado);
-        return obtenerVenta(codigo);
-    }
-
-    @Override
     public List<VentaGetDTO> listarVentaUsuarios(int codigoVenta) throws Exception {
         List<Venta> ventas  = ventaRepository.findByUsuarioIdUsuario(codigoVenta);
         List<VentaGetDTO> VentaGetDTO = new ArrayList<>();
@@ -101,6 +94,13 @@ public class VentaServicioImpl implements VentaServicio {
         return obtenerVenta(codigo);
     }
 
+    @Override
+    public int eliminarVenta(int codigoVenta) throws Exception {
+        validarExiste(codigoVenta);
+        ventaRepository.actualizarEstadoObjeto(codigoVenta,EstadoObjeto.INACTIVE);
+        return codigoVenta;
+    }
+
     private Venta convertir(VentaDTO ventaDTO) {
         Venta venta = new Venta();
         venta.setMetodoPago(ventaDTO.getMetodoPago());
@@ -139,9 +139,12 @@ public class VentaServicioImpl implements VentaServicio {
 
     private void validarExiste(int codigo) throws Exception {
         boolean existe = ventaRepository.existsById(Integer.valueOf(codigo));
-
+        boolean existe2 = ventaRepository.findVentaIdActivo(codigo);
         if (!existe) {
             throw new Exception("El código " + codigo + " no está asociado a ningúna venta");
+        }
+        if (!existe2) {
+            throw new Exception("El código " + codigo + " Se encuentra inactivo");
         }
 
     }

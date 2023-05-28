@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.Controladores;
 
 import co.edu.uniquindio.proyecto.Modelo.Clases.Venta;
 import co.edu.uniquindio.proyecto.Modelo.DTO.*;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoVenta;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.TarjetaServicio;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.UsuarioServicio;
@@ -50,6 +51,9 @@ public class VentaController {
         return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, ventaServicio.actualizarEstado(codigo, estado)));
     }
 
-
+    @PutMapping("/eliminarVenta/{codigo}")
+    public  ResponseEntity<MensajeDTO> actualizarEstadoObjeto(@PathVariable int codigo) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, ventaServicio.eliminarVenta(codigo)));
+    }
 
 }

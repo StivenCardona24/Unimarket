@@ -18,7 +18,7 @@ public interface VentaServicio {
 
 
     int crearVenta(VentaDTO ventaDTO) throws Exception;
-    VentaGetDTO actualizarEstadoObjeto(int codigo, EstadoObjeto estado) throws Exception ;
+
     List<VentaGetDTO> listarVentaUsuarios(int codigoVenta) throws Exception;
 
     VentaGetDTO obtenerVenta(int codigoVenta) throws Exception;
@@ -26,5 +26,5 @@ public interface VentaServicio {
     Venta obtener (int codigoVenta)throws Exception;
 
     VentaGetDTO actualizarEstado(int codigo, EstadoVenta estado) throws Exception;
-
+    int eliminarVenta(int codigoVenta) throws Exception;
 }
