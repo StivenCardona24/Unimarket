@@ -6,7 +6,6 @@ import co.edu.uniquindio.proyecto.Modelo.DTO.LicenciaGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.Categoria;
-import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.LicenciaServicio;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
@@ -69,7 +68,6 @@ public class LicenciaTest {
                         0.0,
                         20,
                         1
-
                 )
         );
 

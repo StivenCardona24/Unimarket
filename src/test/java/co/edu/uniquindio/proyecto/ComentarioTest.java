@@ -2,7 +2,6 @@ package co.edu.uniquindio.proyecto;
 
 import co.edu.uniquindio.proyecto.Modelo.DTO.ComentarioDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ComentarioGetDTO;
-import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.ComentarioServicio;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;

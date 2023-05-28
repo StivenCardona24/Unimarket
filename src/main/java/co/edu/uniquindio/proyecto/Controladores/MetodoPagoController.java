@@ -24,7 +24,7 @@ public class MetodoPagoController {
         return ResponseEntity.ok(entidades);
     }
 
-    @GetMapping("/estados")
+    @GetMapping
     public ResponseEntity<List<String>> obtenerEstados() {
         List<String> estados = Arrays.stream(MetodoPago.values())
                 .map(Enum::name)
