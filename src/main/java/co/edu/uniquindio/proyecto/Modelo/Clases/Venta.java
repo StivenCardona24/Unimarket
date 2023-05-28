@@ -40,7 +40,6 @@ public class Venta implements Serializable{
     private Tarjeta tajetaCompra;
     @ManyToOne
     private Usuario usuario;
-    @NotNull
     @Enumerated(EnumType.STRING)
     private EstadoObjeto estadoObjeto;
 }

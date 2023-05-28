@@ -6,6 +6,7 @@ import co.edu.uniquindio.proyecto.Modelo.DTO.LicenciaGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.Categoria;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.LicenciaServicio;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
@@ -47,7 +48,8 @@ public class LicenciaTest {
                 "ORO ",
                 50000,
                 90,
-                5
+                5,
+                EstadoObjeto.ACTIVE
         ));
 
         System.out.println(licencia);
@@ -67,7 +69,8 @@ public class LicenciaTest {
                         "Licencia de Prueba",
                         0.0,
                         20,
-                        1
+                        1,
+                        EstadoObjeto.ACTIVE
                 )
         );
 

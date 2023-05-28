@@ -23,7 +23,6 @@ public class Ciudad implements Serializable{
     @Column(length = 50,nullable = false)
     private String nombre;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     private EstadoObjeto estadoObjeto;
     @ToString.Exclude

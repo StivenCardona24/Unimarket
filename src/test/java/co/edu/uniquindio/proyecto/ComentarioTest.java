@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto;
 
 import co.edu.uniquindio.proyecto.Modelo.DTO.ComentarioDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ComentarioGetDTO;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.ComentarioServicio;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
@@ -22,7 +23,7 @@ public class ComentarioTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void crearComentario() throws Exception{
-        ComentarioDTO nuevoComentario =new ComentarioDTO("prueba Comentario",1,1);
+        ComentarioDTO nuevoComentario =new ComentarioDTO("prueba Comentario",1,1, EstadoObjeto.ACTIVE);
         Integer comentarioCreado=comentarioServicio.crearComentario(nuevoComentario);
         Assertions.assertNotNull(comentarioCreado);
     }
@@ -80,6 +81,7 @@ public class ComentarioTest {
         nuevoComentario.setIdUsuario(getcomentario.getIdUsuario());
         nuevoComentario.setIdProducto(getcomentario.getIdProducto());
         nuevoComentario.setComentario("Texto nuevo practica");
+        nuevoComentario.setEstadoObjeto(EstadoObjeto.ACTIVE);
         Assertions.assertEquals("Texto nuevo practica",comentarioServicio.actualizarComentario(1,nuevoComentario).getComentario());
        }
     @Test

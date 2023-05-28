@@ -42,7 +42,6 @@ public class Licencia implements Serializable{
     @ToString.Exclude
     private List<Usuario> usuarios;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     private EstadoObjeto estadoObjeto;
 }
