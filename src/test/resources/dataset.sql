@@ -12,7 +12,6 @@ values
 insert into licencia
 values
 
---codigo,dias_activo_producto,nombre,prioridad
 
 (1, 30, "ACTIVE",'Licencia Básica', 5000.0, 3),
 (2, 90, "ACTIVE", 'Licencia Estándar', 3080000.00, 3),

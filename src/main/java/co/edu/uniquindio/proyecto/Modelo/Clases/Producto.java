@@ -32,7 +32,7 @@ public class Producto implements Serializable{
     @Lob
     private String descripcion;
 
-    @Column(nullable = false)
+
     @Min(0)
     private int unidades;
 
