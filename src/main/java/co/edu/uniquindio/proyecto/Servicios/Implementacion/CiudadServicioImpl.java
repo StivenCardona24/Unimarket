@@ -25,8 +25,9 @@ public class CiudadServicioImpl implements CiudadServicio {
         if (ciudadDTO.getNombre() != null && ciudadDTO.getNombre().length() > 50) {
             throw new Exception("El nombre de la ciudad no debe exceder los 50 caracteres.");
         }
-        ciudadDTO.setEstadoObjeto(EstadoObjeto.ACTIVE);
-        Ciudad ciudadGuardar=ciudadRepository.save(convertirDTOToEntity(ciudadDTO));
+        Ciudad ciudadGuardarini=convertirDTOToEntity(ciudadDTO);
+        ciudadGuardarini.setEstadoObjeto(EstadoObjeto.ACTIVE);
+        Ciudad ciudadGuardar=ciudadRepository.save(ciudadGuardarini);
         return ciudadGuardar.getCodigo();
     }
 
@@ -112,7 +113,6 @@ public class CiudadServicioImpl implements CiudadServicio {
         CiudadGetDTO nuevaCiudad=new CiudadGetDTO();
         nuevaCiudad.setNombre(ciudadConvertir.getNombre());
         nuevaCiudad.setCodigo(ciudadConvertir.getCodigo());
-        nuevaCiudad.setEstadoObjeto(ciudadConvertir.getEstadoObjeto());
         List<UsuarioDTO> usuariosDTOs = new ArrayList<>();
         if (ciudadConvertir.getUsuarios() != null) { // Verificar si la lista es nula
             for (Usuario usuariosRecorer : ciudadConvertir.getUsuarios()) {
@@ -135,7 +135,6 @@ public class CiudadServicioImpl implements CiudadServicio {
     public Ciudad convertirDTOToEntity(CiudadDTO ciudadConvertir){
         Ciudad nuevaCiudad=new Ciudad();
         nuevaCiudad.setNombre(ciudadConvertir.getNombre());
-        nuevaCiudad.setEstadoObjeto(ciudadConvertir.getEstadoObjeto());
         return nuevaCiudad;
     }
 }

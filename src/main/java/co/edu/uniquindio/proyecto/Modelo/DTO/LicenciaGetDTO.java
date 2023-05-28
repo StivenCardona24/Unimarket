@@ -19,5 +19,4 @@ public class LicenciaGetDTO {
     private int diasActivoProducto;
 
     private int prioridad;
-    private EstadoObjeto estadoObjeto;
 }

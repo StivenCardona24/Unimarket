@@ -36,8 +36,8 @@ public class VentaServicioImpl implements VentaServicio {
     @Override
 
     public int crearVenta(VentaDTO ventaDTO) throws Exception{
-        ventaDTO.setEstadoObjeto(EstadoObjeto.ACTIVE);
         Venta nuevo = convertir(ventaDTO);
+        nuevo.setEstadoObjeto(EstadoObjeto.ACTIVE);
         Venta registro = ventaRepository.save(nuevo);
         emailServicio.enviarEmail(new EmailDTO("Compra", "Se realizo una compra del usuario " +ventaDTO.getUsuario() , "usuario1@example.com"));
 
@@ -102,9 +102,7 @@ public class VentaServicioImpl implements VentaServicio {
     }
 
     private Venta convertir(VentaDTO ventaDTO) {
-
         Venta venta = new Venta();
-        venta.setEstadoObjeto(ventaDTO.getEstadoObjeto());
         venta.setMetodoPago(ventaDTO.getMetodoPago());
         venta.setEstado(ventaDTO.getEstado());
         venta.setTotalCompra(ventaDTO.getTotalCompra());
@@ -133,8 +131,7 @@ public class VentaServicioImpl implements VentaServicio {
                 venta.getEstado(),
                 venta.getMetodoPago(),
                 venta.getTajetaCompra().getCodigo(),
-                venta.getUsuario().getCodigo(),detalleVntaDTOs,
-                venta.getEstadoObjeto()
+                venta.getUsuario().getCodigo(),detalleVntaDTOs
                  );
         return ventaDTO;
     }

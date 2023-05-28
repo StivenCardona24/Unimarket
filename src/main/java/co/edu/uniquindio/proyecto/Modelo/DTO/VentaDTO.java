@@ -25,5 +25,4 @@ public  class VentaDTO {
     private int usuario;
 
     private LocalDate fechaCompra;
-    private EstadoObjeto estadoObjeto;
 }
