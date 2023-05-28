@@ -23,6 +23,8 @@ public interface LicenciaRepository extends JpaRepository<Licencia,Integer> {
 
     Optional<Licencia> findByDiasActivoProductoAndPrioridad(int diasActivoProductom, int prioridad);
 
+    @Query("SELECT l FROM Licencia l WHERE l.codigo = :codigoLicencia and l.estadoObjeto='ACTIVE'")
+    boolean findLicenciaIdActivo(int codigoLicencia);
 
     @Query("SELECT l FROM Licencia l WHERE l.usuarios IS NOT EMPTY and l.estadoObjeto='ACTIVE'")
     List<Licencia> findLicenciasWithUsuarios();

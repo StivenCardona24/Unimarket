@@ -6,6 +6,7 @@ import co.edu.uniquindio.proyecto.Modelo.DTO.EmailDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioGetDTO;
+import co.edu.uniquindio.proyecto.Repositorios.LicenciaRepository;
 import co.edu.uniquindio.proyecto.Repositorios.UsuarioRepository;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.EmailServicio;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.UsuarioServicio;
@@ -30,6 +31,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     private final UsuarioRepository usuarioRepository;
     private  final EmailServicio emailServicio;
     private final PasswordEncoder passwordEncoder;
+    private final LicenciaRepository licenciaRepository;
+
 
     @Override
     public int crearUsuario(UsuarioDTO usuarioDTO) throws Exception {
@@ -42,13 +45,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         if(buscadoEmail.isPresent()){
             throw new Exception("El email ya se encuentra en uso");
         }
-
         Usuario nuevo = convertir(usuarioDTO);
         nuevo.setPassword( passwordEncoder.encode(nuevo.getPassword()) );
+        nuevo.setLicencia(licenciaRepository.findLicenciasByNombre("Licencia Básica").get());
         Usuario registro = usuarioRepository.save(nuevo);
         return registro.getCodigo();
-
-
     }
 
     @Override

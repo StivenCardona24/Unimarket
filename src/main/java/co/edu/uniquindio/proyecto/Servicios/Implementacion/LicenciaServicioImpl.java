@@ -36,6 +36,13 @@ public class LicenciaServicioImpl implements LicenciaServicio {
     }
 
     @Override
+    public int eliminarLicencia(int codigoLicencia) throws Exception {
+        validarExiste(codigoLicencia);
+        licenciaRepository.actualizarEstadoObjeto(codigoLicencia, EstadoObjeto.INACTIVE);
+        return codigoLicencia;
+    }
+
+    @Override
     public int crearLicencia(LicenciaDTO licenciaDTO)  throws Exception{
         Optional<Licencia> buscadoNombre = licenciaRepository.findLicenciasByNombre(licenciaDTO.getNombre().toLowerCase());
         if(buscadoNombre.isPresent()){
@@ -45,19 +52,11 @@ public class LicenciaServicioImpl implements LicenciaServicio {
         if(buscadoDiasPrioridad.isPresent()){
             throw new Exception("Ya existe una licencia similar, (dias, prioridad)");
         }
-        licenciaDTO.setEstadoObjeto(EstadoObjeto.ACTIVE);
         Licencia nueva = convertir(licenciaDTO);
+        nueva.setEstadoObjeto(EstadoObjeto.ACTIVE);
         Licencia registro = licenciaRepository.save(nueva);
         return  registro.getCodigo();
     }
-
-    @Override
-    public LicenciaGetDTO actualizarEstadoObjeto(int codigo, EstadoObjeto estado) throws Exception {
-        validarExiste(codigo);
-        licenciaRepository.actualizarEstadoObjeto(codigo,estado);
-        return obtenerLicencia(codigo);
-    }
-
 
     @Override
     public LicenciaGetDTO actualizarLicencia(int codigoLicencia, LicenciaDTO licenciaDTO) throws Exception{
@@ -84,9 +83,13 @@ public class LicenciaServicioImpl implements LicenciaServicio {
 
     private void validarExiste(int codigo) throws Exception {
         boolean existe = licenciaRepository.existsById(Integer.valueOf(codigo));
+        boolean existe2 = licenciaRepository.findLicenciaIdActivo(codigo);
 
         if (!existe) {
             throw new Exception("El código " + codigo + " no está asociado a ningúna licencia");
+        }
+        if (!existe2) {
+            throw new Exception("El código " + codigo + " Se encuentra inactivo");
         }
 
     }
@@ -98,7 +101,6 @@ public class LicenciaServicioImpl implements LicenciaServicio {
         licencia.setPrecio(licenciaDTO.getPrecio());
         licencia.setDiasActivoProducto(licenciaDTO.getDiasActivoProducto());
         licencia.setPrioridad(licenciaDTO.getPrioridad());
-        licencia.setEstadoObjeto(licenciaDTO.getEstadoObjeto());
 
         return licencia;
     }
@@ -110,8 +112,7 @@ public class LicenciaServicioImpl implements LicenciaServicio {
                 licencia.getNombre(),
                 licencia.getPrecio(),
                 licencia.getDiasActivoProducto(),
-                licencia.getPrioridad(),
-                licencia.getEstadoObjeto()
+                licencia.getPrioridad()
         );
 
 

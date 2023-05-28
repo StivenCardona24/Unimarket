@@ -30,7 +30,6 @@ public class Comentario implements Serializable{
     private Producto producto;
     @ManyToOne
     private Usuario usuario;
-    @NotNull
     @Enumerated(EnumType.STRING)
     private EstadoObjeto estadoObjeto;
 

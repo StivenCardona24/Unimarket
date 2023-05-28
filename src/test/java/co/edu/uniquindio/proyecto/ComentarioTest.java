@@ -81,6 +81,7 @@ public class ComentarioTest {
         nuevoComentario.setIdUsuario(getcomentario.getIdUsuario());
         nuevoComentario.setIdProducto(getcomentario.getIdProducto());
         nuevoComentario.setComentario("Texto nuevo practica");
+        nuevoComentario.setEstadoObjeto(EstadoObjeto.ACTIVE);
         Assertions.assertEquals("Texto nuevo practica",comentarioServicio.actualizarComentario(1,nuevoComentario).getComentario());
        }
     @Test

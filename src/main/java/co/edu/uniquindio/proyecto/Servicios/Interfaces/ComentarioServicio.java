@@ -2,7 +2,6 @@ package co.edu.uniquindio.proyecto.Servicios.Interfaces;
 
 import co.edu.uniquindio.proyecto.Modelo.DTO.ComentarioDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ComentarioGetDTO;
-import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -10,7 +9,6 @@ import java.util.List;
 public interface ComentarioServicio {
 
     int crearComentario(ComentarioDTO comentarioDTO) throws Exception;
-    ComentarioGetDTO actualizarEstadoObjeto(int codigo, EstadoObjeto estado) throws Exception ;
     ComentarioGetDTO actualizarComentario(int codigoComentario, ComentarioDTO comentarioDTO) throws Exception;
     int eliminarComentario(int codigoComentario) throws Exception;
 

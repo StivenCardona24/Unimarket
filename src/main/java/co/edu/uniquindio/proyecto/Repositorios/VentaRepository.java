@@ -24,6 +24,9 @@ public interface VentaRepository extends JpaRepository<Venta,Integer> {
     @Modifying
     @Query("UPDATE Venta v  SET v.estadoObjeto = :estado WHERE v.codigo = :codigo and v.estadoObjeto='ACTIVE'")
     void actualizarEstadoObjeto(int codigo, EstadoObjeto estado);
+
+    @Query("SELECT v FROM Venta v WHERE v.codigo = :codigoVenta and v.estadoObjeto='ACTIVE'")
+    boolean findVentaIdActivo(int codigoVenta);
     @Transactional
     @Modifying
     @Query("UPDATE Venta v SET v.estado = :estado WHERE v.codigo = :codigo and v.estadoObjeto='ACTIVE'")

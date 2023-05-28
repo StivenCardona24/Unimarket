@@ -23,5 +23,4 @@ public class ComentarioDTO {
 
     @NotNull(message = "El id del Usuario no puede ser nulo")
     private int idUsuario;
-    private EstadoObjeto estadoObjeto;
 }

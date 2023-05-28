@@ -31,4 +31,7 @@ public interface ComentarioRepository extends JpaRepository<Comentario,Integer> 
     Integer countByProducto( Integer codigoProducto);
     @Query("SELECT c FROM Comentario c WHERE c.comentario LIKE %?1% and c.estadoObjeto='ACTIVE'")
     List<Comentario> findBycomentarioContaining(String comentario);
+
+    @Query("SELECT c FROM Comentario c WHERE c.codigo = :codigoComentario and c.estadoObjeto='ACTIVE'")
+    boolean findComentarioIdActivo(int codigoComentario);
 }

@@ -36,20 +36,12 @@ public class ComentarioServicioImpl implements ComentarioServicio {
         if (!usuarioRepository.existsById(comentarioDTO.getIdUsuario())) {
             throw new Exception("El Usuario no existe");
         }
-        comentarioDTO.setEstadoObjeto(EstadoObjeto.ACTIVE);
         Comentario comentarioGuardar=convertirDTOToAnEntity(comentarioDTO);
         Producto productoAsociado=productoRepository.findById(comentarioDTO.getIdProducto()).get();
-
+        comentarioGuardar.setEstadoObjeto(EstadoObjeto.ACTIVE);
         comentarioGuardar.setFecha(LocalDate.now());
         emailServicio.enviarEmail(new EmailDTO("Comentario producto", comentarioGuardar.getComentario(), productoAsociado.getUsuarioPropietario().getEmail()));
         return comentarioRepository.save(comentarioGuardar).getCodigo();
-    }
-
-    @Override
-    public ComentarioGetDTO actualizarEstadoObjeto(int codigo, EstadoObjeto estado) throws Exception {
-        validarExistencia(codigo);
-        comentarioRepository.actualizarEstadoObjeto(codigo, estado);
-        return obtenerComentario(codigo);
     }
 
     @Override
@@ -132,13 +124,17 @@ public class ComentarioServicioImpl implements ComentarioServicio {
     @Override
     public int eliminarComentario(int codigoComentario) throws Exception {
         validarExistencia(codigoComentario);
-        comentarioRepository.deleteById(codigoComentario);
+        comentarioRepository.actualizarEstadoObjeto(codigoComentario, EstadoObjeto.INACTIVE);
         return codigoComentario;
     }
     private void validarExistencia(int codigo) throws Exception {
         boolean existe = comentarioRepository.existsById(codigo);
+        boolean existe2 = comentarioRepository.findComentarioIdActivo(codigo);
         if (!existe) {
             throw new Exception("El código: " + codigo + " no está asociado a ningún comentario");
+        }
+        if (!existe2) {
+            throw new Exception("El código: " + codigo + " Se encuentra inactivo");
         }
     }
     public ComentarioGetDTO convertirEntityToAnDTO (Comentario comentarioConvertir) throws Exception{
@@ -148,13 +144,11 @@ public class ComentarioServicioImpl implements ComentarioServicio {
         nuevoComentario.setFechaComentario(comentarioConvertir.getFecha());
         nuevoComentario.setIdUsuario(comentarioConvertir.getUsuario().getCodigo());
         nuevoComentario.setIdProducto(comentarioConvertir.getProducto().getCodigo());
-        nuevoComentario.setEstadoObjeto(comentarioConvertir.getEstadoObjeto());
         return nuevoComentario;
     }
     public Comentario convertirDTOToAnEntity (ComentarioDTO comentarioConvertir) throws Exception{
         Comentario nuevoComentario= new Comentario();
         nuevoComentario.setComentario(comentarioConvertir.getComentario());
-        nuevoComentario.setEstadoObjeto(comentarioConvertir.getEstadoObjeto());
         nuevoComentario.setUsuario(usuarioRepository.findById(comentarioConvertir.getIdUsuario()).get());
         nuevoComentario.setProducto(productoRepository.findById(comentarioConvertir.getIdProducto()).get());
         return nuevoComentario;

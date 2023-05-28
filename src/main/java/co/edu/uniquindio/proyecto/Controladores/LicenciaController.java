@@ -46,4 +46,10 @@ public class LicenciaController {
         return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false,
                 licenciaServicio.actualizarLicencia(codigo, licencia) ) );
     }
+
+    @PutMapping("/eliminarLicencia/{codigo}")
+    public ResponseEntity<MensajeDTO> eliminarLicencia(@PathVariable int codigo) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false,
+                licenciaServicio.eliminarLicencia(codigo)));
+    }
 }

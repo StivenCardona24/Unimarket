@@ -26,5 +26,4 @@ public  class VentaGetDTO {
     private int tajetaCompra;
     private int usuario;
     private List<DetalleVentaDTO> ventaProducto;
-    private EstadoObjeto estadoObjeto;
 }

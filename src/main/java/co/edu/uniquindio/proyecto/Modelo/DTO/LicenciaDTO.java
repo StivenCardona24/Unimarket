@@ -34,5 +34,4 @@ public class LicenciaDTO {
     @NotNull(message = "La prioridad no puede ser nula")
     @NumberFormat
     private int prioridad;
-    private EstadoObjeto estadoObjeto;
 }

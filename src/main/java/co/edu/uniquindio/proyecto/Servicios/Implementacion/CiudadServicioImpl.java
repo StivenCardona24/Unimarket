@@ -25,17 +25,13 @@ public class CiudadServicioImpl implements CiudadServicio {
         if (ciudadDTO.getNombre() != null && ciudadDTO.getNombre().length() > 50) {
             throw new Exception("El nombre de la ciudad no debe exceder los 50 caracteres.");
         }
-        ciudadDTO.setEstadoObjeto(EstadoObjeto.ACTIVE);
-        Ciudad ciudadGuardar=ciudadRepository.save(convertirDTOToEntity(ciudadDTO));
+        Ciudad ciudadGuardarini=convertirDTOToEntity(ciudadDTO);
+        ciudadGuardarini.setEstadoObjeto(EstadoObjeto.ACTIVE);
+        Ciudad ciudadGuardar=ciudadRepository.save(ciudadGuardarini);
         return ciudadGuardar.getCodigo();
     }
 
-    @Override
-    public CiudadGetDTO actualizarEstadoObjeto(int codigo, EstadoObjeto estado) throws Exception {
-        validarExistencia(codigo);
-        ciudadRepository.actualizarEstadoObjeto(codigo, estado);
-        return obtenerCiudad(codigo);
-    }
+
 
     @Override
     public CiudadGetDTO actualizarCiudad(int codigoCiudad, CiudadDTO ciudadDTO) throws Exception {
@@ -98,21 +94,25 @@ public class CiudadServicioImpl implements CiudadServicio {
     @Override
     public int eliminarCiudad(int codigoCiudad) throws Exception {
         validarExistencia(codigoCiudad);
-        ciudadRepository.deleteById(codigoCiudad);
+        ciudadRepository.actualizarEstadoObjeto(codigoCiudad, EstadoObjeto.INACTIVE);
         return codigoCiudad;
     }
 
     private void validarExistencia(int idCiudad) throws Exception {
         boolean existe = ciudadRepository.existsById(idCiudad);
+        Ciudad ciudadActual= ciudadRepository.findCiudadByNombre(ciudadRepository.findById(idCiudad).get().getNombre());
+
         if (!existe) {
             throw new Exception("El código: " + idCiudad + " no está asociado a ningúna ciudad");
+        }
+        if(ciudadActual==null){
+            throw new Exception("El código: " + idCiudad + "Se encuentra inactivo");
         }
     }
     public CiudadGetDTO convertirEntityToDTO(Ciudad ciudadConvertir){
         CiudadGetDTO nuevaCiudad=new CiudadGetDTO();
         nuevaCiudad.setNombre(ciudadConvertir.getNombre());
         nuevaCiudad.setCodigo(ciudadConvertir.getCodigo());
-        nuevaCiudad.setEstadoObjeto(ciudadConvertir.getEstadoObjeto());
         List<UsuarioDTO> usuariosDTOs = new ArrayList<>();
         if (ciudadConvertir.getUsuarios() != null) { // Verificar si la lista es nula
             for (Usuario usuariosRecorer : ciudadConvertir.getUsuarios()) {
@@ -135,7 +135,6 @@ public class CiudadServicioImpl implements CiudadServicio {
     public Ciudad convertirDTOToEntity(CiudadDTO ciudadConvertir){
         Ciudad nuevaCiudad=new Ciudad();
         nuevaCiudad.setNombre(ciudadConvertir.getNombre());
-        nuevaCiudad.setEstadoObjeto(ciudadConvertir.getEstadoObjeto());
         return nuevaCiudad;
     }
 }

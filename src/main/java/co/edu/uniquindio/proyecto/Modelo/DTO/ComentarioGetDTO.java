@@ -22,5 +22,5 @@ public class ComentarioGetDTO {
     private int idProducto;
 
     private int idUsuario;
-    private EstadoObjeto estadoObjeto;
+
 }

@@ -36,20 +36,13 @@ public class VentaServicioImpl implements VentaServicio {
     @Override
 
     public int crearVenta(VentaDTO ventaDTO) throws Exception{
-        ventaDTO.setEstadoObjeto(EstadoObjeto.ACTIVE);
         Venta nuevo = convertir(ventaDTO);
+        nuevo.setEstadoObjeto(EstadoObjeto.ACTIVE);
         Venta registro = ventaRepository.save(nuevo);
         emailServicio.enviarEmail(new EmailDTO("Compra", "Se realizo una compra del usuario " +ventaDTO.getUsuario() , "usuario1@example.com"));
 
         return registro.getCodigo();
 
-    }
-
-    @Override
-    public VentaGetDTO actualizarEstadoObjeto(int codigo, EstadoObjeto estado) throws Exception {
-        validarExiste(codigo);
-        ventaRepository.actualizarEstadoObjeto(codigo,estado);
-        return obtenerVenta(codigo);
     }
 
     @Override
@@ -101,10 +94,15 @@ public class VentaServicioImpl implements VentaServicio {
         return obtenerVenta(codigo);
     }
 
-    private Venta convertir(VentaDTO ventaDTO) {
+    @Override
+    public int eliminarVenta(int codigoVenta) throws Exception {
+        validarExiste(codigoVenta);
+        ventaRepository.actualizarEstadoObjeto(codigoVenta,EstadoObjeto.INACTIVE);
+        return codigoVenta;
+    }
 
+    private Venta convertir(VentaDTO ventaDTO) {
         Venta venta = new Venta();
-        venta.setEstadoObjeto(ventaDTO.getEstadoObjeto());
         venta.setMetodoPago(ventaDTO.getMetodoPago());
         venta.setEstado(ventaDTO.getEstado());
         venta.setTotalCompra(ventaDTO.getTotalCompra());
@@ -133,8 +131,7 @@ public class VentaServicioImpl implements VentaServicio {
                 venta.getEstado(),
                 venta.getMetodoPago(),
                 venta.getTajetaCompra().getCodigo(),
-                venta.getUsuario().getCodigo(),detalleVntaDTOs,
-                venta.getEstadoObjeto()
+                venta.getUsuario().getCodigo(),detalleVntaDTOs
                  );
         return ventaDTO;
     }
@@ -142,9 +139,12 @@ public class VentaServicioImpl implements VentaServicio {
 
     private void validarExiste(int codigo) throws Exception {
         boolean existe = ventaRepository.existsById(Integer.valueOf(codigo));
-
+        boolean existe2 = ventaRepository.findVentaIdActivo(codigo);
         if (!existe) {
             throw new Exception("El código " + codigo + " no está asociado a ningúna venta");
+        }
+        if (!existe2) {
+            throw new Exception("El código " + codigo + " Se encuentra inactivo");
         }
 
     }
