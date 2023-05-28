@@ -25,7 +25,11 @@ public class ImageController {
     public ResponseEntity<MensajeDTO> create(@RequestParam("file") MultipartFile file) throws Exception {
         File imagen = cloudinaryServicio.convertir(file);
         return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO(HttpStatus.CREATED, false,   cloudinaryServicio.subirImagen( imagen, "productos/")));
-
     }
 
+
+    @DeleteMapping("/{codigo}")
+    public ResponseEntity<MensajeDTO> eliminar(@PathVariable String codigo) throws Exception {
+        return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO(HttpStatus.CREATED, false,   cloudinaryServicio.eliminarImagen(codigo)));
+    }
 }
