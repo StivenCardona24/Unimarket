@@ -41,29 +41,23 @@ public class VentaServicioImpl implements VentaServicio {
         nuevo.setEstadoObjeto(EstadoObjeto.ACTIVE);
         Venta registro = ventaRepository.save(nuevo);
         emailServicio.enviarEmail(new EmailDTO("Compra", "Se realizo una compra del usuario " +ventaDTO.getUsuario() , "usuario1@example.com"));
-
         return registro.getCodigo();
-
     }
 
     @Override
     public List<VentaGetDTO> listarVentaUsuarios(int codigoVenta) throws Exception {
         List<Venta> ventas  = ventaRepository.findByUsuarioIdUsuario(codigoVenta);
         List<VentaGetDTO> VentaGetDTO = new ArrayList<>();
-
         for (Venta venta : ventas) {
             VentaGetDTO dto = convertirDTO(venta);
             VentaGetDTO.add(dto);
         }
-
         return VentaGetDTO;
     }
 
     @Override
     public VentaGetDTO obtenerVenta(int codigoVenta) throws Exception {
-
         return convertirDTO(obtener(codigoVenta));
-
     }
 
 
@@ -71,27 +65,19 @@ public class VentaServicioImpl implements VentaServicio {
     @Transactional
     public Venta obtener(int codigoVenta) throws Exception {
         Optional<Venta> venta = ventaRepository.findById(codigoVenta);
-
         if (venta.isEmpty()) {
             throw new Exception("El código " + codigoVenta + " no está asociado a ningún venta");
         }
-
         return venta.get();
     }
 
     @Override
     public VentaGetDTO actualizarEstado(int codigo, EstadoVenta estadoVenta) throws Exception{
-
         validarExiste(codigo);
-
         if(estadoVenta == EstadoVenta.PAGADO){
             ventaRepository.actualizarFecha(codigo, LocalDate.now());
         }
-        System.out.println(codigo);
-
         ventaRepository.actualizarEstado(codigo, estadoVenta);
-
-
         return obtenerVenta(codigo);
     }
 
@@ -115,7 +101,6 @@ public class VentaServicioImpl implements VentaServicio {
         venta.setEstado(ventaDTO.getEstado());
         venta.setTotalCompra(ventaDTO.getTotalCompra());
         venta.setUsuario(usuarioRepository.findById(ventaDTO.getUsuario()).get());
-      //  venta.setTajetaCompra(tarjetaRepository.findById(ventaDTO.getTajetaCompra()).get());
         venta.setFechaCompra(ventaDTO.getFechaCompra());
         return venta;
     }
@@ -144,7 +129,6 @@ public class VentaServicioImpl implements VentaServicio {
         return ventaDTO;
     }
 
-
     private void validarExiste(int codigo) throws Exception {
         boolean existe = ventaRepository.existsById(Integer.valueOf(codigo));
         boolean existe2 = ventaRepository.findVentaIdActivo(codigo);
@@ -154,9 +138,6 @@ public class VentaServicioImpl implements VentaServicio {
         if (!existe2) {
             throw new Exception("El código " + codigo + " Se encuentra inactivo");
         }
-
     }
-
-
 
 }

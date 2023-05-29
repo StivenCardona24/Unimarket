@@ -48,12 +48,10 @@ public class DetalleVentaServicioImpl implements DetalleVentaServicio {
             throw new Exception("del producto"+productoExitente.get().getNombre()+" no existen todas las unidades solicitadas " +
                     "existen"+detalleVentaDTO.getUnidades());
         }
-
         int CantidadProductos=productoExitente.get().getUnidades()-detalleVentaDTO.getUnidades();
         productoRepository.actualizarUnidades(productoExitente.get().getCodigo(),CantidadProductos);
         int codigo = detalleVentaRepository.save(convertirDTOToAnEntity(detalleVentaDTO)).getCodigo();
-
-       updateVentaTotal(detalleVentaDTO.getIdVenta());
+        updateVentaTotal(detalleVentaDTO.getIdVenta());
         return  codigo;
     }
 
@@ -150,22 +148,11 @@ public class DetalleVentaServicioImpl implements DetalleVentaServicio {
     }
 
     public void updateVentaTotal(int codigo) throws Exception{
-
         List<DetalleVentaGetDTO> listaProductos = obtenerDetalleVentaPorVenta(codigo);
         double total = 0;
-
         for (DetalleVentaGetDTO dv: listaProductos) {
             total += dv.getPrecioUnitario() * dv.getUnidades();
         }
-
         ventaRepository.actualizarTotal(codigo, total);
-
     }
 }
-
-
-
-
-
-
-
