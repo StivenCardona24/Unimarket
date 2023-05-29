@@ -29,7 +29,7 @@ public class ProductoGetDTO {
 
     private int unidades;
 
-    private double precioUnitario;
+    private double precio;
 
     private int codigoVendedor;
 

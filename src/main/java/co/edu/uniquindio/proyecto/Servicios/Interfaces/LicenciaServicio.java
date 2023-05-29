@@ -15,4 +15,6 @@ public interface LicenciaServicio {
     LicenciaGetDTO obtenerLicencia(int codigo) throws Exception;
 
     List<LicenciaGetDTO> listarLicencias();
+
+    int eliminarLicencia(int codigoLicencia) throws Exception;
 }

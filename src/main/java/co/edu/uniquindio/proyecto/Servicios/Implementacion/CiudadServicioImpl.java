@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
 import co.edu.uniquindio.proyecto.Modelo.DTO.CiudadDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.CiudadGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioDTO;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import co.edu.uniquindio.proyecto.Repositorios.CiudadRepository;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.CiudadServicio;
 import lombok.AllArgsConstructor;
@@ -24,8 +25,13 @@ public class CiudadServicioImpl implements CiudadServicio {
         if (ciudadDTO.getNombre() != null && ciudadDTO.getNombre().length() > 50) {
             throw new Exception("El nombre de la ciudad no debe exceder los 50 caracteres.");
         }
-        return ciudadRepository.save(convertirDTOToEntity(ciudadDTO)).getCodigo();
+        Ciudad ciudadGuardarini=convertirDTOToEntity(ciudadDTO);
+        ciudadGuardarini.setEstadoObjeto(EstadoObjeto.ACTIVE);
+        Ciudad ciudadGuardar=ciudadRepository.save(ciudadGuardarini);
+        return ciudadGuardar.getCodigo();
     }
+
+
 
     @Override
     public CiudadGetDTO actualizarCiudad(int codigoCiudad, CiudadDTO ciudadDTO) throws Exception {
@@ -88,14 +94,19 @@ public class CiudadServicioImpl implements CiudadServicio {
     @Override
     public int eliminarCiudad(int codigoCiudad) throws Exception {
         validarExistencia(codigoCiudad);
-        ciudadRepository.deleteById(codigoCiudad);
+        ciudadRepository.actualizarEstadoObjeto(codigoCiudad, EstadoObjeto.INACTIVE);
         return codigoCiudad;
     }
 
     private void validarExistencia(int idCiudad) throws Exception {
         boolean existe = ciudadRepository.existsById(idCiudad);
+        Ciudad ciudadActual= ciudadRepository.findCiudadByNombre(ciudadRepository.findById(idCiudad).get().getNombre());
+
         if (!existe) {
             throw new Exception("El código: " + idCiudad + " no está asociado a ningúna ciudad");
+        }
+        if(ciudadActual==null){
+            throw new Exception("El código: " + idCiudad + "Se encuentra inactivo");
         }
     }
     public CiudadGetDTO convertirEntityToDTO(Ciudad ciudadConvertir){

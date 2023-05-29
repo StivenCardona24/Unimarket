@@ -7,6 +7,7 @@ import co.edu.uniquindio.proyecto.Modelo.DTO.VentaDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.VentaGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.TokenDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioGetDTO;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoVenta;
 
 
@@ -26,6 +27,10 @@ public interface VentaServicio {
 
     VentaGetDTO actualizarEstado(int codigo, EstadoVenta estado) throws Exception;
 
+
     Double ventasMesAnio(int mes, int anio) throws Exception;
+
+
+    int eliminarVenta(int codigoVenta) throws Exception;
 
 }

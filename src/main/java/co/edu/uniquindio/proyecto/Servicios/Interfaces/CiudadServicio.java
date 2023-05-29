@@ -5,7 +5,7 @@ import co.edu.uniquindio.proyecto.Modelo.DTO.CiudadGetDTO;
 
 import java.util.List;
 
-public interface CiudadServicio {
+public interface  CiudadServicio {
 
     int crearCiudad(CiudadDTO ciudadDTO)throws Exception;
 

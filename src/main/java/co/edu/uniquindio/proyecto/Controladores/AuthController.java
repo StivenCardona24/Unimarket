@@ -29,8 +29,8 @@ public class AuthController {
                 sesionServicio.login(loginUser)) );
     }
     @PostMapping("/registro")
-    public ResponseEntity<MensajeDTO> registrarCliente(@Valid @RequestBody UsuarioDTO usuario) throws Exception {
-        usuarioServicio.crearUsuario(usuario);
+    public ResponseEntity<MensajeDTO> registrarCliente( @RequestBody UsuarioDTO usuarioDto) throws Exception {
+        usuarioServicio.crearUsuario(usuarioDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO(HttpStatus.CREATED,
                 false, "Usuario creado correctamente"));
     }

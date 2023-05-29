@@ -36,8 +36,8 @@ public class ProductoDTO {
 
 
     @NumberFormat
-
     private int vendedor;
+
 
     @NumberFormat
     private int unidades;

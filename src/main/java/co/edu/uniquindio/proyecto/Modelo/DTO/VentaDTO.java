@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.Modelo.DTO;
 
 
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoVenta;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.MetodoPago;
 import lombok.AllArgsConstructor;
@@ -24,5 +25,4 @@ public  class VentaDTO {
     private int usuario;
 
     private LocalDate fechaCompra;
-
 }

@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyecto.Modelo.Clases.Producto;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ComentarioDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ComentarioGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.EmailDTO;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import co.edu.uniquindio.proyecto.Repositorios.ComentarioRepository;
 import co.edu.uniquindio.proyecto.Repositorios.ProductoRepository;
 import co.edu.uniquindio.proyecto.Repositorios.UsuarioRepository;
@@ -37,7 +38,7 @@ public class ComentarioServicioImpl implements ComentarioServicio {
         }
         Comentario comentarioGuardar=convertirDTOToAnEntity(comentarioDTO);
         Producto productoAsociado=productoRepository.findById(comentarioDTO.getIdProducto()).get();
-
+        comentarioGuardar.setEstadoObjeto(EstadoObjeto.ACTIVE);
         comentarioGuardar.setFecha(LocalDate.now());
         emailServicio.enviarEmail(new EmailDTO("Comentario producto", comentarioGuardar.getComentario(), productoAsociado.getUsuarioPropietario().getEmail()));
         return comentarioRepository.save(comentarioGuardar).getCodigo();
@@ -123,13 +124,17 @@ public class ComentarioServicioImpl implements ComentarioServicio {
     @Override
     public int eliminarComentario(int codigoComentario) throws Exception {
         validarExistencia(codigoComentario);
-        comentarioRepository.deleteById(codigoComentario);
+        comentarioRepository.actualizarEstadoObjeto(codigoComentario, EstadoObjeto.INACTIVE);
         return codigoComentario;
     }
     private void validarExistencia(int codigo) throws Exception {
         boolean existe = comentarioRepository.existsById(codigo);
+        boolean existe2 = comentarioRepository.findComentarioIdActivo(codigo);
         if (!existe) {
             throw new Exception("El código: " + codigo + " no está asociado a ningún comentario");
+        }
+        if (!existe2) {
+            throw new Exception("El código: " + codigo + " Se encuentra inactivo");
         }
     }
     public ComentarioGetDTO convertirEntityToAnDTO (Comentario comentarioConvertir) throws Exception{

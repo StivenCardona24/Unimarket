@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.seguridad.modelo;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Usuario;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.Role;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,8 +11,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 @AllArgsConstructor
+@Getter
 public class UserDetailsImpl implements UserDetails {
     private String username, password;
+    private int codigo;
     private Collection<? extends GrantedAuthority> authorities;
     public static UserDetailsImpl build(Usuario user){
         List<GrantedAuthority> authorities = new ArrayList<>();
@@ -21,7 +24,7 @@ public class UserDetailsImpl implements UserDetails {
         }else if(user.getEnumRole() == Role.MODERADOR){
             authorities.add( new SimpleGrantedAuthority("MODERADOR") );
         }
-        return new UserDetailsImpl(user.getEmail(), user.getPassword(), authorities);
+        return new UserDetailsImpl(user.getEmail(), user.getPassword(), user.getCodigo(), authorities);
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

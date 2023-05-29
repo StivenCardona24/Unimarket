@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.Servicios.Implementacion;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Licencia;
 import co.edu.uniquindio.proyecto.Modelo.DTO.LicenciaDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.LicenciaGetDTO;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import co.edu.uniquindio.proyecto.Repositorios.LicenciaRepository;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.LicenciaServicio;
 import lombok.AllArgsConstructor;
@@ -35,28 +36,27 @@ public class LicenciaServicioImpl implements LicenciaServicio {
     }
 
     @Override
+    public int eliminarLicencia(int codigoLicencia) throws Exception {
+        validarExiste(codigoLicencia);
+        licenciaRepository.actualizarEstadoObjeto(codigoLicencia, EstadoObjeto.INACTIVE);
+        return codigoLicencia;
+    }
+
+    @Override
     public int crearLicencia(LicenciaDTO licenciaDTO)  throws Exception{
-
         Optional<Licencia> buscadoNombre = licenciaRepository.findLicenciasByNombre(licenciaDTO.getNombre().toLowerCase());
-
         if(buscadoNombre.isPresent()){
             throw new Exception("Ya existe una licencia con ese nombre o similar");
         }
-
         Optional<Licencia> buscadoDiasPrioridad = licenciaRepository.findByDiasActivoProductoAndPrioridad(licenciaDTO.getDiasActivoProducto(), licenciaDTO.getPrioridad());
-
         if(buscadoDiasPrioridad.isPresent()){
             throw new Exception("Ya existe una licencia similar, (dias, prioridad)");
         }
-
         Licencia nueva = convertir(licenciaDTO);
-
+        nueva.setEstadoObjeto(EstadoObjeto.ACTIVE);
         Licencia registro = licenciaRepository.save(nueva);
-
         return  registro.getCodigo();
-
     }
-
 
     @Override
     public LicenciaGetDTO actualizarLicencia(int codigoLicencia, LicenciaDTO licenciaDTO) throws Exception{
@@ -83,9 +83,13 @@ public class LicenciaServicioImpl implements LicenciaServicio {
 
     private void validarExiste(int codigo) throws Exception {
         boolean existe = licenciaRepository.existsById(Integer.valueOf(codigo));
+        boolean existe2 = licenciaRepository.findLicenciaIdActivo(codigo);
 
         if (!existe) {
             throw new Exception("El código " + codigo + " no está asociado a ningúna licencia");
+        }
+        if (!existe2) {
+            throw new Exception("El código " + codigo + " Se encuentra inactivo");
         }
 
     }

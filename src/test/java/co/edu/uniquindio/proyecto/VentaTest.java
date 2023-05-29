@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootTest
-
+@Transactional
 public class VentaTest {
 
     @Autowired
@@ -35,7 +35,9 @@ public class VentaTest {
                     MetodoPago.EFECTIVO,
                     7998273,
                     1,
-                    LocalDate.of(2023, 4, 17));
+                    LocalDate.of(2023, 4, 17)
+            );
+
 
 
 

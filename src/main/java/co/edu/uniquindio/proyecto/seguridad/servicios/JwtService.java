@@ -1,5 +1,7 @@
 package co.edu.uniquindio.proyecto.seguridad.servicios;
 import java.security.Key;
+
+import co.edu.uniquindio.proyecto.seguridad.modelo.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -20,17 +22,17 @@ public class JwtService {
     private long jwtExpiration;
     @Value("${jwt.refresh_expiration}")
     private long refreshExpiration;
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(UserDetailsImpl userDetails) {
         return buildToken(new HashMap<>(), userDetails, jwtExpiration);
     }
-    public String generateRefreshToken(UserDetails userDetails) {
+    public String generateRefreshToken(UserDetailsImpl userDetails) {
         return buildToken(new HashMap<>(), userDetails, refreshExpiration);
     }
-    private String buildToken(Map<String, Object> extraClaims, UserDetails userDetails, long
+    private String buildToken(Map<String, Object> extraClaims, UserDetailsImpl userDetails, long
             expiration) {
-        List<String> roles =
-                userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
+        List<String> roles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
         extraClaims.put("roles", roles);
+        extraClaims.put("sub_code", userDetails.getCodigo());
         return Jwts
                 .builder()
                 .setClaims(extraClaims)

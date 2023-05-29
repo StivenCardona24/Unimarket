@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.Servicios.Implementacion;
 import co.edu.uniquindio.proyecto.Modelo.Clases.DetalleVenta;
 import co.edu.uniquindio.proyecto.Modelo.Clases.Venta;
 import co.edu.uniquindio.proyecto.Modelo.DTO.*;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoVenta;
 import co.edu.uniquindio.proyecto.Repositorios.TarjetaRepository;
 import co.edu.uniquindio.proyecto.Repositorios.UsuarioRepository;
@@ -36,17 +37,10 @@ public class VentaServicioImpl implements VentaServicio {
     @Override
 
     public int crearVenta(VentaDTO ventaDTO) throws Exception{
-
         Venta nuevo = convertir(ventaDTO);
-
+        nuevo.setEstadoObjeto(EstadoObjeto.ACTIVE);
         Venta registro = ventaRepository.save(nuevo);
-
-        emailServicio.enviarEmail(new EmailDTO("Compra", "Se realizo una compra del usuario " +ventaDTO.getUsuario() , "ruisito124@gmail.com"));
-
-
-
-
-
+        emailServicio.enviarEmail(new EmailDTO("Compra", "Se realizo una compra del usuario " +ventaDTO.getUsuario() , "usuario1@example.com"));
 
         return registro.getCodigo();
 
@@ -102,17 +96,21 @@ public class VentaServicioImpl implements VentaServicio {
     }
 
     @Override
+
     public Double ventasMesAnio(int mes, int anio) throws Exception {
         Date inicio = new Date(anio, mes, 1, 1, 0);
-        Date fin = new Date(anio, (mes+1), 1, 1, 0);
-        Double cantidadTotal = ventaRepository.findTotalMesAnio(inicio,fin);
+        Date fin = new Date(anio, (mes + 1), 1, 1, 0);
+        Double cantidadTotal = ventaRepository.findTotalMesAnio(inicio, fin);
         return cantidadTotal;
+    }
+    public int eliminarVenta(int codigoVenta) throws Exception {
+        validarExiste(codigoVenta);
+        ventaRepository.actualizarEstadoObjeto(codigoVenta,EstadoObjeto.INACTIVE);
+        return codigoVenta;
     }
 
     private Venta convertir(VentaDTO ventaDTO) {
-
         Venta venta = new Venta();
-
         venta.setMetodoPago(ventaDTO.getMetodoPago());
         venta.setEstado(ventaDTO.getEstado());
         venta.setTotalCompra(ventaDTO.getTotalCompra());
@@ -123,26 +121,16 @@ public class VentaServicioImpl implements VentaServicio {
     }
 
     private VentaGetDTO convertirDTO(Venta venta)  throws Exception {
-
-
-
-
         List<DetalleVentaDTO> detalleVntaDTOs = new ArrayList<>();
         if (venta.getDetalleVentas() != null) { // Verificar si la lista es nula
             for (DetalleVenta ventaDTO1 : venta.getDetalleVentas()) {
-
                 DetalleVentaDTO detalle = new DetalleVentaDTO();
                 detalle.setIdVenta(ventaDTO1.getVenta().getCodigo());
                 detalle.setUnidades(ventaDTO1.getUnidades());
                 detalle.setIdProducto(ventaDTO1.getProducto().getCodigo());
-
                 detalleVntaDTOs.add(detalle);
-
-
-
             }
         }
-
         System.out.println(venta.getCodigo());
         VentaGetDTO ventaDTO = new VentaGetDTO(
                 venta.getCodigo(),
@@ -153,18 +141,18 @@ public class VentaServicioImpl implements VentaServicio {
                 venta.getTajetaCompra().getCodigo(),
                 venta.getUsuario().getCodigo(),detalleVntaDTOs
                  );
-
-
-
         return ventaDTO;
     }
 
 
     private void validarExiste(int codigo) throws Exception {
         boolean existe = ventaRepository.existsById(Integer.valueOf(codigo));
-
+        boolean existe2 = ventaRepository.findVentaIdActivo(codigo);
         if (!existe) {
             throw new Exception("El código " + codigo + " no está asociado a ningúna venta");
+        }
+        if (!existe2) {
+            throw new Exception("El código " + codigo + " Se encuentra inactivo");
         }
 
     }

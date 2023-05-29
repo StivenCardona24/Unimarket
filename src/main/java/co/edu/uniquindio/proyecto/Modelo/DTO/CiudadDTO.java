@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.Modelo.DTO;
 
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
