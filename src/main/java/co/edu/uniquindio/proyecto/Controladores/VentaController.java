@@ -36,14 +36,14 @@ public class VentaController {
     @GetMapping("/listar/{codigoVenta}")
     public ResponseEntity<MensajeDTO> getUsuario(@PathVariable int codigoVenta) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false,
-                ventaServicio.listarVentaUsuarios(codigoVenta) ));
+                ventaServicio.obtenerVenta(codigoVenta) ));
     }
 
 
 
     @GetMapping("/obtenerCodigo/{codigoUsuario}")
     public ResponseEntity<MensajeDTO> getOne(@PathVariable int codigoUsuario) throws Exception{
-        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, ventaServicio.obtenerVenta(codigoUsuario)));
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, ventaServicio.listarVentaUsuarios(codigoUsuario)));
     }
 
     @PutMapping("{codigo}/estado/{estado}")
