@@ -47,7 +47,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
         Usuario nuevo = convertir(usuarioDTO);
         nuevo.setPassword( passwordEncoder.encode(nuevo.getPassword()) );
-        nuevo.setLicencia(licenciaRepository.findLicenciasByNombre("Licencia Básica").get());
+        nuevo.setLicencia(licenciaRepository.findById(1).get());
+
         Usuario registro = usuarioRepository.save(nuevo);
         return registro.getCodigo();
     }
