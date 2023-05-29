@@ -59,6 +59,6 @@ public class UsuarioDTO {
    private LocalDate fechaNacimiento;
 
 
-    private boolean activo;
+
 
 }
