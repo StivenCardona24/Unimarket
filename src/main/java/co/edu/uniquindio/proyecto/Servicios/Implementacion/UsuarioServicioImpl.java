@@ -6,6 +6,7 @@ import co.edu.uniquindio.proyecto.Modelo.DTO.EmailDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioDTO;
 import co.edu.uniquindio.proyecto.Modelo.DTO.UsuarioGetDTO;
+import co.edu.uniquindio.proyecto.Modelo.Enumeraciones.EstadoObjeto;
 import co.edu.uniquindio.proyecto.Repositorios.LicenciaRepository;
 import co.edu.uniquindio.proyecto.Repositorios.UsuarioRepository;
 import co.edu.uniquindio.proyecto.Servicios.Interfaces.EmailServicio;
@@ -48,6 +49,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         Usuario nuevo = convertir(usuarioDTO);
         nuevo.setPassword( passwordEncoder.encode(nuevo.getPassword()) );
         nuevo.setLicencia(licenciaRepository.findById(1).get());
+        nuevo.setActivo(true);
 
         Usuario registro = usuarioRepository.save(nuevo);
         return registro.getCodigo();
